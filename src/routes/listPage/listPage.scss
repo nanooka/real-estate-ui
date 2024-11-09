@@ -15,10 +15,31 @@
       //   overflow-y: scroll;
       overflow-y: auto;
       padding-bottom: 50px;
+
+      &::-webkit-scrollbar {
+        width: 12px; /* Width of the scrollbar */
+      }
+
+      &::-webkit-scrollbar-track {
+        // background: #f0e6e4; /* Track color */
+        background: transparent;
+        border-radius: 10px; /* Optional: rounds scrollbar corners */
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background-color: #c17c74; /* Color of the scrollbar handle */
+        border-radius: 10px; /* Optional: rounds scrollbar handle */
+        border: 1px solid #f0e6e4; /* Adds space between scrollbar handle and track */
+      }
+
+      &::-webkit-scrollbar-thumb:hover {
+        background-color: #b36760; /* Handle color on hover */
+      }
     }
   }
   .mapContainer {
     flex: 2;
+    height: 100%;
     background-color: #fcf5f3;
   }
 }
