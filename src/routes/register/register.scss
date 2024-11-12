@@ -1,4 +1,4 @@
-.login {
+.register {
   height: 100%;
   display: flex;
 
@@ -42,9 +42,8 @@
       a {
         font-size: 14px;
         color: gray;
-        // border-bottom: 1px solid gray;
-        // width: max-content;
-        text-align: center;
+        border-bottom: 1px solid gray;
+        width: max-content;
       }
     }
   }
