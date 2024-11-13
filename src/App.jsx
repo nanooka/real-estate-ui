@@ -26,11 +26,6 @@ function App() {
           element: <SinglePage />,
         },
         {
-          path: "/profile",
-          element: <ProfilePage />,
-        },
-
-        {
           path: "/login",
           element: <Login />,
         },
@@ -46,4 +41,3 @@ function App() {
 }
 
 export default App;
-// 2:30
