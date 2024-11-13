@@ -52,7 +52,6 @@ export default function Login() {
           />
           <button disabled={isLoading}>Login</button>
           {error && <span>{error}</span>}
-
           <Link to="/register">{"Don't"} you have an account?</Link>
         </form>
       </div>
