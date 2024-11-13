@@ -1,56 +1,56 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import "./navbar.scss";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../context/AuthContext";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
 
-  const user = true;
+  const { currentUser } = useContext(AuthContext);
 
   return (
     <nav>
       <div className="left">
-        <Link href="/" className="logo">
+        <Link to="/" className="logo">
           <img src="/logo.png" alt="" />
           <span>LamaEstate</span>
         </Link>
 
-        <Link href="/">Home</Link>
-        <Link href="/">About</Link>
-        <Link href="/">Contact</Link>
-        <Link href="/">Agents</Link>
+        <Link to="/">Home</Link>
+        <Link to="/">About</Link>
+        <Link to="/">Contact</Link>
+        <Link to="/">Agents</Link>
       </div>
       <div className="right">
-        {user ? (
+        {currentUser ? (
           <div className="user">
-            <img
-              src="https://media.istockphoto.com/id/1437816897/photo/business-woman-manager-or-human-resources-portrait-for-career-success-company-we-are-hiring.jpg?s=2048x2048&w=is&k=20&c=8QovDK9XochFpaIC-N3pn5EEaRSVuE1SKpQDVUxLSUk="
-              alt=""
-            />
-            <span>Jane Doe</span>
+            <img src={currentUser.avatar || "/noavatar.jpg"} alt="" />
+            <span>{currentUser.username}</span>
             <Link to="/profile" className="profile">
               <div className="notification">3</div>
               <span>Profile</span>
             </Link>
           </div>
         ) : (
-          <>
-            <Link href="/">Sign in</Link>
-            <Link href="/" className="register">
+          <div className="login-register-btns">
+            <Link to="/login" className="login">
+              Sign in
+            </Link>
+            <Link to="/register" className="register">
               Sign up
             </Link>
-          </>
+          </div>
         )}
         <div className="menuIcon">
           <img src="/menu.png" alt="" onClick={() => setOpen(!open)} />
         </div>
         <div className={open ? "menu active" : "menu"}>
-          <Link href="/">Home</Link>
-          <Link href="/">About</Link>
-          <Link href="/">Contact</Link>
-          <Link href="/">Agents</Link>
-          <Link href="/">Sign in</Link>
-          <Link href="/">Sign up</Link>
+          <Link to="/">Home</Link>
+          <Link to="/">About</Link>
+          <Link to="/">Contact</Link>
+          <Link to="/">Agents</Link>
+          <Link to="/">Sign in</Link>
+          <Link to="/">Sign up</Link>
         </div>
       </div>
     </nav>
