@@ -15,6 +15,10 @@
       gap: 50px;
       height: 100%;
 
+      @include lg {
+        padding-right: 50px;
+      }
+
       @include md {
         padding: 0;
       }
