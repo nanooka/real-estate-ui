@@ -18,8 +18,8 @@ export default function Navbar() {
     <nav>
       <div className="left">
         <Link to="/" className="logo">
-          <img src="/logo.png" alt="" />
-          <span>LamaEstate</span>
+          <img src="/owner.png" alt="" />
+          <span>RealEstate</span>
         </Link>
 
         <Link to="/">Home</Link>
