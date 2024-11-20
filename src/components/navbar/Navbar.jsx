@@ -22,10 +22,11 @@ export default function Navbar() {
           <span>RealEstate</span>
         </Link>
 
-        <Link to="/">Home</Link>
+        {/* <Link to="/">Home</Link>
         <Link to="/">About</Link>
         <Link to="/">Contact</Link>
-        <Link to="/">Agents</Link>
+        <Link to="/">Agents</Link> */}
+        <Link to="/list">Listing</Link>
       </div>
       <div className="right">
         {currentUser ? (
