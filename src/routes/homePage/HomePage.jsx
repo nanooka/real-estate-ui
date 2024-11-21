@@ -1,11 +1,11 @@
-import { useContext } from "react";
+// import { useContext } from "react";
 import SearchBar from "../../components/searchBar/SearchBar";
 import "./homePage.scss";
-import { AuthContext } from "../../context/AuthContext";
+// import { AuthContext } from "../../context/AuthContext";
 
 export default function HomePage() {
-  const { currentUser } = useContext(AuthContext);
-  console.log(currentUser);
+  // const { currentUser } = useContext(AuthContext);
+  // console.log(currentUser);
 
   return (
     <div className="homePage">

@@ -18,7 +18,7 @@ export default function Navbar() {
     <nav>
       <div className="left">
         <Link to="/" className="logo">
-          <img src="/owner.png" alt="" />
+          <img src="/estate.png" alt="" />
           <span>RealEstate</span>
         </Link>
 
