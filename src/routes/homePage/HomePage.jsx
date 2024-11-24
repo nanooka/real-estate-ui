@@ -1,45 +1,32 @@
-// import { useContext } from "react";
-import SearchBar from "../../components/searchBar/SearchBar";
+import { Suspense } from "react";
 import "./homePage.scss";
-// import { AuthContext } from "../../context/AuthContext";
+import { Await, useLoaderData } from "react-router-dom";
+import Card from "../../components/card/Card";
+import NewFilter from "../../components/newFilter/NewFilter";
 
 export default function HomePage() {
-  // const { currentUser } = useContext(AuthContext);
-  // console.log(currentUser);
+  const data = useLoaderData();
+  console.log(data);
 
   return (
     <div className="homePage">
-      <div className="textContainer">
-        <div className="wrapper">
-          <h1 className="title">Find Real Estate & Get Your Dream Place</h1>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Impedit
-            maxime quae odio illo iste, officiis quos maiores ut suscipit cum
-            soluta sint? Voluptatibus sint voluptatem exercitationem corrupti
-            ipsa. Eos, nihil?
-          </p>
-
-          <SearchBar />
-
-          <div className="boxes">
-            <div className="box">
-              <h1>16+</h1>
-              <h2>Years of Experience</h2>
-            </div>
-            <div className="box">
-              <h1>200</h1>
-              <h2>Award Gained</h2>
-            </div>
-            <div className="box">
-              <h1>2000+</h1>
-              <h2>Property Ready</h2>
-            </div>
-          </div>
+      <div className="coverContainer">
+        <img src="/cover.jpg" alt="" />
+        <h1>Find Your Dream House</h1>
+        <div className="filterContainer">
+          <NewFilter />
         </div>
       </div>
-      <div className="imgContainer">
-        <img src="/bg.png" alt="" />
-      </div>
+      <Suspense fallback={<p>Loading...</p>}>
+        <Await
+          resolve={data.postResponse}
+          errorElement={<p>Error loading posts</p>}
+        >
+          {(postResponse) =>
+            postResponse.data.map((post) => <Card key={post.id} item={post} />)
+          }
+        </Await>
+      </Suspense>
     </div>
   );
 }

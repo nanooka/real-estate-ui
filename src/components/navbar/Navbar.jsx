@@ -27,6 +27,8 @@ export default function Navbar() {
         <Link to="/">Contact</Link>
         <Link to="/">Agents</Link> */}
         <Link to="/list">Listing</Link>
+        <Link to="/about">About Us</Link>
+        <Link to="/">Help</Link>
       </div>
       <div className="right">
         {currentUser ? (

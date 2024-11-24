@@ -5,21 +5,52 @@ import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import apiRequest from "../../lib/apiRequest";
 import UploadWidget from "../../components/uploadWidget/UploadWidget";
+import L from "leaflet";
+import "leaflet-control-geocoder";
 
 export default function NewPostPage() {
   const [value, setValue] = useState("");
   const [images, setImages] = useState([]);
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [coordinates, setCoordinates] = useState({ lat: "", lng: "" });
+  // const geocoderRef = useRef(null);
 
   const navigate = useNavigate();
+
+  const handleGeocode = (address) => {
+    if (!address) {
+      setError("Address is required for geocoding.");
+      return;
+    }
+
+    const geocoder = L.Control.Geocoder.nominatim();
+    geocoder.geocode(address, (results) => {
+      if (results.length > 0) {
+        const { center } = results[0];
+        setCoordinates({ lat: center.lat, lng: center.lng });
+      } else {
+        setError("Unable to fetch coordinates. Please check the address.");
+      }
+    });
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     const formData = new FormData(e.target);
     const inputs = Object.fromEntries(formData);
+    console.log(coordinates);
 
     try {
+      setLoading(true);
+
+      // Trigger geocoding if coordinates are not set
+      if (!coordinates.lat || !coordinates.lng) {
+        handleGeocode(`${inputs.address}, ${inputs.city}`);
+        return; // Wait for geocoding
+      }
+
       const res = await apiRequest.post("/posts", {
         postData: {
           title: inputs.title,
@@ -30,12 +61,15 @@ export default function NewPostPage() {
           bathroom: parseInt(inputs.bathroom),
           type: inputs.type,
           property: inputs.property,
-          latitude: inputs.latitude,
-          longitude: inputs.longitude,
+          // latitude: inputs.latitude,
+          // longitude: inputs.longitude,
+          latitude: coordinates.lat.toString(),
+          longitude: coordinates.lng.toString(),
           images: images,
         },
         postDetail: {
-          desc: value,
+          // desc: value,
+          desc: inputs.desc,
           utilities: inputs.utilities,
           pet: inputs.pet,
           income: inputs.income,
@@ -68,11 +102,17 @@ export default function NewPostPage() {
             </div>
             <div className="item">
               <label htmlFor="address">Address</label>
-              <input id="address" name="address" type="text" />
+              <input
+                id="address"
+                name="address"
+                type="text"
+                onBlur={(e) => handleGeocode(e.target.value)}
+              />
             </div>
             <div className="item description">
               <label htmlFor="desc">Description</label>
-              <ReactQuill theme="snow" onChange={setValue} value={value} />
+              <textarea name="desc" id="desc"></textarea>
+              {/* <ReactQuill theme="snow" onChange={setValue} value={value} /> */}
             </div>
             <div className="item">
               <label htmlFor="city">City</label>
@@ -86,14 +126,14 @@ export default function NewPostPage() {
               <label htmlFor="bathroom">Bathroom Number</label>
               <input min={1} id="bathroom" name="bathroom" type="number" />
             </div>
-            <div className="item">
+            {/* <div className="item">
               <label htmlFor="latitude">Latitude</label>
               <input id="latitude" name="latitude" type="text" />
             </div>
             <div className="item">
               <label htmlFor="longitude">Longitude</label>
               <input id="longitude" name="longitude" type="text" />
-            </div>
+            </div> */}
             <div className="item">
               <label htmlFor="type">Type</label>
               <select name="type">
