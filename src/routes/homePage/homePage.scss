@@ -92,16 +92,18 @@
     background: #000;
     display: flex;
     align-items: center;
-    justify-content: center;
+    // justify-content: center;
     flex-direction: column;
     border-radius: 20px;
+    gap: 20px;
+    padding-top: 50px;
 
     img {
       width: 100%;
       // object-fit: cover;
       position: absolute;
       top: -250px;
-      opacity: 40%;
+      opacity: 35%;
     }
 
     h1 {
