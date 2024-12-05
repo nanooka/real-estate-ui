@@ -2,7 +2,7 @@ import { Suspense } from "react";
 import "./homePage.scss";
 import { Await, useLoaderData } from "react-router-dom";
 import Card from "../../components/card/Card";
-import NewFilter from "../../components/newFilter/NewFilter";
+import Filter from "../../components/filter/Filter";
 
 export default function HomePage() {
   const data = useLoaderData();
@@ -14,7 +14,7 @@ export default function HomePage() {
         <img src="/cover.jpg" alt="" />
         <h1>Find Your Dream House</h1>
         <div className="filterContainer">
-          <NewFilter />
+          <Filter />
         </div>
       </div>
       <Suspense fallback={<p>Loading...</p>}>
