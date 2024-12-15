@@ -9,6 +9,7 @@ export default function ListPage() {
   const data = useLoaderData();
   const [searchParams] = useSearchParams();
   console.log(searchParams);
+  console.log(data);
 
   return (
     <div className="listPage">

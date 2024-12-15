@@ -17,16 +17,20 @@ export default function HomePage() {
           <Filter />
         </div>
       </div>
-      <Suspense fallback={<p>Loading...</p>}>
-        <Await
-          resolve={data.postResponse}
-          errorElement={<p>Error loading posts</p>}
-        >
-          {(postResponse) =>
-            postResponse.data.map((post) => <Card key={post.id} item={post} />)
-          }
-        </Await>
-      </Suspense>
+      <div className="wrapper">
+        <Suspense fallback={<p>Loading...</p>}>
+          <Await
+            resolve={data.postResponse}
+            errorElement={<p>Error loading posts</p>}
+          >
+            {(postResponse) =>
+              postResponse.data.map((post) => (
+                <Card key={post.id} item={post} />
+              ))
+            }
+          </Await>
+        </Suspense>
+      </div>
     </div>
   );
 }

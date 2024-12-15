@@ -1,6 +1,9 @@
+@use "../../responsive.scss" as *;
+
 .login {
   height: 100%;
   display: flex;
+  align-items: center;
 
   .formContainer {
     flex: 3;
@@ -8,6 +11,10 @@
     display: flex;
     align-items: center;
     justify-content: center;
+
+    @include md {
+      margin-top: 100px;
+    }
 
     form {
       display: flex;
@@ -29,6 +36,10 @@
         font-weight: bold;
         cursor: pointer;
 
+        &:hover {
+          background-color: rgb(1, 112, 112);
+        }
+
         &:disabled {
           background-color: #bed9d8;
           cursor: not-allowed;
@@ -45,6 +56,10 @@
         // border-bottom: 1px solid gray;
         // width: max-content;
         text-align: center;
+
+        &:hover {
+          text-decoration: underline;
+        }
       }
     }
   }
@@ -55,8 +70,14 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-right: 20px;
+
     img {
       width: 100%;
+    }
+
+    @include md {
+      display: none;
     }
   }
 }

@@ -12,7 +12,8 @@ function SinglePage() {
   const { currentUser } = useContext(AuthContext);
   const [saved, setSaved] = useState(post?.isSaved || false);
   const navigate = useNavigate();
-  console.log(post);
+  // console.log(post);
+  console.log(post.id, currentUser.id);
 
   const handleSave = async () => {
     if (!currentUser) {
@@ -45,14 +46,14 @@ function SinglePage() {
                 <div className="price">$ {post.price}</div>
               </div>
               <div className="user">
-                <img src={post.user.avatar} alt="" />
-                <span>{post.user.name}</span>
+                <img src={post.user.avatar || "/noavatar.jpg"} alt="" />
+                <span>{post.user.username}</span>
               </div>
             </div>
             <div
               className="bottom"
               dangerouslySetInnerHTML={{
-                __html: DOMPurify.sanitize(post.postDetail.desc),
+                __html: DOMPurify.sanitize(post.desc),
               }}
             ></div>
           </div>
@@ -60,7 +61,7 @@ function SinglePage() {
       </div>
       <div className="features">
         <div className="wrapper">
-          <p className="title">General</p>
+          {/* <p className="title">General</p>
           <div className="listVertical">
             <div className="feature">
               <img src="/utility.png" alt="" />
@@ -87,12 +88,12 @@ function SinglePage() {
                 <p>{post.postDetail.income}</p>
               </div>
             </div>
-          </div>
+          </div> */}
           <p className="title">Sizes</p>
           <div className="sizes">
             <div className="size">
               <img src="/size.png" alt="" />
-              <span>{post.postDetail.size} sqrt</span>
+              <span>{post.area} m²</span>
             </div>
             <div className="size">
               <img src="/bed.png" alt="" />
@@ -111,7 +112,7 @@ function SinglePage() {
               </span>
             </div>
           </div>
-          <p className="title">Nearby Places</p>
+          {/* <p className="title">Nearby Places</p>
           <div className="listHorizontal">
             <div className="feature">
               <img src="/school.png" alt="" />
@@ -149,7 +150,7 @@ function SinglePage() {
                 </p>
               </div>
             </div>
-          </div>
+          </div> */}
           <p className="title">Location</p>
           <div className="mapContainer">
             <Map items={[post]} />

@@ -4,7 +4,8 @@ import { useNavigate } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
 import { CiSearch } from "react-icons/ci";
 import { BiArea } from "react-icons/bi";
-// import { MdOutlineBedroomParent } from "react-icons/md";
+import { MdKeyboardArrowDown } from "react-icons/md";
+import { LiaBedSolid } from "react-icons/lia";
 
 export default function Filter() {
   const [countries, setCountries] = useState([]);
@@ -148,24 +149,39 @@ export default function Filter() {
             activeDropdown === "status" ? "active" : ""
           }`}
           style={{
-            color: query.status && "#004da3",
+            // color: query.status && "#004da3",
+            color: query.status && "teal",
             fontWeight: query.status && "bold",
           }}
           onClick={() => toggleDropdown("status")}
         >
           {query.status ? "For " + query.status : "Status"}
+          <MdKeyboardArrowDown size={20} color="teal" />
         </div>
         {activeDropdown === "status" && (
           <ul className="dropdownList">
-            <li onClick={() => handleQueryUpdate("status", "sale")}>
+            <li
+              onClick={() => handleQueryUpdate("status", "sale")}
+              style={{
+                backgroundColor: query.status === "sale" && "teal",
+                color: query.status === "sale" && "white",
+              }}
+            >
               For sale
             </li>
-            <li onClick={() => handleQueryUpdate("status", "rent")}>
+            <li
+              onClick={() => handleQueryUpdate("status", "rent")}
+              style={{
+                backgroundColor: query.status === "rent" && "teal",
+                color: query.status === "rent" && "white",
+              }}
+            >
               For rent
             </li>
           </ul>
         )}
       </div>
+
       {/* Property Type Dropdown */}
       <div className="dropdown">
         <div
@@ -173,25 +189,40 @@ export default function Filter() {
             activeDropdown === "propertyType" ? "active" : ""
           }`}
           style={{
-            color: query.propertyType && "#004da3",
+            // color: query.propertyType && "#004da3",
+            color: query.propertyType && "teal",
             fontWeight: query.propertyType && "bold",
           }}
           onClick={() => toggleDropdown("propertyType")}
         >
           {query.propertyType.charAt(0).toUpperCase() +
             query.propertyType.slice(1) || "Property Type"}
+          <MdKeyboardArrowDown size={20} color="teal" />
         </div>
         {activeDropdown === "propertyType" && (
           <ul className="dropdownList">
-            <li onClick={() => handleQueryUpdate("propertyType", "apartment")}>
+            <li
+              onClick={() => handleQueryUpdate("propertyType", "apartment")}
+              style={{
+                backgroundColor: query.propertyType === "apartment" && "teal",
+                color: query.propertyType === "apartment" && "white",
+              }}
+            >
               Apartment
             </li>
-            <li onClick={() => handleQueryUpdate("propertyType", "house")}>
+            <li
+              onClick={() => handleQueryUpdate("propertyType", "house")}
+              style={{
+                backgroundColor: query.propertyType === "house" && "teal",
+                color: query.propertyType === "house" && "white",
+              }}
+            >
               House
             </li>
           </ul>
         )}
       </div>
+
       {/* Country Dropdown */}
       <div className="dropdown countryDropDown">
         <div
@@ -199,12 +230,14 @@ export default function Filter() {
             activeDropdown === "country" ? "active" : ""
           }`}
           style={{
-            color: query.country && "#004da3",
+            // color: query.country && "#004da3",
+            color: query.country && "teal",
             fontWeight: query.country && "bold",
           }}
           onClick={() => toggleDropdown("country")}
         >
           {query.country || "Country"}
+          <MdKeyboardArrowDown size={20} color="teal" />
         </div>
 
         {activeDropdown === "country" && (
@@ -223,7 +256,8 @@ export default function Filter() {
                   key={country}
                   onClick={() => handleSelect("country", country)}
                   style={{
-                    backgroundColor: query.country === country && "#b4cfeb",
+                    backgroundColor: query.country === country && "teal",
+                    color: query.country === country && "white",
                   }}
                 >
                   {country}
@@ -233,6 +267,7 @@ export default function Filter() {
           </>
         )}
       </div>
+
       {/* City Dropdown */}
       {/* {query.country && ( */}
       <div className="dropdown cityDropDown">
@@ -241,12 +276,14 @@ export default function Filter() {
             activeDropdown === "city" ? "active" : ""
           }`}
           style={{
-            color: query.city && "#004da3",
+            // color: query.city && "#004da3",
+            color: query.city && "teal",
             fontWeight: query.city && "bold",
           }}
           onClick={() => toggleDropdown("city")}
         >
           {query.city || "City"}
+          <MdKeyboardArrowDown size={20} color="teal" />
         </div>
         {activeDropdown === "city" && (
           <>
@@ -262,7 +299,14 @@ export default function Filter() {
                 />
                 <ul className="dropdownList city">
                   {filteredCities.map((city) => (
-                    <li key={city} onClick={() => handleSelect("city", city)}>
+                    <li
+                      key={city}
+                      onClick={() => handleSelect("city", city)}
+                      style={{
+                        backgroundColor: query.city === city && "teal",
+                        color: query.city === city && "white",
+                      }}
+                    >
                       {city}
                     </li>
                   ))}
@@ -343,7 +387,16 @@ export default function Filter() {
             : !query.minArea && query.maxArea
             ? "-" + query.maxArea
             : "Area"}
-          <BiArea size={20} color="#004da3" />
+          <div>
+            {query.bedroom && (
+              <>
+                <LiaBedSolid size={20} color="teal" />
+                <span>{query.bedroom}</span>
+              </>
+            )}
+
+            <BiArea size={20} color="teal" />
+          </div>
         </div>
 
         {activeDropdown === "area" && (
@@ -354,9 +407,12 @@ export default function Filter() {
                 name="minArea"
                 placeholder="Min area"
                 value={query.minArea || ""}
-                onChange={(e) =>
-                  handleQueryUpdate("minArea", e.target.value, false)
-                }
+                onChange={(e) => {
+                  const value = e.target.value;
+                  if (value.length <= 4) {
+                    handleQueryUpdate("minArea", value, false);
+                  }
+                }}
                 autoFocus
               />
               <input
@@ -364,9 +420,12 @@ export default function Filter() {
                 name="MaxArea"
                 placeholder="Max area"
                 value={query.maxArea || ""}
-                onChange={(e) =>
-                  handleQueryUpdate("maxArea", e.target.value, false)
-                }
+                onChange={(e) => {
+                  const value = e.target.value;
+                  if (value.length <= 4) {
+                    handleQueryUpdate("maxArea", value, false);
+                  }
+                }}
               />
             </div>
             <div className="dropdownList bedroom-selector">

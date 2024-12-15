@@ -58,7 +58,7 @@ export default function SearchBar() {
           onChange={handleChange}
         />
         <Link
-          to={`/list?type=${query.type}&city=${query.city}&minPrice=${query.minPrice}&maxPrice=${query.maxPrice}`}
+          to={`/listing?type=${query.type}&city=${query.city}&minPrice=${query.minPrice}&maxPrice=${query.maxPrice}`}
         >
           <button>
             {/* <img src="/search.png" alt="" /> */}

@@ -3,14 +3,21 @@
 .card {
   display: flex;
   gap: 20px;
+  border-radius: 10px;
+  // padding: 2px;
+  cursor: pointer;
+  transition: all 0.4s ease;
+
+  &:hover {
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
+      rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+    scale: 1.05;
+    margin-left: 20px;
+  }
 
   .imageContainer {
     flex: 2;
     height: 200px;
-
-    @include sm {
-      display: none;
-    }
 
     img {
       width: 100%;
@@ -26,6 +33,11 @@
     flex-direction: column;
     justify-content: space-between;
     gap: 10px;
+    padding: 4px;
+
+    @include sm {
+      flex: 2;
+    }
 
     img {
       width: 16px;
@@ -36,12 +48,13 @@
       font-size: 20px;
       font-weight: 600;
       color: #444;
-      transition: all 0.4s ease;
 
-      &:hover {
-        color: black;
-        scale: 101%;
-      }
+      // transition: all 0.4s ease;
+
+      // &:hover {
+      //   color: black;
+      //   scale: 101%;
+      // }
     }
 
     .address {
@@ -57,8 +70,9 @@
       font-weight: 300;
       padding: 5px;
       border-radius: 5px;
-      background-color: rgba(254, 205, 81, 0.438);
       width: max-content;
+      font-weight: 400;
+      color: teal;
     }
 
     .bottom {

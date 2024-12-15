@@ -1,83 +1,98 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./newPostPage.scss";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import apiRequest from "../../lib/apiRequest";
 import UploadWidget from "../../components/uploadWidget/UploadWidget";
-import L from "leaflet";
 import "leaflet-control-geocoder";
+import PinAddressMap from "../../components/pinAddressMap/PinAddressMap";
+import { fetchCities, fetchCountries } from "../../lib/location";
 
 export default function NewPostPage() {
-  const [value, setValue] = useState("");
-  const [images, setImages] = useState([]);
   const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [coordinates, setCoordinates] = useState({ lat: "", lng: "" });
-  // const geocoderRef = useRef(null);
+  const [images, setImages] = useState([]);
+  const [descValue, setDescValue] = useState(null);
+  const [coordinates, setCoordinates] = useState({ lat: null, lng: null });
+  const [countries, setCountries] = useState([]);
+  const [cities, setCities] = useState([]);
+  const [selectedCountry, setSelectedCountry] = useState("");
+  const [selectedCity, setSelectedCity] = useState("");
 
   const navigate = useNavigate();
 
-  const handleGeocode = (address) => {
-    if (!address) {
-      setError("Address is required for geocoding.");
+  console.log(descValue);
+
+  useEffect(() => {
+    const loadCountries = async () => {
+      try {
+        const countryList = await fetchCountries();
+        setCountries(countryList);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
+    loadCountries();
+  }, []);
+
+  useEffect(() => {
+    if (!selectedCountry) {
+      setCities([]);
+      // setFilteredCities([]);
       return;
     }
 
-    const geocoder = L.Control.Geocoder.nominatim();
-    geocoder.geocode(address, (results) => {
-      if (results.length > 0) {
-        const { center } = results[0];
-        setCoordinates({ lat: center.lat, lng: center.lng });
-      } else {
-        setError("Unable to fetch coordinates. Please check the address.");
+    const loadCities = async () => {
+      try {
+        const cityList = await fetchCities(selectedCountry);
+        setCities(cityList);
+        // setFilteredCities(cityList);
+      } catch (error) {
+        console.error(error);
+        setCities([]);
       }
-    });
-  };
+    };
 
+    loadCities();
+  }, [selectedCountry]);
+
+  // console.log(coordinates);
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     const formData = new FormData(e.target);
     const inputs = Object.fromEntries(formData);
-    console.log(coordinates);
 
     try {
-      setLoading(true);
-
-      // Trigger geocoding if coordinates are not set
-      if (!coordinates.lat || !coordinates.lng) {
-        handleGeocode(`${inputs.address}, ${inputs.city}`);
-        return; // Wait for geocoding
-      }
-
       const res = await apiRequest.post("/posts", {
         postData: {
           title: inputs.title,
+          // desc: inputs.desc,
+          desc: descValue,
           price: parseInt(inputs.price),
           address: inputs.address,
+          country: inputs.country,
           city: inputs.city,
           bedroom: parseInt(inputs.bedroom),
           bathroom: parseInt(inputs.bathroom),
-          type: inputs.type,
-          property: inputs.property,
-          // latitude: inputs.latitude,
-          // longitude: inputs.longitude,
+          status: inputs.status,
+          propertyType: inputs.propertyType,
           latitude: coordinates.lat.toString(),
           longitude: coordinates.lng.toString(),
           images: images,
+          area: parseInt(inputs.area),
         },
-        postDetail: {
-          // desc: value,
-          desc: inputs.desc,
-          utilities: inputs.utilities,
-          pet: inputs.pet,
-          income: inputs.income,
-          size: parseInt(inputs.size),
-          school: parseInt(inputs.school),
-          bus: parseInt(inputs.bus),
-          restaurant: parseInt(inputs.restaurant),
-        },
+        // postDetail: {
+        //   // desc: value,
+        //   desc: inputs.desc,
+        //   utilities: inputs.utilities,
+        //   pet: inputs.pet,
+        //   income: inputs.income,
+        //   school: parseInt(inputs.school),
+        //   bus: parseInt(inputs.bus),
+        //   restaurant: parseInt(inputs.restaurant),
+        // },
       });
       navigate(`/${res.data.id}`);
     } catch (err) {
@@ -94,104 +109,114 @@ export default function NewPostPage() {
           <form onSubmit={handleSubmit}>
             <div className="item">
               <label htmlFor="title">Title</label>
-              <input id="title" name="title" type="text" />
+              <input id="title" name="title" type="text" required />
             </div>
             <div className="item">
               <label htmlFor="price">Price</label>
-              <input id="price" name="price" type="number" />
+              <input id="price" name="price" type="number" required />
             </div>
             <div className="item">
               <label htmlFor="address">Address</label>
-              <input
-                id="address"
-                name="address"
-                type="text"
-                onBlur={(e) => handleGeocode(e.target.value)}
-              />
+              <input id="address" name="address" type="text" required />
             </div>
             <div className="item description">
               <label htmlFor="desc">Description</label>
-              <textarea name="desc" id="desc"></textarea>
-              {/* <ReactQuill theme="snow" onChange={setValue} value={value} /> */}
+              {/* <textarea name="desc" id="desc"></textarea> */}
+              <ReactQuill
+                theme="snow"
+                onChange={setDescValue}
+                value={descValue}
+              />
             </div>
+
+            <div className="item">
+              <label htmlFor="country">Country</label>
+              <select
+                name="country"
+                id="country"
+                value={selectedCountry}
+                onChange={(e) => {
+                  setSelectedCountry(e.target.value);
+                  setSelectedCity("");
+                }}
+                required
+              >
+                <option value="" disabled>
+                  Select country
+                </option>
+                {countries.map((country) => (
+                  <option key={country}>{country}</option>
+                ))}
+              </select>
+            </div>
+
             <div className="item">
               <label htmlFor="city">City</label>
-              <input id="city" name="city" type="text" />
+              <select
+                id="city"
+                name="city"
+                value={selectedCity}
+                onChange={(e) => setSelectedCity(e.target.value)}
+                required
+                disabled={!selectedCountry || cities.length === 0}
+              >
+                <option value="" disabled>
+                  {selectedCountry ? "Select city" : "Select country First"}
+                </option>
+                {cities.map((city) => (
+                  <option key={city} value={city}>
+                    {city}
+                  </option>
+                ))}
+              </select>
             </div>
+
             <div className="item">
               <label htmlFor="bedroom">Bedroom Number</label>
-              <input min={1} id="bedroom" name="bedroom" type="number" />
-            </div>
-            <div className="item">
-              <label htmlFor="bathroom">Bathroom Number</label>
-              <input min={1} id="bathroom" name="bathroom" type="number" />
-            </div>
-            {/* <div className="item">
-              <label htmlFor="latitude">Latitude</label>
-              <input id="latitude" name="latitude" type="text" />
-            </div>
-            <div className="item">
-              <label htmlFor="longitude">Longitude</label>
-              <input id="longitude" name="longitude" type="text" />
-            </div> */}
-            <div className="item">
-              <label htmlFor="type">Type</label>
-              <select name="type">
-                <option value="rent" defaultChecked>
-                  Rent
-                </option>
-                <option value="buy">Buy</option>
-              </select>
-            </div>
-            <div className="item">
-              <label htmlFor="type">Property</label>
-              <select name="property">
-                <option value="apartment">Apartment</option>
-                <option value="house">House</option>
-                <option value="condo">Condo</option>
-                <option value="land">Land</option>
-              </select>
-            </div>
-            <div className="item">
-              <label htmlFor="utilities">Utilities Policy</label>
-              <select name="utilities">
-                <option value="owner">Owner is responsible</option>
-                <option value="tenant">Tenant is responsible</option>
-                <option value="shared">Shared</option>
-              </select>
-            </div>
-            <div className="item">
-              <label htmlFor="pet">Pet Policy</label>
-              <select name="pet">
-                <option value="allowed">Allowed</option>
-                <option value="not-allowed">Not Allowed</option>
-              </select>
-            </div>
-            <div className="item">
-              <label htmlFor="income">Income Policy</label>
               <input
-                id="income"
-                name="income"
-                type="text"
-                placeholder="Income Policy"
+                min={1}
+                id="bedroom"
+                name="bedroom"
+                type="number"
+                required
               />
             </div>
             <div className="item">
-              <label htmlFor="size">Total Size (sqft)</label>
-              <input min={0} id="size" name="size" type="number" />
+              <label htmlFor="bathroom">Bathroom Number</label>
+              <input
+                min={1}
+                id="bathroom"
+                name="bathroom"
+                type="number"
+                required
+              />
             </div>
             <div className="item">
-              <label htmlFor="school">School</label>
-              <input min={0} id="school" name="school" type="number" />
+              <label htmlFor="status">Status</label>
+              <select id="status" name="status" required>
+                <option value="rent" defaultChecked>
+                  Rent
+                </option>
+                <option value="sale">Sale</option>
+              </select>
             </div>
             <div className="item">
-              <label htmlFor="bus">bus</label>
-              <input min={0} id="bus" name="bus" type="number" />
+              <label htmlFor="propertyType">Property</label>
+              <select id="propertyType" name="propertyType" required>
+                <option value="apartment">Apartment</option>
+                <option value="house">House</option>
+              </select>
             </div>
+
             <div className="item">
-              <label htmlFor="restaurant">Restaurant</label>
-              <input min={0} id="restaurant" name="restaurant" type="number" />
+              <label htmlFor="area">Area (m²)</label>
+              <input min={0} id="area" name="area" type="number" required />
             </div>
+
+            <PinAddressMap
+              setCoordinates={setCoordinates}
+              city={selectedCity}
+            />
             <button className="sendButton">Add</button>
             {error && <span>{error}</span>}
           </form>

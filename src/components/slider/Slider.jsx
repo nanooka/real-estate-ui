@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./slider.scss";
 
 export default function Slider({ images }) {
@@ -19,6 +19,17 @@ export default function Slider({ images }) {
       }
     }
   };
+
+  useEffect(() => {
+    if (imageIndex !== null) {
+      document.body.style.overflowY = "hidden";
+    } else {
+      document.body.style.overflowY = "auto";
+    }
+    return () => {
+      document.body.style.overflowY = "auto"; // Clean up in case the component unmounts
+    };
+  }, [imageIndex]);
 
   return (
     <div className="slider">
@@ -42,7 +53,7 @@ export default function Slider({ images }) {
         <img src={images[0]} alt="" onClick={() => setImageIndex(0)} />
       </div>
       <div className="smallImages">
-        {images.slice(1).map((image, index) => (
+        {images.slice(1, 4).map((image, index) => (
           <img
             src={image}
             alt=""
@@ -50,6 +61,12 @@ export default function Slider({ images }) {
             onClick={() => setImageIndex(index + 1)}
           />
         ))}
+
+        {images.length > 4 && (
+          <div className="extraImages" onClick={() => setImageIndex(3)}>
+            +{images.length - 4} more
+          </div>
+        )}
       </div>
     </div>
   );

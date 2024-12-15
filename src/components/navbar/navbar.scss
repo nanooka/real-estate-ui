@@ -5,152 +5,174 @@ nav {
   justify-content: space-between;
   align-items: center;
   height: 100px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background-color: white;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 
-  a {
-    transition: all 0.4s ease;
-
-    @include sm {
-      display: none;
-    }
-
-    &:hover {
-      scale: 1.05;
-    }
-  }
-
-  .left {
-    flex: 3;
+  .nav-div {
+    width: 100%;
+    max-width: 1366px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 20px;
+    padding-right: 20px;
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    gap: 50px;
-
-    .logo {
-      font-weight: bold;
-      font-size: 20px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-
-      img {
-        // width: 28px;
-        width: 50px;
-      }
-
-      span {
-        color: #004da3;
-
-        @include md {
-          display: none;
-        }
-
-        @include sm {
-          display: initial;
-        }
-      }
-    }
-  }
-  .right {
-    flex: 2;
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    // background-color: #fcf5f3;
-    height: 100%;
-
-    @include md {
-      background-color: transparent;
-    }
 
     a {
-      padding: 12px 24px;
-      margin: 20px;
+      transition: all 0.4s ease;
+
+      @include sm {
+        display: none;
+      }
+
+      &:hover {
+        scale: 1.05;
+      }
     }
 
-    .user {
+    .left {
+      flex: 3;
       display: flex;
       align-items: center;
-      font-weight: bold;
+      gap: 50px;
 
-      img {
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        object-fit: cover;
-        margin-right: 20px;
-      }
+      .logo {
+        font-weight: bold;
+        font-size: 20px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
 
-      span {
-        @include sm {
-          display: none;
+        img {
+          // width: 28px;
+          width: 50px;
+        }
+
+        span {
+          // color: #004da3;
+          color: teal;
+
+          @include md {
+            display: none;
+          }
+
+          @include sm {
+            display: initial;
+          }
         }
       }
+    }
+    .right {
+      flex: 2;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      // background-color: #fcf5f3;
+      height: 100%;
 
-      .profile {
+      @include md {
+        background-color: transparent;
+      }
+
+      a {
         padding: 12px 24px;
-        background-color: #fece51;
-        position: relative;
+        margin: 20px;
+      }
 
-        .notification {
-          position: absolute;
-          top: -8px;
-          right: -8px;
-          background-color: red;
-          color: white;
+      .user {
+        display: flex;
+        align-items: center;
+        font-weight: bold;
+
+        img {
+          width: 40px;
+          height: 40px;
           border-radius: 50%;
-          width: 26px;
-          height: 26px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
+          object-fit: cover;
+          margin-right: 20px;
+        }
+
+        span {
+          @include sm {
+            display: none;
+          }
+        }
+
+        .profile {
+          padding: 12px 24px;
+          border-radius: 25px;
+          background-color: teal;
+          color: white;
+          position: relative;
+
+          .notification {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background-color: red;
+            color: white;
+            border-radius: 50%;
+            width: 26px;
+            height: 26px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+          }
         }
       }
-    }
 
-    .login-register-btns {
-      display: flex;
-    }
-
-    .register {
-      background-color: #fece51;
-    }
-
-    .menuIcon {
-      display: none;
-      z-index: 99;
-
-      img {
-        width: 36px;
-        height: 36px;
-        cursor: pointer;
+      .login {
+        height: 40px;
+        background-color: teal;
+        color: white;
+        border-radius: 25px;
       }
 
-      @include sm {
-        display: initial;
-      }
-    }
+      .menuIcon {
+        display: none;
+        z-index: 1000000;
 
-    .menu {
-      position: absolute;
-      top: 0;
-      right: -50%;
-      background-color: black;
-      color: white;
-      height: 100vh;
-      width: 50%;
-      transition: all 0.5s ease;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      font-size: 24px;
+        img {
+          width: 36px;
+          height: 36px;
+          cursor: pointer;
+        }
 
-      &.active {
-        right: 0;
-      }
-
-      @include sm {
-        a {
+        @include sm {
           display: initial;
+        }
+      }
+
+      .menu {
+        position: absolute;
+        top: 0;
+        right: -50%;
+        background-color: black;
+        color: white;
+        height: 100vh;
+        width: 50%;
+        transition: all 0.5s ease;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        font-size: 24px;
+        z-index: 100000;
+
+        &.active {
+          right: 0;
+        }
+
+        @include sm {
+          a {
+            display: initial;
+          }
         }
       }
     }

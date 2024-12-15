@@ -9,10 +9,10 @@ export default function Map({ items }) {
       center={
         items.length === 1
           ? [items[0].latitude, items[0].longitude]
-          : [42.3154, 43.3569]
+          : [41.7310854, 44.766338]
       }
-      zoom={7}
-      scrollWheelZoom={false}
+      zoom={10}
+      scrollWheelZoom={true}
       className="map"
     >
       <TileLayer

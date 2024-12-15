@@ -13,5 +13,12 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    color: black;
+
+    b {
+      &:last-child {
+        color: teal;
+      }
+    }
   }
 }
