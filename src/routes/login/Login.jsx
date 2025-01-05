@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import "./login.scss";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import apiRequest from "../../lib/apiRequest";
 import { AuthContext } from "../../context/AuthContext";
 
@@ -11,6 +11,8 @@ export default function Login() {
   const { updateUser } = useContext(AuthContext);
 
   const navigate = useNavigate();
+  const location = useLocation();
+  console.log(location.state);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -30,7 +32,12 @@ export default function Login() {
 
       updateUser(res.data);
 
-      navigate("/");
+      // navigate("/");
+      const fallback =
+        location.state?.from && location.state.from.startsWith("/")
+          ? location.state.from
+          : "/";
+      navigate(fallback);
     } catch (err) {
       console.log(err);
       setError(err.response.data.message);

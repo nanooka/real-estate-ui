@@ -1,6 +1,7 @@
 import { Marker, Popup } from "react-leaflet";
 import "./pin.scss";
 import { Link } from "react-router-dom";
+import { formatWithSpaces } from "../../lib/formatPrice";
 
 export default function Pin({ item }) {
   return (
@@ -12,7 +13,7 @@ export default function Pin({ item }) {
             <div className="textContainer">
               <b>{item.title}</b>
               <span>{item.bedroom} bedroom</span>
-              <b>$ {item.price}</b>
+              <b>$ {formatWithSpaces(item.price)}</b>
             </div>
           </div>
         </Link>

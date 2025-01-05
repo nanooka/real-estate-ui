@@ -1,11 +1,8 @@
+import { formatWithSpaces } from "../../lib/formatPrice";
 import "./card.scss";
 import { Link } from "react-router-dom";
 
 export default function Card({ item }) {
-  function formatWithSpaces(number) {
-    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
-  }
-
   return (
     <Link to={`/${item.id}`}>
       <div className="card">

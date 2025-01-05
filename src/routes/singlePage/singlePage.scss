@@ -64,14 +64,14 @@
                 height: 16px;
               }
             }
-            .price {
-              padding: 5px;
-              background-color: rgba(254, 205, 81, 0.438);
-              border-radius: 5px;
-              width: max-content;
-              font-size: 20px;
-              font-weight: 300;
-            }
+            // .price {
+            //   padding: 5px;
+            //   background-color: rgba(254, 205, 81, 0.438);
+            //   border-radius: 5px;
+            //   width: max-content;
+            //   font-size: 20px;
+            //   font-weight: 300;
+            // }
           }
           .user {
             display: flex;
@@ -110,6 +110,7 @@
     height: 100%;
     // overflow-y: scroll;
     // overflow-y: auto;
+    position: relative;
 
     @include md {
       flex: none;
@@ -137,6 +138,14 @@
         font-weight: bold;
         font-size: 18px;
         margin-bottom: 10px;
+      }
+
+      .price {
+        padding: 5px;
+        border-radius: 5px;
+        width: max-content;
+        font-size: 20px;
+        font-weight: 600;
       }
 
       .feature {
@@ -219,6 +228,60 @@
             height: 16px;
           }
         }
+      }
+
+      .chatPopup {
+        position: absolute;
+        bottom: 40px;
+        left: 20px;
+        right: 0px;
+        margin-right: 20px;
+        background: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        z-index: 100;
+        // width: 80%;
+      }
+
+      .popupContentTop {
+        display: flex;
+        justify-content: space-between;
+      }
+
+      .popupContentTop button {
+        background: transparent;
+        border: none;
+        cursor: pointer;
+      }
+
+      .popupContentBottom {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 4px;
+        margin-right: -6px;
+
+        .sendButton {
+          width: 24px;
+          height: 24px;
+        }
+      }
+
+      textarea {
+        width: 100%;
+        height: 34px;
+        margin-top: 10px;
+        padding: 8px;
+        resize: none;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        outline: none;
+        scrollbar-width: none;
+      }
+
+      textarea::-webkit-scrollbar {
+        display: none;
       }
     }
   }

@@ -6,27 +6,66 @@ import DOMPurify from "dompurify";
 import { useContext, useState } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import apiRequest from "../../lib/apiRequest";
+import { formatWithSpaces } from "../../lib/formatPrice";
+import { IoIosSend } from "react-icons/io";
 
 function SinglePage() {
   const post = useLoaderData();
   const { currentUser } = useContext(AuthContext);
   const [saved, setSaved] = useState(post?.isSaved || false);
+  const [showChat, setShowChat] = useState(false);
+  const [message, setMessage] = useState("");
   const navigate = useNavigate();
   // console.log(post);
-  console.log(post.id, currentUser.id);
+  console.log(post);
 
   const handleSave = async () => {
     if (!currentUser) {
-      navigate("/login");
+      navigate("/login", { state: { from: `/${post.id}` } });
+      return;
     }
 
     setSaved((prev) => !prev);
-    console.log(typeof post.id, typeof currentUser.id);
+    console.log(typeof post.id, typeof currentUser?.id);
     try {
       await apiRequest.post("/users/save", { postId: post.id });
     } catch (err) {
       console.log(err);
       setSaved((prev) => !prev);
+    }
+  };
+
+  const handleOpenChat = () => {
+    if (!currentUser) {
+      navigate("/login", { state: { from: `/${post.id}` } });
+      return;
+    }
+    setShowChat(true);
+  };
+
+  const handleSendMessage = async () => {
+    if (!message.trim()) {
+      return;
+    }
+
+    try {
+      // Create a chat or send a message
+      const chatResponse = await apiRequest.post("/chats", {
+        receiverId: post.userId, // Receiver is the post owner
+      });
+
+      const chatId = chatResponse.data.id;
+
+      await apiRequest.post(`/messages/${chatId}`, {
+        text: message,
+      });
+
+      alert("Message sent!");
+      setMessage("");
+      setShowChat(false);
+    } catch (err) {
+      console.error(err);
+      alert("Failed to send message.");
     }
   };
 
@@ -43,7 +82,7 @@ function SinglePage() {
                   <img src="/pin.png" alt="" />
                   <span>{post.address}</span>
                 </div>
-                <div className="price">$ {post.price}</div>
+                {/* <div className="price">$ {post.price}</div> */}
               </div>
               <div className="user">
                 <img src={post.user.avatar || "/noavatar.jpg"} alt="" />
@@ -89,6 +128,7 @@ function SinglePage() {
               </div>
             </div>
           </div> */}
+          <div className="price">$ {formatWithSpaces(post.price)}</div>
           <p className="title">Sizes</p>
           <div className="sizes">
             <div className="size">
@@ -156,7 +196,7 @@ function SinglePage() {
             <Map items={[post]} />
           </div>
           <div className="buttons">
-            <button>
+            <button onClick={handleOpenChat}>
               <img src="/chat.png" alt="" />
               Send a Message
             </button>
@@ -168,6 +208,33 @@ function SinglePage() {
               {saved ? "Place is Saved" : "Save the Place"}
             </button>
           </div>
+          {showChat && (
+            <div className="chatPopup">
+              <div>
+                <div className="popupContentTop">
+                  <h3>Send a Message</h3>
+                  <button onClick={() => setShowChat(false)}>X</button>
+                </div>
+                <div className="popupContentBottom">
+                  <textarea
+                    value={message}
+                    onChange={(e) => setMessage(e.target.value)}
+                    placeholder="Write your message here..."
+                  />
+                  {/* <button className="sendButton" onClick={handleSendMessage}> */}
+                  <IoIosSend
+                    onClick={handleSendMessage}
+                    className="sendButton"
+                    style={{
+                      color: message ? "teal" : "#ccc",
+                      cursor: message && "pointer",
+                    }}
+                  />
+                  {/* </button> */}
+                </div>
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </div>
