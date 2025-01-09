@@ -8,6 +8,9 @@ import { AuthContext } from "../../context/AuthContext";
 import apiRequest from "../../lib/apiRequest";
 import { formatWithSpaces } from "../../lib/formatPrice";
 import { IoIosSend } from "react-icons/io";
+import { IoCallOutline } from "react-icons/io5";
+import { FaBookmark, FaRegBookmark } from "react-icons/fa";
+import { BiMessageDetail } from "react-icons/bi";
 
 function SinglePage() {
   const post = useLoaderData();
@@ -33,6 +36,17 @@ function SinglePage() {
       console.log(err);
       setSaved((prev) => !prev);
     }
+  };
+
+  const handleCopy = (number) => {
+    navigator.clipboard
+      .writeText(number)
+      .then(() => {
+        alert("Phone number copied to clipboard!");
+      })
+      .catch((err) => {
+        console.error("Failed to copy number: ", err);
+      });
   };
 
   const handleOpenChat = () => {
@@ -69,6 +83,8 @@ function SinglePage() {
     }
   };
 
+  console.log(post.price, post.area);
+
   return (
     <div className="singlePage">
       <div className="details">
@@ -76,17 +92,39 @@ function SinglePage() {
           <Slider images={post.images} />
           <div className="info">
             <div className="top">
-              <div className="post">
-                <h1>{post.title}</h1>
-                <div className="address">
+              {/* <div className="post"> */}
+              <h1>{post.title}</h1>
+              {/* <div className="address">
                   <img src="/pin.png" alt="" />
                   <span>{post.address}</span>
-                </div>
-                {/* <div className="price">$ {post.price}</div> */}
-              </div>
-              <div className="user">
+                </div> */}
+              {/* <div className="price">$ {post.price}</div> */}
+              {/* </div> */}
+              {/* <div className="user">
                 <img src={post.user.avatar || "/noavatar.jpg"} alt="" />
                 <span>{post.user.username}</span>
+              </div> */}
+              <div className="sizes">
+                <div className="size">
+                  <img src="/size.png" alt="" />
+                  <span>{post.area} m²</span>
+                </div>
+                <div className="size">
+                  <img src="/bed.png" alt="" />
+                  <span>
+                    {post.bedroom > 1
+                      ? post.bedroom + " beds"
+                      : post.bedroom + " bed"}
+                  </span>
+                </div>
+                <div className="size">
+                  <img src="/bath.png" alt="" />
+                  <span>
+                    {post.bathroom > 1
+                      ? post.bathroom + " bathrooms"
+                      : post.bathroom + " bathroom"}
+                  </span>
+                </div>
               </div>
             </div>
             <div
@@ -100,141 +138,100 @@ function SinglePage() {
       </div>
       <div className="features">
         <div className="wrapper">
-          {/* <p className="title">General</p>
-          <div className="listVertical">
-            <div className="feature">
-              <img src="/utility.png" alt="" />
-              <div className="featureText">
-                <span>Utilities</span>
-                {post.postDetail.utilities === "owner" ? (
-                  <p>Owner is responsible</p>
-                ) : (
-                  <p>Tentant is responsible</p>
-                )}
-              </div>
-            </div>
-            <div className="feature">
-              <img src="/pet.png" alt="" />
-              <div className="featureText">
-                <span>Pet Policy</span>
-                <p>{post.postDetail.pet}</p>
-              </div>
-            </div>
-            <div className="feature">
-              <img src="/fee.png" alt="" />
-              <div className="featureText">
-                <span>Income policy</span>
-                <p>{post.postDetail.income}</p>
-              </div>
-            </div>
-          </div> */}
-          <div className="price">$ {formatWithSpaces(post.price)}</div>
-          <p className="title">Sizes</p>
-          <div className="sizes">
-            <div className="size">
-              <img src="/size.png" alt="" />
-              <span>{post.area} m²</span>
-            </div>
-            <div className="size">
-              <img src="/bed.png" alt="" />
+          <div className="top">
+            <div className="price">
+              <p>$ {formatWithSpaces(post.price)}</p>
               <span>
-                {post.bedroom > 1
-                  ? post.bedroom + " beds"
-                  : post.bedroom + " bed"}
+                1 m² - $ {formatWithSpaces(Math.floor(post.price / post.area))}
               </span>
             </div>
-            <div className="size">
-              <img src="/bath.png" alt="" />
-              <span>
-                {post.bathroom > 1
-                  ? post.bathroom + " bathrooms"
-                  : post.bathroom + " bathroom"}
-              </span>
-            </div>
+            <button onClick={handleSave} className="saveBtn">
+              {/* <img src="/save.png" alt="" /> */}
+              {saved ? (
+                <FaBookmark color="teal" size={32} />
+              ) : (
+                <FaRegBookmark color="teal" size={32} />
+              )}
+
+              {/* {saved ? "Place is Saved" : "Save the Place"} */}
+              {/* {saved ? "Unsave" : "Save"} */}
+            </button>
           </div>
-          {/* <p className="title">Nearby Places</p>
-          <div className="listHorizontal">
-            <div className="feature">
-              <img src="/school.png" alt="" />
-              <div className="featureText">
-                <span>School</span>
-                <p>
-                  {post.postDetail.school > 999
-                    ? post.postDetail.school / 1000 + "km"
-                    : post.postDetail.school + "m"}{" "}
-                  away
-                </p>
-              </div>
-            </div>
-            <div className="feature">
-              <img src="/pet.png" alt="" />
-              <div className="featureText">
-                <span>Bus Stop</span>
-                <p>
-                  {post.postDetail.bus > 999
-                    ? post.postDetail.bus / 1000 + "km"
-                    : post.postDetail.bus + "m"}{" "}
-                  away
-                </p>
-              </div>
-            </div>
-            <div className="feature">
-              <img src="/fee.png" alt="" />
-              <div className="featureText">
-                <span>Restaurant</span>
-                <p>
-                  {post.postDetail.restaurant > 999
-                    ? post.postDetail.restaurant / 1000 + "km"
-                    : post.postDetail.restaurant + "m"}{" "}
-                  away
-                </p>
-              </div>
-            </div>
-          </div> */}
-          <p className="title">Location</p>
+          <div className="address">
+            <img src="/pin.png" alt="" />
+            <span>{post.address}</span>
+          </div>
           <div className="mapContainer">
             <Map items={[post]} />
           </div>
+
+          <div className="user">
+            <img src={post.user.avatar || "/noavatar.jpg"} alt="" />
+            <div>
+              <span>{post.user.username}</span>
+              <span>total posts - {post.user.posts.length}</span>
+            </div>
+          </div>
+
+          <div
+            className="phoneNumber"
+            onClick={() => handleCopy(post.user.phone)}
+          >
+            <IoCallOutline size={24} color="teal" />
+            <span>{post.user.phone}</span>
+          </div>
+
           <div className="buttons">
             <button onClick={handleOpenChat}>
-              <img src="/chat.png" alt="" />
-              Send a Message
+              {/* <img src="/chat.png" alt="" />
+               */}
+              <BiMessageDetail size={24} color="teal" />
+              <span>Send a Message</span>
             </button>
-            <button
+            {/* <button
               onClick={handleSave}
               style={{ backgroundColor: saved ? "#fece51" : "white" }}
             >
               <img src="/save.png" alt="" />
-              {saved ? "Place is Saved" : "Save the Place"}
-            </button>
-          </div>
-          {showChat && (
-            <div className="chatPopup">
-              <div>
-                <div className="popupContentTop">
-                  <h3>Send a Message</h3>
-                  <button onClick={() => setShowChat(false)}>X</button>
-                </div>
-                <div className="popupContentBottom">
-                  <textarea
-                    value={message}
-                    onChange={(e) => setMessage(e.target.value)}
-                    placeholder="Write your message here..."
-                  />
-                  {/* <button className="sendButton" onClick={handleSendMessage}> */}
-                  <IoIosSend
-                    onClick={handleSendMessage}
-                    className="sendButton"
-                    style={{
-                      color: message ? "teal" : "#ccc",
-                      cursor: message && "pointer",
-                    }}
-                  />
-                  {/* </button> */}
+              {saved ? "Unsave" : "Save"}
+            </button> */}
+
+            {showChat && (
+              <div className="chatPopup">
+                <div>
+                  <div className="popupContentTop">
+                    <h3>Send a Message</h3>
+                    <button
+                      onClick={() => {
+                        setShowChat(false);
+                        setMessage("");
+                      }}
+                    >
+                      X
+                    </button>
+                  </div>
+                  <div className="popupContentBottom">
+                    <textarea
+                      autoFocus
+                      value={message}
+                      onChange={(e) => setMessage(e.target.value)}
+                      placeholder="Write your message here..."
+                    />
+                    {/* <button className="sendButton" onClick={handleSendMessage}> */}
+                    <IoIosSend
+                      onClick={handleSendMessage}
+                      className="sendButton"
+                      style={{
+                        color: message ? "white" : "#ccc",
+                        cursor: message && "pointer",
+                      }}
+                    />
+                    {/* </button> */}
+                  </div>
                 </div>
               </div>
-            </div>
-          )}
+            )}
+          </div>
         </div>
       </div>
     </div>
