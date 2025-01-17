@@ -50,6 +50,7 @@ export default function Register() {
             maxLength={20}
           />
           <input name="email" type="text" placeholder="Email" required />
+          <input name="phone" type="text" placeholder="Phone" required />
           <input
             name="password"
             type="password"
