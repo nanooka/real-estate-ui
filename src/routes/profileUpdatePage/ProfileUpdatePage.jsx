@@ -16,13 +16,14 @@ export default function ProfileUpdatePage() {
     e.preventDefault();
     const formData = new FormData(e.target);
 
-    const { username, email, password } = Object.fromEntries(formData);
+    const { username, email, password, phone } = Object.fromEntries(formData);
 
     try {
       const res = await apiRequest.put(`/users/${currentUser.id}`, {
         username,
         email,
         password,
+        phone,
         avatar: avatar[0],
       });
 
@@ -55,6 +56,15 @@ export default function ProfileUpdatePage() {
               name="email"
               type="email"
               defaultValue={currentUser.email}
+            />
+          </div>
+          <div className="item">
+            <label htmlFor="phone">Phone</label>
+            <input
+              id="phone"
+              name="phone"
+              type="phone"
+              defaultValue={currentUser.phone}
             />
           </div>
           <div className="item">
