@@ -10,6 +10,7 @@ export default function ProfilePage() {
   const data = useLoaderData();
 
   const { updateUser, currentUser } = useContext(AuthContext);
+  console.log("ProfilePage", updateUser, currentUser);
 
   const navigate = useNavigate();
 

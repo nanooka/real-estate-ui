@@ -18,6 +18,7 @@ export default function Register() {
 
     const username = formData.get("username");
     const email = formData.get("email");
+    const phone = formData.get("phone");
     const password = formData.get("password");
 
     try {
@@ -25,6 +26,7 @@ export default function Register() {
         username,
         email,
         password,
+        phone,
       });
 
       navigate("/login");
@@ -49,7 +51,7 @@ export default function Register() {
             minLength={3}
             maxLength={20}
           />
-          <input name="email" type="text" placeholder="Email" required />
+          <input name="email" type="email" placeholder="Email" required />
           <input name="phone" type="text" placeholder="Phone" required />
           <input
             name="password"

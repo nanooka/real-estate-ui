@@ -6,7 +6,7 @@ import Filter from "../../components/filter/Filter";
 
 export default function HomePage() {
   const data = useLoaderData();
-  console.log(data);
+  console.log("homePage", data);
 
   return (
     <div className="homePage">
