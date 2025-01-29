@@ -1,52 +1,159 @@
-.profileUpdatePage {
-  height: 100%;
-  display: flex;
+@use "../../responsive.scss" as *;
 
-  .formContainer {
-    flex: 3;
+.profileUpdatePage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 50px;
+
+  h1 {
+    color: teal;
+  }
+
+  .profileUpdatePageCointainer {
+    // height: 100%;
     display: flex;
-    align-items: center;
-    justify-content: center;
-    form {
+    align-items: start;
+    gap: 50px;
+
+    @include sm {
+      flex-direction: column-reverse;
+      gap: 50px;
+      align-items: center;
+      padding-bottom: 50px;
+    }
+
+    .formContainer {
+      flex: 3;
+      display: flex;
+      align-items: center;
+      // justify-content: center;
+      // width: 50%;
+
+      form {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+
+        // .item {
+        //   display: flex;
+        //   flex-direction: column;
+        //   gap: 5px;
+
+        //   input {
+        //     padding: 20px;
+        //     border-radius: 5px;
+        //     border: 1px solid gray;
+        //   }
+        // }
+
+        .item {
+          // display: flex;
+          // flex-direction: column;
+          gap: 5px;
+          // align-items: center;
+          // justify-content: space-between;
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+
+          label {
+            // color: teal;
+            font-weight: bold;
+          }
+
+          input {
+            // padding: 20px;
+            // border-radius: 5px;
+            // border: 1px solid gray;
+            border: none;
+            outline: none;
+            padding: 4px;
+
+            &:focus {
+              border-bottom: 1px solid black;
+            }
+          }
+
+          .editIcon {
+            color: teal;
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+          }
+
+          .eyeIcon {
+            // color: #999;
+            color: teal;
+            cursor: pointer;
+          }
+        }
+
+        .changePasswordButton {
+          background: transparent;
+          border: none;
+          color: teal;
+          font-weight: bold;
+          font-size: 14px;
+          cursor: pointer;
+          align-self: flex-start;
+        }
+
+        .updateButton {
+          padding: 20px;
+          border-radius: 5px;
+          border: none;
+          background-color: teal;
+          color: white;
+          font-weight: bold;
+          cursor: pointer;
+          max-width: 70%;
+
+          @include md {
+            max-width: 80%;
+          }
+        }
+
+        .errorMessage {
+          color: red;
+        }
+      }
+    }
+
+    .sideContainer {
+      flex: 2;
+      // width: 50%;
+      // background-color: #fcf5f3;
       display: flex;
       flex-direction: column;
       gap: 20px;
+      align-items: center;
+      justify-content: center;
 
-      .item {
-        display: flex;
-        flex-direction: column;
-        gap: 5px;
+      .avatarCointainer {
+        width: 50%;
+        position: relative;
 
-        input {
-          padding: 20px;
-          border-radius: 5px;
-          border: 1px solid gray;
+        .avatar {
+          width: 100%;
+          object-fit: cover;
+        }
+
+        .deleteImage {
+          border: 1px solid black;
+          width: 24px;
+          height: 24px;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          cursor: pointer;
+          position: absolute;
+          top: 0;
+          right: 0;
+          background-color: #fff;
+          transform: translate(50%, -50%);
         }
       }
-      button {
-        padding: 20px;
-        border-radius: 5px;
-        border: none;
-        background-color: teal;
-        color: white;
-        font-weight: bold;
-        cursor: pointer;
-      }
-    }
-  }
-
-  .sideContainer {
-    flex: 2;
-    background-color: #fcf5f3;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    align-items: center;
-    justify-content: center;
-
-    .avatar {
-      width: 50%;
-      object-fit: cover;
     }
   }
 }
