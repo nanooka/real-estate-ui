@@ -24,23 +24,23 @@ nav {
     justify-content: space-between;
     align-items: center;
 
-    a {
-      transition: all 0.4s ease;
-
-      @include sm {
-        display: none;
-      }
-
-      &:hover {
-        scale: 1.05;
-      }
-    }
-
     .left {
       flex: 3;
       display: flex;
       align-items: center;
       gap: 50px;
+
+      a {
+        transition: all 0.4s ease;
+
+        @include sm {
+          display: none;
+        }
+
+        &:hover {
+          scale: 1.05;
+        }
+      }
 
       .logo {
         font-weight: bold;
@@ -50,12 +50,10 @@ nav {
         gap: 10px;
 
         img {
-          // width: 28px;
           width: 50px;
         }
 
         span {
-          // color: #004da3;
           color: teal;
 
           @include md {
@@ -73,43 +71,32 @@ nav {
       display: flex;
       align-items: center;
       justify-content: flex-end;
-      // background-color: #fcf5f3;
       height: 100%;
 
       @include md {
         background-color: transparent;
       }
 
-      a {
-        padding: 12px 24px;
-        margin: 20px;
-      }
+      .user-dropdown {
+        position: relative;
+        display: inline-block;
+        cursor: pointer;
 
-      .user {
-        display: flex;
-        align-items: center;
-        font-weight: bold;
-
-        img {
-          width: 40px;
-          height: 40px;
-          border-radius: 50%;
-          object-fit: cover;
-          margin-right: 20px;
+        @include sm {
+          display: none;
         }
 
-        span {
-          @include sm {
-            display: none;
+        .user-info {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          padding: 4px;
+          border-radius: 6px;
+          transition: background 0.3s;
+
+          &:hover {
+            background: #f5f5f5;
           }
-        }
-
-        .profile {
-          padding: 12px 24px;
-          border-radius: 25px;
-          background-color: teal;
-          color: white;
-          position: relative;
 
           .notification {
             position: absolute;
@@ -124,6 +111,40 @@ nav {
             align-items: center;
             justify-content: center;
           }
+
+          img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+          }
+        }
+
+        .dropdown-menu {
+          position: absolute;
+          top: 100%;
+          right: 0;
+          background: white;
+          box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+          border-radius: 6px;
+          min-width: 150px;
+
+          .dropdown-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px;
+            cursor: pointer;
+            text-decoration: none;
+            color: black;
+
+            &:hover {
+              background: #f0f0f0;
+            }
+          }
+          .logout {
+            border-top: 1px solid #c8c8c8;
+          }
         }
       }
 
@@ -132,6 +153,16 @@ nav {
         background-color: teal;
         color: white;
         border-radius: 25px;
+        padding: 12px 24px;
+        transition: all 0.4s ease;
+
+        @include sm {
+          display: none;
+        }
+
+        &:hover {
+          scale: 1.05;
+        }
       }
 
       .menuIcon {
