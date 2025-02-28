@@ -2,6 +2,8 @@
   height: 100%;
   display: flex;
   flex-direction: column;
+  padding-top: 20px;
+  position: relative;
 
   .messages {
     flex: 1;
@@ -12,7 +14,9 @@
     overflow-y: auto;
 
     h1 {
-      font-weight: 300;
+      // font-weight: 300;
+      font-weight: 500;
+      font-size: 26px;
     }
 
     .message {
@@ -37,14 +41,21 @@
     }
   }
   .chatBox {
-    flex: 1;
+    // flex: 1;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    left: 0;
     background-color: #fff;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 
     .top {
-      background-color: #f7c14b85;
+      background-color: teal;
+      color: white;
+      border-top-left-radius: 20px;
+      border-top-right-radius: 20px;
       padding: 20px;
       font-weight: bold;
       display: flex;
@@ -86,7 +97,9 @@
 
         span {
           font-size: 12px;
-          background-color: #f7c14b39;
+          // background-color: rgba(44, 139, 139, 0.2);
+          color: rgb(44, 139, 139);
+          color: #888;
           padding: 2px;
           border-radius: 5px;
         }
@@ -94,7 +107,7 @@
     }
 
     .bottom {
-      border-top: 2px solid #f7c14b85;
+      border-top: 2px solid teal;
       height: 60px;
       display: flex;
       align-items: center;
@@ -107,14 +120,24 @@
         padding: 20px;
         outline: none;
         resize: none;
+
+        &:focus {
+          border-bottom: 2px solid #ededed;
+        }
       }
 
       button {
         flex: 1;
-        background-color: #f7c14b85;
+        background-color: teal;
+        color: white;
+        font-weight: bold;
         height: 100%;
         border: none;
         cursor: pointer;
+
+        &:hover {
+          background-color: rgb(1, 112, 112);
+        }
       }
     }
   }

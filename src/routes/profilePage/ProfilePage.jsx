@@ -37,7 +37,7 @@ export default function ProfilePage() {
             </span>
           </div>
           <div className="title">
-            <h1>My List</h1>
+            <h1>My Posts</h1>
             <Link to="/add">
               <button>Create New Post</button>
             </Link>
@@ -53,7 +53,7 @@ export default function ProfilePage() {
           </Suspense>
 
           <div className="title">
-            <h1>Saved List</h1>
+            <h1>Saved Posts</h1>
           </div>
           <Suspense fallback={<p>Loading...</p>}>
             <Await

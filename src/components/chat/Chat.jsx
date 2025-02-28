@@ -85,7 +85,7 @@ export default function Chat({ chats }) {
               backgroundColor:
                 c.seenBy.includes(currentUser.id) || chat?.id === c.id
                   ? "white"
-                  : "#fecd514e",
+                  : "rgba(44, 139, 139, 0.4)",
             }}
             onClick={() => handleOpenChat(c.id, c.receiver)}
           >

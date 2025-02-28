@@ -4,16 +4,40 @@
   display: flex;
   // height: 100%;
   height: calc(100vh - 120px);
+  padding-bottom: 20px;
+  gap: 1px;
 
   @include md {
     flex-direction: column;
-    overflow-y: auto;
+    // overflow-y: auto;
+    overflow-y: visible; /* No scrollbar on medium screens */
   }
 
   .details {
     flex: 3;
     overflow-y: auto;
     padding-bottom: 50px;
+    padding-top: 20px;
+
+    &::-webkit-scrollbar {
+      width: 12px; /* Width of the scrollbar */
+    }
+
+    &::-webkit-scrollbar-track {
+      // background: #f0e6e4; /* Track color */
+      background: transparent;
+      border-radius: 10px; /* Optional: rounds scrollbar corners */
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: teal; /* Color of the scrollbar handle */
+      border-radius: 10px; /* Optional: rounds scrollbar handle */
+      border: 1px solid #f0e6e4; /* Adds space between scrollbar handle and track */
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+      background-color: rgb(1, 112, 112); /* Handle color on hover */
+    }
 
     @include md {
       flex: none;
@@ -32,14 +56,22 @@
         justify-content: space-between;
 
         h1 {
-          font-weight: 300;
+          font-weight: 500;
+          font-size: 26px;
         }
 
         button {
           padding: 12px 24px;
-          background-color: #fece51;
+          background-color: teal;
+          color: white;
+          font-weight: bold;
+          border-radius: 20px;
           cursor: pointer;
           border: none;
+
+          &:hover {
+            background-color: rgb(1, 112, 112);
+          }
         }
       }
 
@@ -79,7 +111,12 @@
 
   .chatContainer {
     flex: 2;
-    background-color: #fcf5f3;
+    // background-color: #fcf5f3;
+    // background-color: #ededed;
+    // background: linear-gradient(#ededed, #fff);
+    background: linear-gradient(#e1e1e1, #ededed 90%, #fff);
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
     height: 100%;
 
     @include md {
