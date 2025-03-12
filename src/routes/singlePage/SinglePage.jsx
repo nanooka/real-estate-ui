@@ -1,16 +1,17 @@
 import "./singlePage.scss";
 import Slider from "../../components/slider/Slider";
 import Map from "../../components/map/Map";
-import { useLoaderData, useNavigate } from "react-router-dom";
+import { Link, useLoaderData, useNavigate } from "react-router-dom";
 import DOMPurify from "dompurify";
 import { useContext, useState } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import apiRequest from "../../lib/apiRequest";
 import { formatWithSpaces } from "../../lib/formatPrice";
 import { IoIosSend } from "react-icons/io";
-import { IoCallOutline } from "react-icons/io5";
+import { IoCallOutline, IoCopyOutline } from "react-icons/io5";
 import { FaBookmark, FaRegBookmark } from "react-icons/fa";
 import { BiMessageDetail } from "react-icons/bi";
+import { MdDone } from "react-icons/md";
 
 function SinglePage() {
   const post = useLoaderData();
@@ -18,6 +19,7 @@ function SinglePage() {
   const [saved, setSaved] = useState(post?.isSaved || false);
   const [showChat, setShowChat] = useState(false);
   const [message, setMessage] = useState("");
+  const [copied, setCopied] = useState(false);
   const navigate = useNavigate();
   // console.log(post);
   console.log(post);
@@ -42,7 +44,8 @@ function SinglePage() {
     navigator.clipboard
       .writeText(number)
       .then(() => {
-        alert("Phone number copied to clipboard!");
+        setCopied(true);
+        setTimeout(() => setCopied(false), 1500);
       })
       .catch((err) => {
         console.error("Failed to copy number: ", err);
@@ -63,9 +66,10 @@ function SinglePage() {
     }
 
     try {
-      // Create a chat or send a message
+      setMessage("");
+      setShowChat(false);
       const chatResponse = await apiRequest.post("/chats", {
-        receiverId: post.userId, // Receiver is the post owner
+        receiverId: post.userId,
       });
 
       const chatId = chatResponse.data.id;
@@ -74,9 +78,9 @@ function SinglePage() {
         text: message,
       });
 
-      alert("Message sent!");
-      setMessage("");
-      setShowChat(false);
+      // alert("Message sent!");
+      // setMessage("");
+      // setShowChat(false);
     } catch (err) {
       console.error(err);
       alert("Failed to send message.");
@@ -173,12 +177,40 @@ function SinglePage() {
             </div>
           </div>
 
-          <div
+          {/* <div
             className="phoneNumber"
             onClick={() => handleCopy(post.user.phone)}
           >
             <IoCallOutline size={24} color="teal" />
             <span>{post.user.phone}</span>
+          </div> */}
+
+          <div className="phoneNumber">
+            <Link to={`tel:${post.user.phone}`}>
+              <IoCallOutline size={24} color="teal" />
+              <span>{post.user.phone}</span>
+            </Link>
+            <button
+              onClick={() => handleCopy(post.user.phone)}
+              className="copyButton"
+            >
+              <IoCopyOutline size={24} />
+            </button>
+            <span
+              style={{
+                opacity: copied ? 1 : 0,
+                visibility: copied ? "visible" : "hidden",
+                transition:
+                  "opacity 0.5s ease-in-out, visibility 0.5s ease-in-out",
+                display: "flex",
+                alignItems: "center",
+                gap: "5px",
+                color: "#888",
+              }}
+            >
+              <MdDone />
+              Copied!
+            </span>
           </div>
 
           <div className="buttons">
@@ -210,24 +242,35 @@ function SinglePage() {
                       X
                     </button>
                   </div>
-                  <div className="popupContentBottom">
+                  <form
+                    className="popupContentBottom"
+                    onSubmit={(e) => {
+                      e.preventDefault();
+                      handleSendMessage();
+                    }}
+                  >
                     <textarea
                       autoFocus
                       value={message}
                       onChange={(e) => setMessage(e.target.value)}
                       placeholder="Write your message here..."
+                      onKeyDown={(e) => {
+                        if (e.key === "Enter" && !e.shiftKey) {
+                          e.preventDefault(); // Prevents new line
+                          handleSendMessage();
+                        }
+                      }}
                     />
                     {/* <button className="sendButton" onClick={handleSendMessage}> */}
                     <IoIosSend
                       onClick={handleSendMessage}
                       className="sendButton"
                       style={{
-                        color: message ? "white" : "#ccc",
-                        cursor: message && "pointer",
+                        visibility: message ? "visible" : "hidden",
                       }}
                     />
                     {/* </button> */}
-                  </div>
+                  </form>
                 </div>
               </div>
             )}

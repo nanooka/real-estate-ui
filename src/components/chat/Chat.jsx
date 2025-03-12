@@ -5,9 +5,11 @@ import apiRequest from "../../lib/apiRequest";
 import { format } from "timeago.js";
 import { SocketContext } from "../../context/SocketContext";
 import { useNotificationStore } from "../../lib/notificationStore";
+import { IoIosSend } from "react-icons/io";
 
 export default function Chat({ chats }) {
   const [chat, setChat] = useState(null);
+  const [chatsState, setChatsState] = useState(chats);
   const { currentUser } = useContext(AuthContext);
   const { socket } = useContext(SocketContext);
 
@@ -47,6 +49,12 @@ export default function Chat({ chats }) {
         receiverId: chat.receiver.id,
         data: res.data,
       });
+
+      setChatsState((prevChats) =>
+        prevChats.map((c) =>
+          c.id === chat.id ? { ...c, lastMessage: res.data.text } : c
+        )
+      );
     } catch (err) {
       console.log(err);
     }
@@ -77,7 +85,7 @@ export default function Chat({ chats }) {
     <div className="chat">
       <div className="messages">
         <h1>Messages</h1>
-        {chats?.map((c) => (
+        {chatsState?.map((c) => (
           <div
             className="message"
             key={c.id}
@@ -127,8 +135,18 @@ export default function Chat({ chats }) {
             <div ref={messageEndRef}></div>
           </div>
           <form onSubmit={handleSubmit} className="bottom">
-            <textarea name="text"></textarea>
-            <button>Send</button>
+            <textarea
+              name="text"
+              onKeyDown={(e) => {
+                if (e.key === "Enter" && !e.shiftKey) {
+                  e.preventDefault();
+                  e.target.form.requestSubmit();
+                }
+              }}
+            ></textarea>
+            <button type="submit">
+              <IoIosSend size={24} />
+            </button>
           </form>
         </div>
       )}
