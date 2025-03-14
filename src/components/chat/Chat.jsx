@@ -117,9 +117,12 @@ export default function Chat({ chats }) {
           <div className="center">
             {chat.messages.map((message) => (
               <div
-                className="chatMessage"
                 key={message.id}
+                className="chatMessage"
                 style={{
+                  // width: "auto",
+                  // padding: "4px",
+                  // borderRadius: "10px",
                   alignSelf:
                     message.userId === currentUser.id
                       ? "flex-end"
@@ -128,7 +131,22 @@ export default function Chat({ chats }) {
                     message.userId === currentUser.id ? "right" : "left",
                 }}
               >
-                <p>{message.text}</p>
+                <p
+                  key={message.id}
+                  style={{
+                    alignSelf:
+                      message.userId === currentUser.id
+                        ? "flex-end"
+                        : "flex-start",
+                    textAlign:
+                      message.userId === currentUser.id ? "right" : "left",
+                    backgroundColor:
+                      message.userId === currentUser.id ? "teal" : "#ddd",
+                    color: message.userId === currentUser.id && "white",
+                  }}
+                >
+                  {message.text}
+                </p>
                 <span>{format(message.createdAt)}</span>
               </div>
             ))}

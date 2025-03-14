@@ -55,8 +55,9 @@ export default function Navbar() {
             <img src="/estate.png" alt="" />
             <span>RealEstate</span>
           </Link>
-          <Link to="/listing">Listing</Link>
+          {/* <Link to="/listing">Listing</Link> */}
           <Link to="/about">About Us</Link>
+          <Link to="/faqs">FAQs</Link>
           <Link to="/">Help</Link>
         </div>
         <div className="right">
