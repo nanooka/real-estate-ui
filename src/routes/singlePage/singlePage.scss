@@ -232,21 +232,17 @@
           display: flex;
           align-items: center;
           gap: 6px;
-
-          &:hover {
-            text-decoration: underline;
-          }
         }
 
-        .copyButton {
-          border: none;
-          background-color: transparent;
-          color: #888;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          cursor: pointer;
-        }
+        // .copyButton {
+        //   border: none;
+        //   background-color: transparent;
+        //   color: #888;
+        //   display: flex;
+        //   align-items: center;
+        //   justify-content: center;
+        //   cursor: pointer;
+        // }
       }
 
       .title {
@@ -347,10 +343,6 @@
           color: teal;
           font-size: 14px;
           width: max-content;
-
-          &:hover {
-            text-decoration: underline;
-          }
         }
 
         .chatPopup {

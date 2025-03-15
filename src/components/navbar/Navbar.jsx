@@ -58,6 +58,7 @@ export default function Navbar() {
           {/* <Link to="/listing">Listing</Link> */}
           <Link to="/about">About Us</Link>
           <Link to="/faqs">FAQs</Link>
+          <Link to="/contact">Contact</Link>
           <Link to="/">Help</Link>
         </div>
         <div className="right">

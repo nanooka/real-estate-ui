@@ -5,6 +5,7 @@ import { Link, useLoaderData, useNavigate } from "react-router-dom";
 import DOMPurify from "dompurify";
 import { useContext, useState } from "react";
 import { AuthContext } from "../../context/AuthContext";
+import toast, { Toaster } from "react-hot-toast";
 import apiRequest from "../../lib/apiRequest";
 import { formatWithSpaces } from "../../lib/formatPrice";
 import { IoIosSend } from "react-icons/io";
@@ -40,17 +41,17 @@ function SinglePage() {
     }
   };
 
-  const handleCopy = (number) => {
-    navigator.clipboard
-      .writeText(number)
-      .then(() => {
-        setCopied(true);
-        setTimeout(() => setCopied(false), 1500);
-      })
-      .catch((err) => {
-        console.error("Failed to copy number: ", err);
-      });
-  };
+  // const handleCopy = (number) => {
+  //   navigator.clipboard
+  //     .writeText(number)
+  //     .then(() => {
+  //       setCopied(true);
+  //       setTimeout(() => setCopied(false), 1500);
+  //     })
+  //     .catch((err) => {
+  //       console.error("Failed to copy number: ", err);
+  //     });
+  // };
 
   const handleOpenChat = () => {
     if (!currentUser) {
@@ -83,7 +84,8 @@ function SinglePage() {
       // setShowChat(false);
     } catch (err) {
       console.error(err);
-      alert("Failed to send message.");
+      // alert("Failed to send message.");
+      toast.error("Failed to send message.");
     }
   };
 
@@ -190,12 +192,12 @@ function SinglePage() {
               <IoCallOutline size={24} color="teal" />
               <span>{post.user.phone}</span>
             </Link>
-            <button
+            {/* <button
               onClick={() => handleCopy(post.user.phone)}
               className="copyButton"
             >
               <IoCopyOutline size={24} />
-            </button>
+            </button> */}
             <span
               style={{
                 opacity: copied ? 1 : 0,
@@ -277,6 +279,7 @@ function SinglePage() {
           </div>
         </div>
       </div>
+      <Toaster position="bottom-center" reverseOrder={false} />
     </div>
   );
 }
