@@ -34,18 +34,24 @@
       color: #444;
     }
 
-    .answer {
-      margin-top: 10px;
-      margin-right: 10px;
-      font-size: 1rem;
-      color: #555;
-      line-height: 1.5;
+    .answerContainer {
+      overflow: hidden;
+      transition: max-height 0.4s ease-in-out, opacity 0.4s ease-in-out;
+
+      .answer {
+        margin-top: 10px;
+        margin-right: 10px;
+        font-size: 1rem;
+        color: #555;
+        line-height: 1.5;
+      }
     }
 
     .arrow {
       position: absolute;
       right: 10px;
       top: 14px;
+      transition: transform 0.4s ease-in-out;
     }
   }
 }

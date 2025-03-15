@@ -1,6 +1,6 @@
 import { useState } from "react";
 import "./faqsPage.scss";
-import { MdKeyboardArrowDown, MdKeyboardArrowUp } from "react-icons/md";
+import { MdKeyboardArrowDown } from "react-icons/md";
 
 const faqs = [
   {
@@ -103,21 +103,27 @@ export default function FaqsPage() {
             return (
               <div
                 key={i}
-                // className="faq-item"
                 className={`faq-item ${openIndex === itemIndex ? "open" : ""}`}
                 onClick={() => toggleAccordion(itemIndex)}
               >
                 <div className="question">{item.question}</div>
-                <div className="arrow">
-                  {openIndex == itemIndex ? (
-                    <MdKeyboardArrowUp size={24} />
-                  ) : (
-                    <MdKeyboardArrowDown size={24} />
-                  )}
+                <div
+                  className="arrow"
+                  style={{
+                    transform: openIndex == itemIndex && "rotate(-180deg)",
+                  }}
+                >
+                  <MdKeyboardArrowDown size={24} />
                 </div>
-                {openIndex === itemIndex && (
+                <div
+                  className="answerContainer"
+                  style={{
+                    maxHeight: openIndex === itemIndex ? "200px" : "0px",
+                    opacity: openIndex === itemIndex ? 1 : 0,
+                  }}
+                >
                   <div className="answer">{item.answer}</div>
-                )}
+                </div>
               </div>
             );
           })}
