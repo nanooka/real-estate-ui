@@ -16,6 +16,7 @@ import {
   singlePageLoader,
 } from "./lib/loaders";
 import ContactPage from "./routes/contactPage/ContactPage";
+import AboutUs from "./routes/aboutUsPage/AboutUs";
 
 function App() {
   const router = createBrowserRouter([
@@ -54,6 +55,7 @@ function App() {
           path: "/contact",
           element: <ContactPage />,
         },
+        { path: "/aboutUs", element: <AboutUs /> },
       ],
     },
     {

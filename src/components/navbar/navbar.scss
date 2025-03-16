@@ -31,15 +31,27 @@ nav {
       gap: 50px;
 
       a {
-        transition: all 0.4s ease;
+        // transition: all 0.4s ease;
+
+        &:first-of-type {
+          width: auto;
+        }
+
+        width: 80px;
 
         @include sm {
           display: none;
         }
 
         &:hover {
-          scale: 1.05;
+          // scale: 1.05;
+          font-weight: bold;
         }
+      }
+
+      a.active {
+        color: teal;
+        font-weight: bold;
       }
 
       .logo {

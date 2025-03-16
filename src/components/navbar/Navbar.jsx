@@ -1,6 +1,6 @@
 import { useContext, useEffect, useRef, useState } from "react";
 import "./navbar.scss";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 import { useNotificationStore } from "../../lib/notificationStore";
 import apiRequest from "../../lib/apiRequest";
@@ -53,13 +53,11 @@ export default function Navbar() {
         <div className="left">
           <Link to="/" className="logo">
             <img src="/estate.png" alt="" />
-            <span>RealEstate</span>
+            <span>PrimeEstate</span>
           </Link>
-          {/* <Link to="/listing">Listing</Link> */}
-          <Link to="/about">About Us</Link>
-          <Link to="/faqs">FAQs</Link>
-          <Link to="/contact">Contact</Link>
-          <Link to="/">Help</Link>
+          <NavLink to="/aboutUs">About Us</NavLink>
+          <NavLink to="/contact">Contact</NavLink>
+          <NavLink to="/faqs">FAQs</NavLink>
         </div>
         <div className="right">
           {currentUser ? (

@@ -1,5 +1,4 @@
 import "./contactPage.scss";
-import { useState } from "react";
 import emailjs from "@emailjs/browser";
 import { Link } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
@@ -9,8 +8,6 @@ import { AiOutlineMail } from "react-icons/ai";
 import { MdAccessTime } from "react-icons/md";
 
 const ContactPage = () => {
-  const [isFormValid, setIsFormValid] = useState(false);
-
   const sendEmail = (e) => {
     e.preventDefault();
 
@@ -41,29 +38,26 @@ const ContactPage = () => {
           </p>
 
           <div className="contact-details">
-            <div className="contact-item">
+            <Link className="contact-item" to={"tel:(123) 456-7890"}>
               <FaPhoneAlt color="teal" size={20} />
-              <Link to={"tel:(123) 456-7890"}>(123) 456-7890</Link>
-            </div>
-            <div className="contact-item">
+              <span>(123) 456-7890</span>
+            </Link>
+            <Link className="contact-item" to="mailto:info@primeestate.com">
               <AiOutlineMail color="teal" size={24} />
-              <Link to="mailto:info@yourrealestate.com">
-                info@yourrealestate.com
-              </Link>
-            </div>
+              <span>info@primeestate.com</span>
+            </Link>
             <div className="contact-item">
               <MdAccessTime color="teal" size={24} />
               <p>Monday - Friday: 9:00 AM - 6:00 PM</p>
             </div>
-            <div className="contact-item">
+            <Link
+              className="contact-item"
+              to="https://www.google.com/maps?q=285+Fulton+St,+New+York,+NY+10007"
+              target="_blank"
+            >
               <IoLocationSharp color="teal" size={24} />
-              <Link
-                to="https://www.google.com/maps?q=285+Fulton+St,+New+York,+NY+10007"
-                target="_blank"
-              >
-                285 Fulton St, New York, NY 10007
-              </Link>
-            </div>
+              <span>285 Fulton St, New York, NY 10007</span>
+            </Link>
           </div>
 
           <form className="contact-form" onSubmit={sendEmail}>
