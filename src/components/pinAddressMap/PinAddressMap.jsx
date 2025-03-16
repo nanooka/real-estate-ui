@@ -10,7 +10,7 @@ import "leaflet/dist/leaflet.css";
 
 export default function PinAddressMap({ setCoordinates, city }) {
   const [position, setPosition] = useState(null); // Store the pin position
-  const [center, setCenter] = useState([41.7151, 44.8271]);
+  const [center, setCenter] = useState([40.713, -74.0132]);
 
   // Geocode the city when it changes
   console.log("center", center);

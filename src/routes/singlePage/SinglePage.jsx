@@ -2,7 +2,7 @@ import "./singlePage.scss";
 import Slider from "../../components/slider/Slider";
 import Map from "../../components/map/Map";
 import { Link, useLoaderData, useNavigate } from "react-router-dom";
-import DOMPurify from "dompurify";
+// import DOMPurify from "dompurify";
 import { useContext, useState } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import toast, { Toaster } from "react-hot-toast";
@@ -101,12 +101,13 @@ function SinglePage() {
                 </div>
               </div>
             </div>
-            <div
+            {/* <div
               className="bottom"
               dangerouslySetInnerHTML={{
                 __html: DOMPurify.sanitize(post.desc),
               }}
-            ></div>
+            ></div> */}
+            <div className="bottomc">{post.desc}</div>
           </div>
         </div>
       </div>

@@ -1,73 +1,245 @@
+// .newPostPage {
+//   height: 100%;
+//   display: flex;
+
+//   .formContainer {
+//     flex: 3;
+//     overflow: scroll;
+
+//     .wrapper {
+//       margin: 30px 50px 100px 0px;
+
+//       form {
+//         display: flex;
+//         justify-content: space-between;
+//         flex-wrap: wrap;
+//         gap: 20px;
+
+//         // .testing {
+//         //   display: flex;
+//         //   flex-direction: column;
+//         //   select,
+//         //   ::picker(select) {
+//         //     appearance: base-select;
+//         //   }
+//         //   select {
+//         //     width: 100%;
+//         //   }
+
+//         //   selectedcontent,
+//         //   option {
+//         //     display: flex;
+//         //     gap: 4px;
+//         //     align-items: center;
+//         //   }
+
+//         //   option {
+//         //     padding-block: 4px;
+//         //   }
+
+//         //   option::checkmark {
+//         //     display: none;
+//         //   }
+//         //   option:checked {
+//         //     background-color: green;
+//         //   }
+//         // }
+
+//         .custom-select {
+//           &__control {
+//             // background: #f8f9fa;
+//             border-radius: 8px;
+//             border: 1px solid #ccc;
+//             padding: 5px;
+//             transition: border-color 0.2s ease-in-out;
+
+//             &:hover {
+//               border-color: #888;
+//             }
+//           }
+
+//           &__menu {
+//             border-radius: 8px;
+//             box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+//           }
+
+//           &__option {
+//             padding: 10px;
+//             cursor: pointer;
+
+//             &--is-focused {
+//               background-color: red;
+//             }
+
+//             &--is-selected {
+//               background-color: #007bff;
+//               color: white;
+//             }
+//           }
+//         }
+
+//         .item {
+//           width: 30%;
+//           display: flex;
+//           flex-direction: column;
+//           gap: 5px;
+
+//           input {
+//             padding: 20px;
+//             border-radius: 5px;
+//             border: 1px solid gray;
+//           }
+
+//           select {
+//             padding: 19px;
+//           }
+
+//           &.description {
+//             width: 100%;
+//             height: 320px;
+
+//             .quill > .ql-container > .ql-editor {
+//               height: 200px;
+//               font-size: 16px;
+//             }
+//           }
+//         }
+//         .sendButton {
+//           width: 30%;
+//           border-radius: 5px;
+//           border: none;
+//           background-color: teal;
+//           color: white;
+//           font-weight: bold;
+//           cursor: pointer;
+//         }
+//       }
+//     }
+//   }
+
+//   .sideContainer {
+//     flex: 2;
+//     background-color: #fcf5f3;
+//     display: flex;
+//     flex-direction: column;
+//     gap: 20px;
+//     align-items: center;
+//     justify-content: center;
+
+//     img {
+//       width: 50%;
+//       height: 180px;
+//       object-fit: cover;
+//       border-radius: 5px;
+//     }
+//   }
+// }
+
 .newPostPage {
-  height: 100%;
   display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 20px;
+  padding-bottom: 50px;
+  background-color: #f9f9f9;
 
   .formContainer {
-    flex: 3;
-    overflow: scroll;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 800px;
+
+    h1 {
+      font-size: 24px;
+      margin-bottom: 20px;
+      color: #333;
+      font-weight: 600;
+    }
 
     .wrapper {
-      margin: 30px 50px 100px 0px;
+      display: flex;
+      flex-direction: column;
 
       form {
         display: flex;
-        justify-content: space-between;
-        flex-wrap: wrap;
-        gap: 20px;
+        flex-direction: column;
+
+        .item-section {
+          display: flex;
+          gap: 50px;
+        }
 
         .item {
-          width: 30%;
+          margin-bottom: 20px;
           display: flex;
           flex-direction: column;
-          gap: 5px;
+          width: 100%;
 
-          input {
-            padding: 20px;
+          label,
+          span {
+            font-size: 16px;
+            color: #333;
+            margin-bottom: 8px;
+          }
+
+          input,
+          .custom-select,
+          textarea {
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ddd;
             border-radius: 5px;
-            border: 1px solid gray;
-          }
+            transition: border-color 0.3s;
 
-          select {
-            padding: 19px;
-          }
-
-          &.description {
-            width: 100%;
-            height: 320px;
-
-            .quill > .ql-container > .ql-editor {
-              height: 200px;
-              font-size: 16px;
+            &:focus {
+              border-color: teal;
+              outline: none;
             }
+
+            // &.custom-select {
+            // border-radius: 5px;
+            // }
+          }
+
+          textarea {
+            resize: none;
+            width: 100%;
+            height: 100px;
           }
         }
+
         .sendButton {
-          width: 30%;
-          border-radius: 5px;
-          border: none;
+          padding: 12px 20px;
           background-color: teal;
-          color: white;
-          font-weight: bold;
+          color: #fff;
+          font-size: 16px;
+          border: none;
+          border-radius: 5px;
           cursor: pointer;
+          transition: background-color 0.3s;
+          margin-top: 20px;
+
+          &:hover {
+            background-color: rgb(1, 112, 112);
+          }
         }
       }
-    }
-  }
 
-  .sideContainer {
-    flex: 2;
-    background-color: #fcf5f3;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    align-items: center;
-    justify-content: center;
+      .imgContainer {
+        margin-top: 40px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
 
-    img {
-      width: 50%;
-      height: 180px;
-      object-fit: cover;
-      border-radius: 5px;
+        img {
+          max-width: 100%;
+          margin: 10px 0;
+          border-radius: 8px;
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+      }
     }
   }
 }
