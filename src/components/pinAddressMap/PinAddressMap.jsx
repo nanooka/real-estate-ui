@@ -7,9 +7,10 @@ import {
   useMap,
 } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
+import "./pinAddressMap.scss";
 
-export default function PinAddressMap({ setCoordinates, city }) {
-  const [position, setPosition] = useState(null); // Store the pin position
+export default function PinAddressMap({ setCoordinates, city, setAddress }) {
+  const [position, setPosition] = useState(null);
   const [center, setCenter] = useState([40.713, -74.0132]);
 
   // Geocode the city when it changes
@@ -40,13 +41,37 @@ export default function PinAddressMap({ setCoordinates, city }) {
     fetchCityCoordinates();
   }, [city]);
 
-  // Custom hook for handling map clicks
   const LocationSelector = () => {
     useMapEvents({
-      click(e) {
+      async click(e) {
         const { lat, lng } = e.latlng;
-        setPosition({ lat, lng }); // Update the pin position
-        setCoordinates({ lat, lng }); // Pass the coordinates to parent component or form
+        setPosition({ lat, lng });
+        setCoordinates({ lat, lng });
+
+        // Reverse geocoding to get the full address
+        try {
+          const response = await fetch(
+            `https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lng}&format=json`
+          );
+          const data = await response.json();
+
+          if (data && data.address) {
+            const { house_number, road, city, state, postcode } = data.address;
+
+            const addressParts = [
+              house_number ? house_number + " " + road : road,
+              city,
+              state,
+              postcode,
+            ].filter(Boolean);
+
+            const fullAddress = addressParts.join(", ");
+            console.log("Pinned Address:", fullAddress);
+            setAddress(fullAddress);
+          }
+        } catch (err) {
+          console.error("Error fetching address:", err);
+        }
       },
     });
     return null;
@@ -61,11 +86,7 @@ export default function PinAddressMap({ setCoordinates, city }) {
   };
 
   return (
-    <MapContainer
-      center={center}
-      zoom={13}
-      style={{ height: "400px", width: "100%" }}
-    >
+    <MapContainer center={center} zoom={13} className="map">
       <TileLayer
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         attribution="&copy; OpenStreetMap contributors"

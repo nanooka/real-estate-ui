@@ -1,139 +1,4 @@
-// .newPostPage {
-//   height: 100%;
-//   display: flex;
-
-//   .formContainer {
-//     flex: 3;
-//     overflow: scroll;
-
-//     .wrapper {
-//       margin: 30px 50px 100px 0px;
-
-//       form {
-//         display: flex;
-//         justify-content: space-between;
-//         flex-wrap: wrap;
-//         gap: 20px;
-
-//         // .testing {
-//         //   display: flex;
-//         //   flex-direction: column;
-//         //   select,
-//         //   ::picker(select) {
-//         //     appearance: base-select;
-//         //   }
-//         //   select {
-//         //     width: 100%;
-//         //   }
-
-//         //   selectedcontent,
-//         //   option {
-//         //     display: flex;
-//         //     gap: 4px;
-//         //     align-items: center;
-//         //   }
-
-//         //   option {
-//         //     padding-block: 4px;
-//         //   }
-
-//         //   option::checkmark {
-//         //     display: none;
-//         //   }
-//         //   option:checked {
-//         //     background-color: green;
-//         //   }
-//         // }
-
-//         .custom-select {
-//           &__control {
-//             // background: #f8f9fa;
-//             border-radius: 8px;
-//             border: 1px solid #ccc;
-//             padding: 5px;
-//             transition: border-color 0.2s ease-in-out;
-
-//             &:hover {
-//               border-color: #888;
-//             }
-//           }
-
-//           &__menu {
-//             border-radius: 8px;
-//             box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-//           }
-
-//           &__option {
-//             padding: 10px;
-//             cursor: pointer;
-
-//             &--is-focused {
-//               background-color: red;
-//             }
-
-//             &--is-selected {
-//               background-color: #007bff;
-//               color: white;
-//             }
-//           }
-//         }
-
-//         .item {
-//           width: 30%;
-//           display: flex;
-//           flex-direction: column;
-//           gap: 5px;
-
-//           input {
-//             padding: 20px;
-//             border-radius: 5px;
-//             border: 1px solid gray;
-//           }
-
-//           select {
-//             padding: 19px;
-//           }
-
-//           &.description {
-//             width: 100%;
-//             height: 320px;
-
-//             .quill > .ql-container > .ql-editor {
-//               height: 200px;
-//               font-size: 16px;
-//             }
-//           }
-//         }
-//         .sendButton {
-//           width: 30%;
-//           border-radius: 5px;
-//           border: none;
-//           background-color: teal;
-//           color: white;
-//           font-weight: bold;
-//           cursor: pointer;
-//         }
-//       }
-//     }
-//   }
-
-//   .sideContainer {
-//     flex: 2;
-//     background-color: #fcf5f3;
-//     display: flex;
-//     flex-direction: column;
-//     gap: 20px;
-//     align-items: center;
-//     justify-content: center;
-
-//     img {
-//       width: 50%;
-//       height: 180px;
-//       object-fit: cover;
-//       border-radius: 5px;
-//     }
-//   }
-// }
+@use "../../responsive.scss" as *;
 
 .newPostPage {
   display: flex;
@@ -156,6 +21,7 @@
       margin-bottom: 20px;
       color: #333;
       font-weight: 600;
+      justify-self: center;
     }
 
     .wrapper {
@@ -169,6 +35,23 @@
         .item-section {
           display: flex;
           gap: 50px;
+
+          @include sm {
+            gap: 20px;
+          }
+        }
+
+        .big-item-section {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+          column-gap: 50px;
+
+          // @include md {
+          //   grid-template-columns: repeat(2, 1fr);
+          // }
+          @include sm {
+            column-gap: 20px;
+          }
         }
 
         .item {
@@ -176,12 +59,20 @@
           display: flex;
           flex-direction: column;
           width: 100%;
+          position: relative;
 
           label,
           span {
             font-size: 16px;
             color: #333;
             margin-bottom: 8px;
+          }
+
+          input[type="number"]::-webkit-outer-spin-button,
+          input[type="number"]::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+            padding-right: 15px;
           }
 
           input,
@@ -197,20 +88,39 @@
               border-color: teal;
               outline: none;
             }
+          }
 
-            // &.custom-select {
-            // border-radius: 5px;
-            // }
+          .custom-select__option--is-focused {
+            background-color: rgba(44, 139, 139, 0.4);
+            cursor: pointer;
+          }
+
+          .custom-select__option--is-selected {
+            background-color: teal;
+            color: white;
+          }
+
+          .custom-select__control--is-focused {
+            border: 1px solid teal;
+            box-shadow: none;
           }
 
           textarea {
             resize: none;
             width: 100%;
             height: 100px;
+            font-family: "Lato", sans-serif;
+          }
+
+          .price-sign {
+            position: absolute;
+            right: 10px;
+            bottom: 4px;
+            color: #777;
           }
         }
 
-        .sendButton {
+        .addButton {
           padding: 12px 20px;
           background-color: teal;
           color: #fff;
@@ -220,6 +130,9 @@
           cursor: pointer;
           transition: background-color 0.3s;
           margin-top: 20px;
+          letter-spacing: 1px;
+          width: 200px;
+          align-self: center;
 
           &:hover {
             background-color: rgb(1, 112, 112);
@@ -233,11 +146,21 @@
         flex-direction: column;
         align-items: center;
 
-        img {
-          max-width: 100%;
-          margin: 10px 0;
-          border-radius: 8px;
-          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        .uploadedImages {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 20px;
+
+          @include sm {
+            grid-template-columns: 1fr;
+          }
+
+          img {
+            max-width: 100%;
+            margin: 10px 0;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+          }
         }
       }
     }

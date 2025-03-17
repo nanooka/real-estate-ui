@@ -1,0 +1,14 @@
+.cloudinary-button {
+  background-color: teal !important;
+  border-radius: 5px;
+  padding: 10px 15px;
+  letter-spacing: 1px;
+  border: none;
+  transition: background-color 0.3s;
+  font-weight: bold !important;
+
+  &:hover {
+    background-color: rgb(1, 112, 112);
+    box-shadow: none;
+  }
+}

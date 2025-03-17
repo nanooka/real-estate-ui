@@ -156,7 +156,14 @@ export default function Filter() {
           onClick={() => toggleDropdown("status")}
         >
           {query.status ? "For " + query.status : "Status"}
-          <MdKeyboardArrowDown size={20} color="teal" />
+          <MdKeyboardArrowDown
+            size={20}
+            color="teal"
+            style={{
+              transform: activeDropdown === "status" && "rotate(-180deg)",
+              transition: "transform 0.3s ease-in-out",
+            }}
+          />
         </div>
         {activeDropdown === "status" && (
           <ul className="dropdownList">
@@ -197,7 +204,14 @@ export default function Filter() {
         >
           {query.propertyType.charAt(0).toUpperCase() +
             query.propertyType.slice(1) || "Property Type"}
-          <MdKeyboardArrowDown size={20} color="teal" />
+          <MdKeyboardArrowDown
+            size={20}
+            color="teal"
+            style={{
+              transform: activeDropdown === "propertyType" && "rotate(-180deg)",
+              transition: "transform 0.3s ease-in-out",
+            }}
+          />
         </div>
         {activeDropdown === "propertyType" && (
           <ul className="dropdownList">
@@ -237,7 +251,14 @@ export default function Filter() {
           onClick={() => toggleDropdown("country")}
         >
           {query.country || "Country"}
-          <MdKeyboardArrowDown size={20} color="teal" />
+          <MdKeyboardArrowDown
+            size={20}
+            color="teal"
+            style={{
+              transform: activeDropdown === "country" && "rotate(-180deg)",
+              transition: "transform 0.3s ease-in-out",
+            }}
+          />
         </div>
 
         {activeDropdown === "country" && (
@@ -283,7 +304,14 @@ export default function Filter() {
           onClick={() => toggleDropdown("city")}
         >
           {query.city || "City"}
-          <MdKeyboardArrowDown size={20} color="teal" />
+          <MdKeyboardArrowDown
+            size={20}
+            color="teal"
+            style={{
+              transform: activeDropdown === "city" && "rotate(-180deg)",
+              transition: "transform 0.3s ease-in-out",
+            }}
+          />
         </div>
         {activeDropdown === "city" && (
           <>
@@ -386,7 +414,7 @@ export default function Filter() {
             ? query.minArea + "+"
             : !query.minArea && query.maxArea
             ? "-" + query.maxArea
-            : "Area"}
+            : "Area (m²)"}
           <div>
             {query.bedroom && (
               <>

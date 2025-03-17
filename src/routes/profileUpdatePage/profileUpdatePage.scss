@@ -107,6 +107,11 @@
           font-weight: bold;
           cursor: pointer;
           max-width: 70%;
+          transition: background-color 0.3s;
+
+          &:hover {
+            background-color: rgb(1, 112, 112);
+          }
 
           @include md {
             max-width: 80%;

@@ -13,6 +13,7 @@ export default function NewPostPage() {
   const [error, setError] = useState("");
   const [images, setImages] = useState([]);
   const [coordinates, setCoordinates] = useState({ lat: null, lng: null });
+  const [address, setAddress] = useState("");
   const [countries, setCountries] = useState([]);
   const [cities, setCities] = useState([]);
   const [selectedCountry, setSelectedCountry] = useState("");
@@ -141,10 +142,12 @@ export default function NewPostPage() {
                 type="text"
                 required
                 autoComplete="address"
+                value={address && address}
+                onChange={(e) => e.target.value}
               />
             </div>
 
-            <div className="item-section">
+            <div className="big-item-section">
               <div className="item">
                 <label htmlFor="area">Area (m²)</label>
                 <input
@@ -154,6 +157,11 @@ export default function NewPostPage() {
                   type="number"
                   required
                   autoComplete="off"
+                  onKeyDown={(e) => {
+                    if (e.key === "-" || e.key === "e") {
+                      e.preventDefault();
+                    }
+                  }}
                 />
               </div>
               <div className="item">
@@ -165,6 +173,11 @@ export default function NewPostPage() {
                   type="number"
                   required
                   autoComplete="off"
+                  onKeyDown={(e) => {
+                    if (e.key === "-" || e.key === "e") {
+                      e.preventDefault();
+                    }
+                  }}
                 />
               </div>
               <div className="item">
@@ -176,19 +189,21 @@ export default function NewPostPage() {
                   type="number"
                   required
                   autoComplete="off"
+                  onKeyDown={(e) => {
+                    if (e.key === "-" || e.key === "e") {
+                      e.preventDefault();
+                    }
+                  }}
                 />
               </div>
-            </div>
-
-            <div className="item-section">
               <div className="item">
                 <span>Status</span>
 
                 <Select
                   classNamePrefix="custom-select"
                   options={[
-                    { value: "rent", label: "Rent" },
-                    { value: "sale", label: "Sale" },
+                    { value: "rent", label: "For rent" },
+                    { value: "sale", label: "For sale" },
                   ]}
                   name="status"
                   placeholder=""
@@ -209,6 +224,7 @@ export default function NewPostPage() {
                   name="propertyType"
                   placeholder=""
                   autoComplete="off"
+                  required
                 />
               </div>
 
@@ -221,7 +237,13 @@ export default function NewPostPage() {
                   type="number"
                   required
                   autoComplete="off"
+                  onKeyDown={(e) => {
+                    if (e.key === "-" || e.key === "e") {
+                      e.preventDefault();
+                    }
+                  }}
                 />
+                <span className="price-sign">$</span>
               </div>
             </div>
 
@@ -244,24 +266,29 @@ export default function NewPostPage() {
             <PinAddressMap
               setCoordinates={setCoordinates}
               city={selectedCity?.label}
+              setAddress={setAddress}
             />
-            <button className="sendButton">Add</button>
+            <div className="imgContainer">
+              <div className="uploadedImages">
+                {images?.map((image, index) => (
+                  <img src={image} key={index} alt="" />
+                ))}
+              </div>
+              <UploadWidget
+                uwConfig={{
+                  cloudName: "dg04baaoh",
+                  uploadPreset: "estate",
+                  multiple: true,
+                  folder: "posts",
+                }}
+                setState={setImages}
+              />
+            </div>
+            <button className="addButton" type="submit">
+              Add Post
+            </button>
             {error && <span>{error}</span>}
           </form>
-          <div className="imgContainer">
-            {images?.map((image, index) => (
-              <img src={image} key={index} alt="" />
-            ))}
-            <UploadWidget
-              uwConfig={{
-                cloudName: "dg04baaoh",
-                uploadPreset: "estate",
-                multiple: true,
-                folder: "posts",
-              }}
-              setState={setImages}
-            />
-          </div>
         </div>
       </div>
     </div>
