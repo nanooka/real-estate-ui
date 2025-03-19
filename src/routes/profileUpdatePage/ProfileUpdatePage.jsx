@@ -84,86 +84,102 @@ export default function ProfileUpdatePage() {
           <form onSubmit={handleSubmit}>
             <div className="item">
               <label htmlFor="username">Username: </label>
-              <input
-                id="username"
-                name="username"
-                type="text"
-                defaultValue={currentUser.username}
-              />
-              <BiSolidEditAlt className="editIcon" onClick={handleEditClick} />
+              <div className="valueContainer">
+                <input
+                  id="username"
+                  name="username"
+                  type="text"
+                  defaultValue={currentUser.username}
+                />
+                <BiSolidEditAlt
+                  className="editIcon"
+                  onClick={handleEditClick}
+                />
+              </div>
             </div>
             <div className="item">
               <label htmlFor="email">Email: </label>
-              <input
-                id="email"
-                name="email"
-                type="email"
-                defaultValue={currentUser.email}
-              />
-              <BiSolidEditAlt className="editIcon" onClick={handleEditClick} />
+              <div className="valueContainer">
+                <input
+                  id="email"
+                  name="email"
+                  type="email"
+                  defaultValue={currentUser.email}
+                />
+                <BiSolidEditAlt
+                  className="editIcon"
+                  onClick={handleEditClick}
+                />
+              </div>
             </div>
             <div className="item">
               <label htmlFor="phone">Phone: </label>
-              <input
-                id="phone"
-                name="phone"
-                type="phone"
-                defaultValue={currentUser.phone}
-              />
-              <BiSolidEditAlt className="editIcon" onClick={handleEditClick} />
+              <div className="valueContainer">
+                <input
+                  id="phone"
+                  name="phone"
+                  type="phone"
+                  defaultValue={currentUser.phone}
+                />
+                <BiSolidEditAlt
+                  className="editIcon"
+                  onClick={handleEditClick}
+                />
+              </div>
             </div>
-            {/* <div className="item">
-            <label htmlFor="password">Password: </label>
-            <input id="password" name="password" type="password" />
-            <BiSolidEditAlt className="editIcon" onClick={handleEditClick} />
-          </div> */}
             {isPasswordInputsShown ? (
               <>
                 <div className="item">
                   <label htmlFor="oldPassword">Current Password</label>
-                  <input
-                    id="oldPassword"
-                    name="oldPassword"
-                    type={visibility.oldPassword ? "text" : "password"}
-                    autoFocus
-                  />
-                  <span onClick={() => toggleVisibility("oldPassword")}>
-                    {visibility.oldPassword ? (
-                      <IoEyeOffOutline className="eyeIcon" />
-                    ) : (
-                      <IoEyeOutline className="eyeIcon" />
-                    )}
-                  </span>
+                  <div className="valueContainer">
+                    <input
+                      id="oldPassword"
+                      name="oldPassword"
+                      type={visibility.oldPassword ? "text" : "password"}
+                      autoFocus
+                    />
+                    <span onClick={() => toggleVisibility("oldPassword")}>
+                      {visibility.oldPassword ? (
+                        <IoEyeOffOutline className="eyeIcon" />
+                      ) : (
+                        <IoEyeOutline className="eyeIcon" />
+                      )}
+                    </span>
+                  </div>
                 </div>
                 <div className="item">
                   <label htmlFor="newPassword">new Password</label>
-                  <input
-                    id="newPassword"
-                    name="newPassword"
-                    type={visibility.newPassword ? "text" : "password"}
-                  />
-                  <span onClick={() => toggleVisibility("newPassword")}>
-                    {visibility.newPassword ? (
-                      <IoEyeOffOutline className="eyeIcon" />
-                    ) : (
-                      <IoEyeOutline className="eyeIcon" />
-                    )}
-                  </span>
+                  <div className="valueContainer">
+                    <input
+                      id="newPassword"
+                      name="newPassword"
+                      type={visibility.newPassword ? "text" : "password"}
+                    />
+                    <span onClick={() => toggleVisibility("newPassword")}>
+                      {visibility.newPassword ? (
+                        <IoEyeOffOutline className="eyeIcon" />
+                      ) : (
+                        <IoEyeOutline className="eyeIcon" />
+                      )}
+                    </span>
+                  </div>
                 </div>
                 <div className="item">
                   <label htmlFor="confirmPassword">Confirm Password</label>
-                  <input
-                    id="confirmPassword"
-                    name="confirmPassword"
-                    type={visibility.confirmPassword ? "text" : "password"}
-                  />
-                  <span onClick={() => toggleVisibility("confirmPassword")}>
-                    {visibility.confirmPassword ? (
-                      <IoEyeOffOutline className="eyeIcon" />
-                    ) : (
-                      <IoEyeOutline className="eyeIcon" />
-                    )}
-                  </span>
+                  <div className="valueContainer">
+                    <input
+                      id="confirmPassword"
+                      name="confirmPassword"
+                      type={visibility.confirmPassword ? "text" : "password"}
+                    />
+                    <span onClick={() => toggleVisibility("confirmPassword")}>
+                      {visibility.confirmPassword ? (
+                        <IoEyeOffOutline className="eyeIcon" />
+                      ) : (
+                        <IoEyeOutline className="eyeIcon" />
+                      )}
+                    </span>
+                  </div>
                 </div>
               </>
             ) : (
@@ -181,12 +197,7 @@ export default function ProfileUpdatePage() {
         </div>
         <div className="sideContainer">
           <div className="avatarCointainer">
-            <img
-              // src={avatar[0] || currentUser.avatar || "/noavatar.jpg"}
-              src={avatar[0] || "/noavatar.jpg"}
-              alt=""
-              className="avatar"
-            />
+            <img src={avatar[0] || "/noavatar.jpg"} alt="" className="avatar" />
             <div className="deleteImage" onClick={() => setAvatar([])}>
               <RiCloseLargeLine />
             </div>

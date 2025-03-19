@@ -8,6 +8,7 @@ import "leaflet-control-geocoder";
 import PinAddressMap from "../../components/pinAddressMap/PinAddressMap";
 import { fetchCities, fetchCountries } from "../../lib/location";
 import Select from "react-select";
+import { RiCloseLargeLine } from "react-icons/ri";
 
 export default function NewPostPage() {
   const [error, setError] = useState("");
@@ -60,6 +61,12 @@ export default function NewPostPage() {
 
     loadCities();
   }, [selectedCountry]);
+
+  const handleDeleteImage = (indexToRemove) => {
+    setImages((prevImages) =>
+      prevImages.filter((_, index) => index !== indexToRemove)
+    );
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -271,7 +278,15 @@ export default function NewPostPage() {
             <div className="imgContainer">
               <div className="uploadedImages">
                 {images?.map((image, index) => (
-                  <img src={image} key={index} alt="" />
+                  <div key={index} className="image">
+                    <img src={image} alt="" />
+                    <div
+                      className="deleteImage"
+                      onClick={() => handleDeleteImage(index)}
+                    >
+                      <RiCloseLargeLine />
+                    </div>
+                  </div>
                 ))}
               </div>
               <UploadWidget

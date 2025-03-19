@@ -26,7 +26,6 @@
       padding-right: 50px;
       display: flex;
       flex-direction: column;
-      gap: 50px;
       overflow-y: auto;
 
       @include lg {
@@ -34,6 +33,7 @@
       }
       @include md {
         padding-right: 0px;
+        gap: 50px;
         overflow-y: visible;
       }
 
@@ -57,7 +57,7 @@
       }
 
       .info {
-        margin-top: 50px;
+        margin-top: 25px;
 
         .top {
           width: max-content;
@@ -88,7 +88,11 @@
               align-items: center;
               gap: 10px;
               border-radius: 5px;
-              margin-top: 30px;
+              margin-top: 15px;
+
+              @include md {
+                margin-top: 30px;
+              }
 
               img {
                 width: 24px;
@@ -98,11 +102,15 @@
           }
         }
         .bottom {
-          margin-top: 50px;
+          margin-top: 20px;
           color: #555;
           line-height: 20px;
           border-top: 1px solid #ccc;
           padding-top: 20px;
+
+          @include md {
+            margin-top: 50px;
+          }
         }
       }
     }

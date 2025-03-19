@@ -2,7 +2,6 @@ import "./singlePage.scss";
 import Slider from "../../components/slider/Slider";
 import Map from "../../components/map/Map";
 import { Link, useLoaderData, useNavigate } from "react-router-dom";
-// import DOMPurify from "dompurify";
 import { useContext, useState } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import toast, { Toaster } from "react-hot-toast";
@@ -12,6 +11,7 @@ import { IoIosSend } from "react-icons/io";
 import { IoCallOutline } from "react-icons/io5";
 import { FaBookmark, FaRegBookmark } from "react-icons/fa";
 import { BiMessageDetail } from "react-icons/bi";
+import { RiCloseLargeLine } from "react-icons/ri";
 
 function SinglePage() {
   const post = useLoaderData();
@@ -101,13 +101,7 @@ function SinglePage() {
                 </div>
               </div>
             </div>
-            {/* <div
-              className="bottom"
-              dangerouslySetInnerHTML={{
-                __html: DOMPurify.sanitize(post.desc),
-              }}
-            ></div> */}
-            <div className="bottomc">{post.desc}</div>
+            <div className="bottom">{post.desc}</div>
           </div>
         </div>
       </div>
@@ -168,7 +162,7 @@ function SinglePage() {
                         setMessage("");
                       }}
                     >
-                      X
+                      <RiCloseLargeLine />
                     </button>
                   </div>
                   <form

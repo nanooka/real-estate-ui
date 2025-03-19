@@ -11,10 +11,17 @@
   }
 
   .profileUpdatePageCointainer {
-    // height: 100%;
     display: flex;
     align-items: start;
-    gap: 50px;
+    padding: 0 120px;
+
+    @include lg {
+      padding: 0 40px;
+    }
+
+    @include md {
+      padding: 0;
+    }
 
     @include sm {
       flex-direction: column-reverse;
@@ -27,44 +34,37 @@
       flex: 3;
       display: flex;
       align-items: center;
-      // justify-content: center;
-      // width: 50%;
 
       form {
         display: flex;
         flex-direction: column;
         gap: 20px;
+        width: 60%;
 
-        // .item {
-        //   display: flex;
-        //   flex-direction: column;
-        //   gap: 5px;
+        @include md {
+          width: 80%;
+        }
 
-        //   input {
-        //     padding: 20px;
-        //     border-radius: 5px;
-        //     border: 1px solid gray;
-        //   }
-        // }
+        @include sm {
+          width: 100%;
+        }
 
         .item {
-          // display: flex;
-          // flex-direction: column;
           gap: 5px;
-          // align-items: center;
-          // justify-content: space-between;
-          display: grid;
-          grid-template-columns: repeat(3, 1fr);
+          display: flex;
+          justify-content: space-between;
 
           label {
-            // color: teal;
             font-weight: bold;
           }
 
+          .valueContainer {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+          }
+
           input {
-            // padding: 20px;
-            // border-radius: 5px;
-            // border: 1px solid gray;
             border: none;
             outline: none;
             padding: 4px;
@@ -82,7 +82,6 @@
           }
 
           .eyeIcon {
-            // color: #999;
             color: teal;
             cursor: pointer;
           }
@@ -106,15 +105,10 @@
           color: white;
           font-weight: bold;
           cursor: pointer;
-          max-width: 70%;
           transition: background-color 0.3s;
 
           &:hover {
             background-color: rgb(1, 112, 112);
-          }
-
-          @include md {
-            max-width: 80%;
           }
         }
 
@@ -126,8 +120,6 @@
 
     .sideContainer {
       flex: 2;
-      // width: 50%;
-      // background-color: #fcf5f3;
       display: flex;
       flex-direction: column;
       gap: 20px;
