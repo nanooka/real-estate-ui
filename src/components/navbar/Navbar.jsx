@@ -1,10 +1,10 @@
 import { useContext, useEffect, useRef, useState } from "react";
 import "./navbar.scss";
-import { Link, NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 import { useNotificationStore } from "../../lib/notificationStore";
 import apiRequest from "../../lib/apiRequest";
-import { IoIosLogOut } from "react-icons/io";
+import { IoIosLogOut, IoMdMenu } from "react-icons/io";
 import { CgProfile } from "react-icons/cg";
 
 export default function Navbar() {
@@ -18,6 +18,8 @@ export default function Navbar() {
   const number = useNotificationStore((state) => state.number);
 
   const dropdownRef = useRef(null);
+  const hamburgerRef = useRef(null);
+  const menuIconRef = useRef(null);
 
   if (currentUser) fetch();
 
@@ -36,25 +38,33 @@ export default function Navbar() {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
         setProfileDropdownOpen(false);
       }
+
+      if (
+        hamburgerRef.current &&
+        !hamburgerRef.current.contains(event.target) &&
+        menuIconRef.current &&
+        !menuIconRef.current.contains(event.target)
+      ) {
+        setHamburgerOpen(false);
+      }
     }
 
-    if (profileDropdownOpen) {
-      document.addEventListener("mousedown", handleClickOutside);
-    }
-
+    document.addEventListener("mousedown", handleClickOutside);
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, [profileDropdownOpen]);
+  }, []);
+
+  const closeHamburger = () => setHamburgerOpen(false);
 
   return (
     <nav>
       <div className="nav-div">
         <div className="left">
-          <Link to="/" className="logo">
+          <NavLink to="/" className="logo">
             <img src="/estate.png" alt="" />
             <span>PrimeEstate</span>
-          </Link>
+          </NavLink>
           <NavLink to="/aboutUs">About Us</NavLink>
           <NavLink to="/contact">Contact</NavLink>
           <NavLink to="/faqs">FAQs</NavLink>
@@ -72,34 +82,63 @@ export default function Navbar() {
               </div>
               {profileDropdownOpen && (
                 <div className="dropdown-menu">
-                  <Link to="/profile" className="dropdown-item">
+                  <NavLink to="/profile" className="dropdown-item">
                     <CgProfile /> Profile
-                  </Link>
+                  </NavLink>
                   <span onClick={handleLogout} className="dropdown-item logout">
-                    <IoIosLogOut /> Logout
+                    <IoIosLogOut /> Log out
                   </span>
                 </div>
               )}
             </div>
           ) : (
-            <Link to="/login" className="login">
+            <NavLink to="/login" className="login">
               Log in
-            </Link>
+            </NavLink>
           )}
-          <div className="menuIcon">
-            <img
-              src="/menu.png"
-              alt=""
-              onClick={() => setHamburgerOpen(!hamburgerOpen)}
-            />
+          <div
+            className="menuIcon"
+            onClick={() => setHamburgerOpen(!hamburgerOpen)}
+          >
+            <IoMdMenu size={24} />
           </div>
-          <div className={hamburgerOpen ? "menu active" : "menu"}>
-            <Link to="/">Home</Link>
-            <Link to="/">About</Link>
-            <Link to="/">Contact</Link>
-            <Link to="/">Agents</Link>
-            <Link to="/">Sign in</Link>
-            <Link to="/">Sign up</Link>
+
+          <div
+            className={hamburgerOpen ? "overlay active" : "overlay"}
+            onClick={closeHamburger}
+          ></div>
+
+          <div
+            ref={hamburgerRef}
+            className={hamburgerOpen ? "menu active" : "menu"}
+          >
+            <NavLink to="/" onClick={closeHamburger}>
+              Home
+            </NavLink>
+            <NavLink to="/aboutUs" onClick={closeHamburger}>
+              About Us
+            </NavLink>
+            <NavLink to="/contact" onClick={closeHamburger}>
+              Contact
+            </NavLink>
+            <NavLink to="/faqs" onClick={closeHamburger}>
+              FAQs
+            </NavLink>
+            {currentUser && <NavLink to="/profile">Profile</NavLink>}
+            {!currentUser ? (
+              <NavLink to="/login" onClick={closeHamburger}>
+                Log in
+              </NavLink>
+            ) : (
+              <p
+                onClick={() => {
+                  handleLogout();
+                  closeHamburger();
+                }}
+              >
+                Log out
+              </p>
+            )}
           </div>
         </div>
       </div>

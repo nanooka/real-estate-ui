@@ -82,6 +82,28 @@ export default function ProfileUpdatePage() {
       <div className="profileUpdatePageCointainer">
         <div className="formContainer">
           <form onSubmit={handleSubmit}>
+            <div className="sideContainer">
+              <div className="avatarCointainer">
+                <img
+                  src={avatar[0] || "/noavatar.jpg"}
+                  alt=""
+                  className="avatar"
+                />
+                <div className="deleteImage" onClick={() => setAvatar([])}>
+                  <RiCloseLargeLine />
+                </div>
+              </div>
+              <UploadWidget
+                uwConfig={{
+                  cloudName: "dg04baaoh",
+                  uploadPreset: "estate",
+                  multiple: false,
+                  maxImageFileSize: 2000000,
+                  folder: "avatars",
+                }}
+                setState={setAvatar}
+              />
+            </div>
             <div className="item">
               <label htmlFor="username">Username: </label>
               <div className="valueContainer">
@@ -195,7 +217,7 @@ export default function ProfileUpdatePage() {
             {error && <span className="errorMessage">{error}</span>}
           </form>
         </div>
-        <div className="sideContainer">
+        {/* <div className="sideContainer">
           <div className="avatarCointainer">
             <img src={avatar[0] || "/noavatar.jpg"} alt="" className="avatar" />
             <div className="deleteImage" onClick={() => setAvatar([])}>
@@ -212,7 +234,7 @@ export default function ProfileUpdatePage() {
             }}
             setState={setAvatar}
           />
-        </div>
+        </div> */}
       </div>
     </div>
   );
