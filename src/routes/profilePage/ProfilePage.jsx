@@ -4,6 +4,8 @@ import Chat from "../../components/chat/Chat";
 import { Await, Link, useLoaderData } from "react-router-dom";
 import { Suspense, useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
+import Spinner from "../../components/spinner/Spinner";
+import CardSkeleton from "../../components/cardSkeleton/CardSkeleton";
 
 export default function ProfilePage() {
   const data = useLoaderData();
@@ -43,7 +45,7 @@ export default function ProfilePage() {
             </Link>
           </div>
 
-          <Suspense fallback={<p>Loading...</p>}>
+          <Suspense fallback={<CardSkeleton />}>
             <Await
               resolve={data.postResponse}
               errorElement={<p>Error loading posts</p>}
@@ -55,7 +57,7 @@ export default function ProfilePage() {
           <div className="title">
             <h1>Saved Posts</h1>
           </div>
-          <Suspense fallback={<p>Loading...</p>}>
+          <Suspense fallback={<CardSkeleton />}>
             <Await
               resolve={data.postResponse}
               errorElement={<p>Error loading posts</p>}
@@ -67,7 +69,7 @@ export default function ProfilePage() {
       </div>
       <div className="chatContainer">
         <div className="wrapper">
-          <Suspense fallback={<p>Loading...</p>}>
+          <Suspense fallback={<Spinner />}>
             <Await
               resolve={data.chatResponse}
               errorElement={<p>Error loading chats</p>}

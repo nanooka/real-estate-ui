@@ -5,6 +5,7 @@ import Map from "../../components/map/Map";
 import { Await, useLoaderData } from "react-router-dom";
 import { Suspense } from "react";
 import CardSkeleton from "../../components/cardSkeleton/CardSkeleton";
+import Spinner from "../../components/Spinner/Spinner";
 
 export default function ListPage() {
   const data = useLoaderData();
@@ -40,7 +41,7 @@ export default function ListPage() {
         </div>
       </div>
       <div className="mapContainer">
-        <Suspense fallback={<p>Loading...</p>}>
+        <Suspense fallback={<Spinner />}>
           <Await
             resolve={data.postResponse}
             errorElement={<p>Error loading posts!</p>}

@@ -4,6 +4,7 @@ import { Await, useLoaderData } from "react-router-dom";
 import Card from "../../components/card/Card";
 import Filter from "../../components/filter/Filter";
 import CardSkeleton from "../../components/cardSkeleton/CardSkeleton";
+import Spinner from "../../components/spinner/Spinner";
 
 export default function HomePage() {
   const data = useLoaderData();
@@ -16,7 +17,9 @@ export default function HomePage() {
         <img src="/cover.jpg" alt="" />
         <h1>Find Your Dream House</h1>
         <div className="filterContainer">
-          <Filter />
+          <Suspense fallback={<Spinner />}>
+            <Filter />
+          </Suspense>
         </div>
       </div>
       <div className="wrapper">
