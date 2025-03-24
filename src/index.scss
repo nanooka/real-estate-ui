@@ -1,3 +1,21 @@
+:root {
+  --bg-color: #f9f9f9;
+  --bg-navbar: white;
+  --text-color: #000000;
+  --primary-color: teal;
+  --bg-gradient: linear-gradient(#e1e1e1, #ededed 90%, #fff);
+  --bg-message: white;
+}
+
+[data-theme="dark"] {
+  --bg-color: #181818;
+  --bg-navbar: #1f1f1f;
+  --text-color: #b4b4b4;
+  --primary-color: teal;
+  --bg-gradient: linear-gradient(#1f1f1f, #181818);
+  --bg-message: #333;
+}
+
 * {
   padding: 0;
   margin: 0;
@@ -12,5 +30,6 @@ a {
 body {
   font-family: "Lato", sans-serif;
   overflow-x: hidden;
-  background-color: #f9f9f9;
+  background-color: var(--bg-color);
+  color: var(--text-color);
 }

@@ -10,7 +10,8 @@ nav {
   left: 0;
   right: 0;
   z-index: 1000;
-  background-color: white;
+  // background-color: white;
+  background-color: var(--bg-navbar);
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 
   .nav-div {
@@ -64,7 +65,7 @@ nav {
       }
 
       a.active {
-        color: teal;
+        color: var(--primary-color);
         font-weight: bold;
       }
 
@@ -80,7 +81,7 @@ nav {
         }
 
         span {
-          color: teal;
+          color: var(--primary-color);
 
           @include md {
             display: none;
@@ -177,7 +178,7 @@ nav {
 
       .login {
         height: 40px;
-        background-color: teal;
+        background-color: var(--primary-color);
         color: white;
         border-radius: 25px;
         padding: 12px 24px;

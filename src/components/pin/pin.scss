@@ -17,7 +17,7 @@
 
     b {
       &:last-child {
-        color: teal;
+        color: var(--primary-color);
       }
     }
   }

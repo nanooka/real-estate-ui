@@ -150,7 +150,7 @@ export default function Filter() {
           }`}
           style={{
             // color: query.status && "#004da3",
-            color: query.status && "teal",
+            color: query.status && "var(--primary-color)",
             fontWeight: query.status && "bold",
           }}
           onClick={() => toggleDropdown("status")}
@@ -158,7 +158,7 @@ export default function Filter() {
           {query.status ? "For " + query.status : "Status"}
           <MdKeyboardArrowDown
             size={20}
-            color="teal"
+            color="var(--primary-color)"
             style={{
               transform: activeDropdown === "status" && "rotate(-180deg)",
               transition: "transform 0.3s ease-in-out",
@@ -170,7 +170,8 @@ export default function Filter() {
             <li
               onClick={() => handleQueryUpdate("status", "sale")}
               style={{
-                backgroundColor: query.status === "sale" && "teal",
+                backgroundColor:
+                  query.status === "sale" && "var(--primary-color)",
                 color: query.status === "sale" && "white",
               }}
             >
@@ -179,7 +180,8 @@ export default function Filter() {
             <li
               onClick={() => handleQueryUpdate("status", "rent")}
               style={{
-                backgroundColor: query.status === "rent" && "teal",
+                backgroundColor:
+                  query.status === "rent" && "var(--primary-color)",
                 color: query.status === "rent" && "white",
               }}
             >
@@ -197,7 +199,7 @@ export default function Filter() {
           }`}
           style={{
             // color: query.propertyType && "#004da3",
-            color: query.propertyType && "teal",
+            color: query.propertyType && "var(--primary-color)",
             fontWeight: query.propertyType && "bold",
           }}
           onClick={() => toggleDropdown("propertyType")}
@@ -206,7 +208,7 @@ export default function Filter() {
             query.propertyType.slice(1) || "Property Type"}
           <MdKeyboardArrowDown
             size={20}
-            color="teal"
+            color="var(--primary-color)"
             style={{
               transform: activeDropdown === "propertyType" && "rotate(-180deg)",
               transition: "transform 0.3s ease-in-out",
@@ -218,7 +220,8 @@ export default function Filter() {
             <li
               onClick={() => handleQueryUpdate("propertyType", "apartment")}
               style={{
-                backgroundColor: query.propertyType === "apartment" && "teal",
+                backgroundColor:
+                  query.propertyType === "apartment" && "var(--primary-color)",
                 color: query.propertyType === "apartment" && "white",
               }}
             >
@@ -227,7 +230,8 @@ export default function Filter() {
             <li
               onClick={() => handleQueryUpdate("propertyType", "house")}
               style={{
-                backgroundColor: query.propertyType === "house" && "teal",
+                backgroundColor:
+                  query.propertyType === "house" && "var(--primary-color)",
                 color: query.propertyType === "house" && "white",
               }}
             >
@@ -245,7 +249,7 @@ export default function Filter() {
           }`}
           style={{
             // color: query.country && "#004da3",
-            color: query.country && "teal",
+            color: query.country && "var(--primary-color)",
             fontWeight: query.country && "bold",
           }}
           onClick={() => toggleDropdown("country")}
@@ -253,7 +257,7 @@ export default function Filter() {
           {query.country || "Country"}
           <MdKeyboardArrowDown
             size={20}
-            color="teal"
+            color="var(--primary-color)"
             style={{
               transform: activeDropdown === "country" && "rotate(-180deg)",
               transition: "transform 0.3s ease-in-out",
@@ -277,7 +281,8 @@ export default function Filter() {
                   key={country}
                   onClick={() => handleSelect("country", country)}
                   style={{
-                    backgroundColor: query.country === country && "teal",
+                    backgroundColor:
+                      query.country === country && "var(--primary-color)",
                     color: query.country === country && "white",
                   }}
                 >
@@ -298,7 +303,7 @@ export default function Filter() {
           }`}
           style={{
             // color: query.city && "#004da3",
-            color: query.city && "teal",
+            color: query.city && "var(--primary-color)",
             fontWeight: query.city && "bold",
           }}
           onClick={() => toggleDropdown("city")}
@@ -306,7 +311,7 @@ export default function Filter() {
           {query.city || "City"}
           <MdKeyboardArrowDown
             size={20}
-            color="teal"
+            color="var(--primary-color)"
             style={{
               transform: activeDropdown === "city" && "rotate(-180deg)",
               transition: "transform 0.3s ease-in-out",
@@ -331,7 +336,8 @@ export default function Filter() {
                       key={city}
                       onClick={() => handleSelect("city", city)}
                       style={{
-                        backgroundColor: query.city === city && "teal",
+                        backgroundColor:
+                          query.city === city && "var(--primary-color)",
                         color: query.city === city && "white",
                       }}
                     >
@@ -418,12 +424,12 @@ export default function Filter() {
           <div>
             {query.bedroom && (
               <>
-                <LiaBedSolid size={20} color="teal" />
+                <LiaBedSolid size={20} color="var(--primary-color)" />
                 <span>{query.bedroom}</span>
               </>
             )}
 
-            <BiArea size={20} color="teal" />
+            <BiArea size={20} color="var(--primary-color)" />
           </div>
         </div>
 

@@ -1,5 +1,5 @@
 .feature {
-  background: white;
+  background: var(--bg-navbar);
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
@@ -8,7 +8,7 @@
 
   h3 {
     font-size: 20px;
-    color: teal;
+    color: var(--primary-color);
     margin-bottom: 15px;
   }
 
@@ -18,11 +18,11 @@
 
     li {
       font-size: 1rem;
-      color: #555;
+      // color: #555;
       margin-bottom: 8px;
       &::before {
         content: "✔";
-        color: teal;
+        color: var(--primary-color);
         margin-right: 8px;
       }
     }

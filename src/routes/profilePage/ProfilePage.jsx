@@ -4,8 +4,8 @@ import Chat from "../../components/chat/Chat";
 import { Await, Link, useLoaderData } from "react-router-dom";
 import { Suspense, useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
-import Spinner from "../../components/spinner/Spinner";
 import CardSkeleton from "../../components/cardSkeleton/CardSkeleton";
+import Spinner from "../../components/Spinner/Spinner";
 
 export default function ProfilePage() {
   const data = useLoaderData();

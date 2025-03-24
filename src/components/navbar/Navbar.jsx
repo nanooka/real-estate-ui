@@ -6,6 +6,7 @@ import { useNotificationStore } from "../../lib/notificationStore";
 import apiRequest from "../../lib/apiRequest";
 import { IoIosLogOut, IoMdMenu } from "react-icons/io";
 import { CgProfile } from "react-icons/cg";
+import ThemeToggle from "../ThemeToggle/ThemeToggle";
 
 export default function Navbar() {
   const [hamburgerOpen, setHamburgerOpen] = useState(false);
@@ -70,6 +71,7 @@ export default function Navbar() {
           <NavLink to="/faqs">FAQs</NavLink>
         </div>
         <div className="right">
+          <ThemeToggle />
           {currentUser ? (
             <div className="user-dropdown" ref={dropdownRef}>
               <div

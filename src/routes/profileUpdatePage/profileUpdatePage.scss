@@ -9,7 +9,7 @@
   padding-bottom: 50px;
 
   h1 {
-    color: teal;
+    color: var(--primary-color);
   }
 
   .profileUpdatePageCointainer {
@@ -55,14 +55,14 @@
           }
 
           .editIcon {
-            color: teal;
+            color: var(--primary-color);
             width: 20px;
             height: 20px;
             cursor: pointer;
           }
 
           .eyeIcon {
-            color: teal;
+            color: var(--primary-color);
             cursor: pointer;
           }
         }
@@ -70,7 +70,7 @@
         .changePasswordButton {
           background: transparent;
           border: none;
-          color: teal;
+          color: var(--primary-color);
           font-weight: bold;
           font-size: 14px;
           cursor: pointer;
@@ -81,7 +81,7 @@
           padding: 20px;
           border-radius: 5px;
           border: none;
-          background-color: teal;
+          background-color: var(--primary-color);
           color: white;
           font-weight: bold;
           cursor: pointer;

@@ -39,15 +39,15 @@ const ContactPage = () => {
 
           <div className="contact-details">
             <Link className="contact-item" to={"tel:(123) 456-7890"}>
-              <FaPhoneAlt color="teal" size={20} />
+              <FaPhoneAlt color="var(--primary-color)" size={20} />
               <span>(123) 456-7890</span>
             </Link>
             <Link className="contact-item" to="mailto:info@primeestate.com">
-              <AiOutlineMail color="teal" size={24} />
+              <AiOutlineMail color="var(--primary-color)" size={24} />
               <span>info@primeestate.com</span>
             </Link>
             <div className="contact-item">
-              <MdAccessTime color="teal" size={24} />
+              <MdAccessTime color="var(--primary-color)" size={24} />
               <p>Monday - Friday: 9:00 AM - 6:00 PM</p>
             </div>
             <Link
@@ -55,7 +55,7 @@ const ContactPage = () => {
               to="https://www.google.com/maps?q=285+Fulton+St,+New+York,+NY+10007"
               target="_blank"
             >
-              <IoLocationSharp color="teal" size={24} />
+              <IoLocationSharp color="var(--primary-color)" size={24} />
               <span>285 Fulton St, New York, NY 10007</span>
             </Link>
           </div>

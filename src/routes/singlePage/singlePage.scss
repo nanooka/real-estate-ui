@@ -47,9 +47,9 @@
       }
 
       &::-webkit-scrollbar-thumb {
-        background-color: teal;
+        background-color: var(--primary-color);
         border-radius: 10px;
-        border: 1px solid #f0e6e4;
+        // border: 1px solid #f0e6e4;
       }
 
       &::-webkit-scrollbar-thumb:hover {
@@ -190,7 +190,7 @@
         display: flex;
         align-items: center;
         gap: 10px;
-        color: teal;
+        color: var(--primary-color);
         width: max-content;
 
         a {
@@ -212,7 +212,7 @@
         width: max-content;
         font-size: 24px;
         font-weight: 600;
-        color: teal;
+        color: var(--primary-color);
 
         span {
           font-size: 14px;
@@ -273,7 +273,7 @@
           padding: 0;
           background-color: transparent;
           border: none;
-          color: teal;
+          color: var(--primary-color);
           font-size: 14px;
           width: max-content;
         }
@@ -289,7 +289,7 @@
           box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
           z-index: 100;
           height: max-content;
-          background-color: teal;
+          background-color: var(--primary-color);
           color: white;
 
           .popupContentTop {

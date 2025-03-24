@@ -27,9 +27,9 @@
     }
 
     &::-webkit-scrollbar-thumb {
-      background-color: teal;
+      background-color: var(--primary-color);
       border-radius: 10px;
-      border: 1px solid #f0e6e4;
+      // border: 1px solid #f0e6e4;
     }
 
     &::-webkit-scrollbar-thumb:hover {
@@ -59,7 +59,7 @@
 
         button {
           padding: 12px 24px;
-          background-color: teal;
+          background-color: var(--primary-color);
           color: white;
           font-weight: bold;
           border-radius: 20px;
@@ -87,7 +87,7 @@
 
         button {
           width: 100px;
-          background-color: teal;
+          background-color: var(--primary-color);
           color: white;
           border: none;
           padding: 10px 20px;
@@ -107,7 +107,8 @@
 
   .chatContainer {
     flex: 2;
-    background: linear-gradient(#e1e1e1, #ededed 90%, #fff);
+    // background: linear-gradient(#e1e1e1, #ededed 90%, #fff);
+    background: var(--bg-gradient);
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
     height: 100%;

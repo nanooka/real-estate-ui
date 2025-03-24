@@ -92,7 +92,7 @@ export default function Chat({ chats }) {
             style={{
               backgroundColor:
                 c.seenBy.includes(currentUser.id) || chat?.id === c.id
-                  ? "white"
+                  ? "var(--bg-message)"
                   : "rgba(44, 139, 139, 0.4)",
             }}
             onClick={() => handleOpenChat(c.id, c.receiver)}
@@ -141,7 +141,9 @@ export default function Chat({ chats }) {
                     textAlign:
                       message.userId === currentUser.id ? "right" : "left",
                     backgroundColor:
-                      message.userId === currentUser.id ? "teal" : "#ddd",
+                      message.userId === currentUser.id
+                        ? "var(--primary-color)"
+                        : "#ddd",
                     color: message.userId === currentUser.id && "white",
                   }}
                 >

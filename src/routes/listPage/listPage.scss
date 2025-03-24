@@ -42,9 +42,11 @@
       }
 
       &::-webkit-scrollbar-thumb {
-        background-color: teal; /* Color of the scrollbar handle */
+        background-color: var(
+          --primary-color
+        ); /* Color of the scrollbar handle */
         border-radius: 10px; /* Optional: rounds scrollbar handle */
-        border: 1px solid #f0e6e4; /* Adds space between scrollbar handle and track */
+        // border: 1px solid #f0e6e4; /* Adds space between scrollbar handle and track */
       }
 
       &::-webkit-scrollbar-thumb:hover {

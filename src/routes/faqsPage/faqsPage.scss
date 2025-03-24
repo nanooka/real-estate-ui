@@ -9,11 +9,11 @@
   h2 {
     text-align: center;
     margin-bottom: 20px;
-    color: teal;
+    color: var(--primary-color);
   }
 
   h3 {
-    color: teal;
+    color: var(--primary-color);
     margin-top: 40px;
     margin-bottom: 10px;
   }
@@ -22,7 +22,8 @@
     margin-bottom: 15px;
     padding: 15px;
     border-radius: 8px;
-    background-color: white;
+    // background-color: white;
+    background-color: var(--bg-navbar);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     cursor: pointer;
     position: relative;
@@ -30,7 +31,8 @@
 
     .question {
       font-weight: bold;
-      color: #444;
+      // color: #444;
+      color: var(--text-color);
     }
 
     .answerContainer {
@@ -41,7 +43,9 @@
         margin-top: 10px;
         margin-right: 10px;
         font-size: 1rem;
-        color: #555;
+        // color: #555;
+        color: var(--text-color);
+        // color: #555;
         line-height: 1.5;
       }
     }

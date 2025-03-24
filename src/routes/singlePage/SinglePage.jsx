@@ -117,9 +117,9 @@ function SinglePage() {
             </div>
             <button onClick={handleSave} className="saveBtn">
               {saved ? (
-                <FaBookmark color="teal" size={32} />
+                <FaBookmark color="var(--primary-color)" size={32} />
               ) : (
-                <FaRegBookmark color="teal" size={32} />
+                <FaRegBookmark color="var(--primary-color)" size={32} />
               )}
             </button>
           </div>
@@ -143,14 +143,14 @@ function SinglePage() {
 
           <div className="phoneNumber">
             <Link to={`tel:${post.user.phone}`}>
-              <IoCallOutline size={24} color="teal" />
+              <IoCallOutline size={24} color="var(--primary-color)" />
               <span>{post.user.phone}</span>
             </Link>
           </div>
 
           <div className="buttons">
             <button onClick={handleOpenChat}>
-              <BiMessageDetail size={24} color="teal" />
+              <BiMessageDetail size={24} color="var(--primary-color)" />
               <span>Send a Message</span>
             </button>
 

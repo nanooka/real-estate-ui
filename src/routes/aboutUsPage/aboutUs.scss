@@ -1,6 +1,6 @@
 .about-us {
   padding: 60px 20px;
-  background-color: #f9f9f9;
+  // background-color: var(--bg-color);
   text-align: center;
 
   .container {
@@ -11,19 +11,19 @@
   .title {
     font-size: 2.5rem;
     font-weight: bold;
-    color: #2c3e50;
+    // color: #2c3e50;
     margin-bottom: 10px;
   }
 
   .subtitle {
     font-size: 1.5rem;
-    color: #34495e;
+    // color: #34495e;
     margin-bottom: 20px;
   }
 
   .description {
     font-size: 1.2rem;
-    color: #555;
+    // color: #555;
     margin-bottom: 40px;
   }
 
@@ -36,7 +36,7 @@
 
   .why-choose-us {
     margin-top: 40px;
-    background: white;
+    background: var(--bg-navbar);
     padding: 30px;
     border-radius: 10px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
@@ -44,7 +44,8 @@
 
     h2 {
       font-size: 1.8rem;
-      color: #2c3e50;
+      // color: #2c3e50;
+      // color: #555;
       margin-bottom: 20px;
     }
 
@@ -54,16 +55,16 @@
 
       li {
         font-size: 1.1rem;
-        color: #555;
+        // color: #555;
         margin-bottom: 10px;
         &::before {
           content: "✔";
-          color: teal;
+          color: var(--primary-color);
           margin-right: 8px;
         }
 
         strong {
-          color: teal;
+          color: var(--primary-color);
         }
       }
     }
@@ -72,8 +73,9 @@
   .cta {
     margin-top: 40px;
     padding: 20px;
-    background: teal;
-    color: white;
+    background: var(--primary-color);
+    // color: white;
+    color: black;
     border-radius: 10px;
 
     h2 {
