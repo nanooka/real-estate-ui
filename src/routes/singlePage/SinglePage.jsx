@@ -2,7 +2,7 @@ import "./singlePage.scss";
 import Slider from "../../components/slider/Slider";
 import Map from "../../components/map/Map";
 import { Link, useLoaderData, useNavigate } from "react-router-dom";
-import { useContext, useState } from "react";
+import { Suspense, useContext, useState } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import toast, { Toaster } from "react-hot-toast";
 import apiRequest from "../../lib/apiRequest";
@@ -12,6 +12,7 @@ import { IoCallOutline } from "react-icons/io5";
 import { FaBookmark, FaRegBookmark } from "react-icons/fa";
 import { BiMessageDetail } from "react-icons/bi";
 import { RiCloseLargeLine } from "react-icons/ri";
+import Spinner from "../../components/Spinner/Spinner";
 
 function SinglePage() {
   const post = useLoaderData();
@@ -127,7 +128,9 @@ function SinglePage() {
             <span>{post.address}</span>
           </div>
           <div className="mapContainer">
-            <Map items={[post]} />
+            <Suspense fallback={<Spinner />}>
+              <Map items={[post]} />
+            </Suspense>
           </div>
 
           <div className="user">

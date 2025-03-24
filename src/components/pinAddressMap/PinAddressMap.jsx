@@ -13,8 +13,6 @@ export default function PinAddressMap({ setCoordinates, city, setAddress }) {
   const [position, setPosition] = useState(null);
   const [center, setCenter] = useState([40.713, -74.0132]);
 
-  // Geocode the city when it changes
-  console.log("center", center);
   useEffect(() => {
     if (!city) return;
 
@@ -29,7 +27,7 @@ export default function PinAddressMap({ setCoordinates, city, setAddress }) {
 
         if (data.length > 0) {
           const { lat, lon } = data[0];
-          setCenter([parseFloat(lat), parseFloat(lon)]); // Update center
+          setCenter([parseFloat(lat), parseFloat(lon)]);
         } else {
           console.error("City not found");
         }
@@ -48,7 +46,6 @@ export default function PinAddressMap({ setCoordinates, city, setAddress }) {
         setPosition({ lat, lng });
         setCoordinates({ lat, lng });
 
-        // Reverse geocoding to get the full address
         try {
           const response = await fetch(
             `https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lng}&format=json`
@@ -80,7 +77,7 @@ export default function PinAddressMap({ setCoordinates, city, setAddress }) {
   const DynamicMapCenter = () => {
     const map = useMap();
     useEffect(() => {
-      map.setView(center); // Update the map's view to the new center
+      map.setView(center);
     }, [map]);
     return null;
   };

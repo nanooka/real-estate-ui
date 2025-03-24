@@ -1,8 +1,17 @@
 import { useEffect, useState } from "react";
 import "./slider.scss";
+import { RiCloseLargeLine } from "react-icons/ri";
+import {
+  MdOutlineKeyboardArrowLeft,
+  MdOutlineKeyboardArrowRight,
+} from "react-icons/md";
+import Skeleton from "react-loading-skeleton";
 
 export default function Slider({ images }) {
   const [imageIndex, setImageIndex] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  console.log(imageIndex);
 
   const changeSlide = (direction) => {
     if (direction === "left") {
@@ -23,12 +32,26 @@ export default function Slider({ images }) {
   useEffect(() => {
     if (imageIndex !== null) {
       document.body.style.overflowY = "hidden";
+
+      const handleKeyDown = (e) => {
+        if (e.key === "ArrowLeft") {
+          changeSlide("left");
+        } else if (e.key === "ArrowRight") {
+          changeSlide("right");
+        } else if (e.key === "Escape") {
+          setImageIndex(null);
+        }
+      };
+
+      window.addEventListener("keydown", handleKeyDown);
+
+      return () => {
+        window.removeEventListener("keydown", handleKeyDown);
+      };
     } else {
       document.body.style.overflowY = "auto";
     }
-    return () => {
-      document.body.style.overflowY = "auto"; // Clean up in case the component unmounts
-    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [imageIndex]);
 
   return (
@@ -36,31 +59,46 @@ export default function Slider({ images }) {
       {imageIndex !== null && (
         <div className="fullSlider">
           <div className="arrow" onClick={() => changeSlide("left")}>
-            <img src="/arrow.png" alt="" />
+            <MdOutlineKeyboardArrowLeft className="arrowIcon" />
           </div>
           <div className="imgContainer">
             <img src={images[imageIndex]} alt="" />
           </div>
           <div className="arrow" onClick={() => changeSlide("right")}>
-            <img src="/arrow.png" className="right" alt="" />
+            <MdOutlineKeyboardArrowRight className="arrowIcon" />
           </div>
           <div className="close" onClick={() => setImageIndex(null)}>
-            X
+            <RiCloseLargeLine />
           </div>
         </div>
       )}
       <div className="bigImage">
-        <img src={images[0]} alt="" onClick={() => setImageIndex(0)} />
+        {loading && <Skeleton height="100%" />}
+        <img
+          src={images[0]}
+          alt=""
+          onClick={() => setImageIndex(0)}
+          onLoad={() => setLoading(false)}
+          style={{ display: loading ? "none" : "block" }}
+        />
       </div>
       <div className="smallImages">
-        {images.slice(1, 4).map((image, index) => (
-          <img
-            src={image}
-            alt=""
-            key={index}
-            onClick={() => setImageIndex(index + 1)}
-          />
-        ))}
+        {images
+          .slice(1, 4)
+          .map((image, index) =>
+            loading ? (
+              <Skeleton key={index} height={100} />
+            ) : (
+              <img
+                src={image}
+                alt=""
+                key={index}
+                onClick={() => setImageIndex(index + 1)}
+                onLoad={() => setLoading(false)}
+                style={{ display: loading ? "none" : "block" }}
+              />
+            )
+          )}
 
         {images.length > 4 && (
           <div className="extraImages" onClick={() => setImageIndex(3)}>
