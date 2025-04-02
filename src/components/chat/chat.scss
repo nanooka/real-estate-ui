@@ -46,16 +46,18 @@
     bottom: 0;
     right: 0;
     left: 0;
-    background-color: #fff;
+    // background-color: #fff;
+    background: var(--bg-navbar);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    overflow: hidden;
 
     .top {
       background-color: var(--primary-color);
       color: white;
-      border-top-left-radius: 20px;
-      border-top-right-radius: 20px;
       padding: 20px;
       font-weight: bold;
       display: flex;
@@ -87,6 +89,28 @@
       flex-direction: column;
       gap: 20px;
 
+      &::-webkit-scrollbar {
+        width: 12px; /* Width of the scrollbar */
+      }
+
+      &::-webkit-scrollbar-track {
+        // background: #f0e6e4; /* Track color */
+        background: transparent;
+        border-radius: 10px; /* Optional: rounds scrollbar corners */
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background-color: var(
+          --primary-color
+        ); /* Color of the scrollbar handle */
+        border-radius: 10px; /* Optional: rounds scrollbar handle */
+        // border: 1px solid #f0e6e4; /* Adds space between scrollbar handle and track */
+      }
+
+      &::-webkit-scrollbar-thumb:hover {
+        background-color: rgb(1, 112, 112); /* Handle color on hover */
+      }
+
       .chatMessage {
         max-width: 50%;
         display: flex;
@@ -106,7 +130,7 @@
         span {
           font-size: 12px;
           // background-color: rgba(44, 139, 139, 0.2);
-          color: rgb(44, 139, 139);
+          // color: rgb(44, 139, 139);
           color: #888;
           padding: 2px;
           border-radius: 5px;
@@ -115,7 +139,8 @@
     }
 
     .bottom {
-      border-top: 2px solid var(--primary-color);
+      // border-top: 2px solid var(--primary-color);
+      border-top: 2px solid var(--border);
       height: 60px;
       display: flex;
       align-items: center;
@@ -128,9 +153,11 @@
         padding: 20px;
         outline: none;
         resize: none;
+        background: var(--bg-navbar);
 
         &:focus {
-          border-bottom: 2px solid #ededed;
+          // border-bottom: 2px solid #ededed;
+          border-bottom: 2px solid var(--border);
         }
       }
 

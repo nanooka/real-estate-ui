@@ -5,6 +5,7 @@
   --primary-color: teal;
   --bg-gradient: linear-gradient(#e1e1e1, #ededed 90%, #fff);
   --bg-message: white;
+  --border: #ddd;
 }
 
 [data-theme="dark"] {
@@ -14,6 +15,7 @@
   --primary-color: teal;
   --bg-gradient: linear-gradient(#1f1f1f, #181818);
   --bg-message: #333;
+  --border: #333;
 }
 
 * {

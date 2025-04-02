@@ -6,6 +6,7 @@ import { format } from "timeago.js";
 import { SocketContext } from "../../context/SocketContext";
 import { useNotificationStore } from "../../lib/notificationStore";
 import { IoIosSend } from "react-icons/io";
+import { RiCloseLargeLine } from "react-icons/ri";
 
 export default function Chat({ chats }) {
   const [chat, setChat] = useState(null);
@@ -26,8 +27,15 @@ export default function Chat({ chats }) {
       const res = await apiRequest(`/chats/${id}`);
       if (!res.data.seenBy.includes(currentUser.id)) {
         decrease();
+        res.data.seenBy.push(currentUser.id);
       }
       setChat({ ...res.data, receiver });
+
+      setChatsState((prevChats) =>
+        prevChats.map((c) =>
+          c.id === id ? { ...c, seenBy: [...c.seenBy, currentUser.id] } : c
+        )
+      );
     } catch (err) {
       console.log(err);
     }
@@ -111,7 +119,7 @@ export default function Chat({ chats }) {
               {chat.receiver.username}
             </div>
             <span className="close" onClick={() => setChat(null)}>
-              X
+              <RiCloseLargeLine />
             </span>
           </div>
           <div className="center">
@@ -143,7 +151,7 @@ export default function Chat({ chats }) {
                     backgroundColor:
                       message.userId === currentUser.id
                         ? "var(--primary-color)"
-                        : "#ddd",
+                        : "var(--border)",
                     color: message.userId === currentUser.id && "white",
                   }}
                 >
