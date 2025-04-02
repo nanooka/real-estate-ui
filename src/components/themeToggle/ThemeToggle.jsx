@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import "./themeToggle.scss";
+import { IoMoonSharp, IoSunnySharp } from "react-icons/io5";
 
 const ThemeToggle = () => {
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
@@ -9,9 +11,22 @@ const ThemeToggle = () => {
   }, [theme]);
 
   return (
-    <button onClick={() => setTheme(theme === "light" ? "dark" : "light")}>
-      {theme === "light" ? "🌙 Dark Mode" : "☀️ Light Mode"}
-    </button>
+    <label className="toggle-container">
+      <input
+        type="checkbox"
+        checked={theme === "dark"}
+        onChange={() => setTheme(theme === "light" ? "dark" : "light")}
+      />
+      <span className="toggle-slider">
+        <div className="toggle-icon">
+          {theme === "dark" ? (
+            <IoMoonSharp color="white" size={20} />
+          ) : (
+            <IoSunnySharp color="yellow" size={20} />
+          )}
+        </div>
+      </span>
+    </label>
   );
 };
 

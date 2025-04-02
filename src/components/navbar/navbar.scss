@@ -98,10 +98,17 @@ nav {
       display: flex;
       align-items: center;
       justify-content: flex-end;
+      gap: 10px;
       height: 100%;
 
       @include md {
         background-color: transparent;
+      }
+
+      .themeToggle {
+        @include sm {
+          display: none;
+        }
       }
 
       .user-dropdown {
@@ -207,7 +214,7 @@ nav {
         position: absolute;
         top: 0;
         right: -50%;
-        background-color: #f9f9f9;
+        background-color: var(--bg-navbar);
         height: 100vh;
         width: 50%;
         transition: all 0.5s ease;
@@ -230,6 +237,11 @@ nav {
             padding: 6px 0;
             border-bottom: 2px solid #c8c8c8;
           }
+        }
+
+        .menuThemeToggle {
+          position: absolute;
+          top: 30px;
         }
 
         p {
