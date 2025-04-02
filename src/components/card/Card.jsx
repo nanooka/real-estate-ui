@@ -1,6 +1,9 @@
+import { SlLocationPin } from "react-icons/sl";
+import { BiBath } from "react-icons/bi";
 import { formatWithSpaces } from "../../lib/formatPrice";
 import "./card.scss";
 import { Link } from "react-router-dom";
+import { IoBedOutline } from "react-icons/io5";
 
 export default function Card({ item }) {
   return (
@@ -13,7 +16,7 @@ export default function Card({ item }) {
           <h2 className="title">{item.title}</h2>
           <p className="price">$ {formatWithSpaces(item.price)}</p>
           <p className="address">
-            <img src="/pin.png" alt="" />
+            <SlLocationPin color="#888" size={18} />
             <span>
               {item.address}, {item.city}
             </span>
@@ -22,23 +25,17 @@ export default function Card({ item }) {
           <div className="bottom">
             <div className="features">
               <div className="feature">
-                <img src="/bed.png" alt="" />
+                {/* <img src="/bed.png" alt="" /> */}
+                <IoBedOutline color="#888" size={18} />
                 <span>{item.bedroom}</span>
               </div>
 
               <div className="feature">
-                <img src="/bath.png" alt="" />
+                {/* <img src="/bath.png" alt="" /> */}
+                <BiBath color="#888" size={18} />
                 <span>{item.bathroom}</span>
               </div>
             </div>
-            {/* <div className="icons">
-            <div className="icon">
-              <img src="/save.png" alt="" />
-            </div>
-            <div className="icon">
-              <img src="/chat.png" alt="" />
-            </div>
-          </div> */}
           </div>
         </div>
       </div>

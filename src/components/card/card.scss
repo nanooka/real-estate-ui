@@ -13,6 +13,7 @@
       rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
     scale: 1.05;
     margin-left: 20px;
+    background: var(--bg-navbar);
   }
 
   .imageContainer {
@@ -47,20 +48,13 @@
     .title {
       font-size: 20px;
       font-weight: 600;
-      color: #444;
-
-      // transition: all 0.4s ease;
-
-      // &:hover {
-      //   color: black;
-      //   scale: 101%;
-      // }
+      // color: #444;
     }
 
     .address {
       font-size: 14px;
       display: flex;
-      align-items: center;
+      align-items: flex-end;
       gap: 5px;
       color: #888;
     }
@@ -89,28 +83,10 @@
           display: flex;
           align-items: center;
           gap: 5px;
-          background-color: whitesmoke;
+          // background-color: whitesmoke;
+          background: transparent;
           padding: 5px;
           border-radius: 5px;
-        }
-      }
-
-      .icons {
-        display: flex;
-        gap: 20px;
-
-        .icon {
-          border: 1px solid #999;
-          padding: 2px 5px;
-          border-radius: 5px;
-          cursor: pointer;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-
-          &:hover {
-            background-color: lightgray;
-          }
         }
       }
     }

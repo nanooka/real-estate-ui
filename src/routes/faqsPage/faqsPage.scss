@@ -41,7 +41,7 @@
 
       .answer {
         margin-top: 10px;
-        margin-right: 10px;
+        margin-right: 18px;
         font-size: 1rem;
         // color: #555;
         color: var(--text-color);
@@ -55,6 +55,7 @@
       right: 10px;
       top: 14px;
       transition: transform 0.3s ease-in-out;
+      color: var(--text-color);
     }
   }
 }

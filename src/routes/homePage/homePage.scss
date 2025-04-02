@@ -64,12 +64,18 @@
   }
 
   .wrapper {
-    padding-right: 100px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+    // padding-right: 100px;
+    // display: flex;
+    // flex-direction: column;
+    // justify-content: center;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     gap: 50px;
     height: 100%;
+
+    @include md {
+      grid-template-columns: 1fr;
+    }
 
     @include sm {
       padding-right: 0;

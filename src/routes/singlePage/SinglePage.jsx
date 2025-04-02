@@ -8,11 +8,12 @@ import toast, { Toaster } from "react-hot-toast";
 import apiRequest from "../../lib/apiRequest";
 import { formatWithSpaces } from "../../lib/formatPrice";
 import { IoIosSend } from "react-icons/io";
-import { IoCallOutline } from "react-icons/io5";
+import { IoBedOutline, IoCallOutline } from "react-icons/io5";
 import { FaBookmark, FaRegBookmark } from "react-icons/fa";
-import { BiMessageDetail } from "react-icons/bi";
+import { BiArea, BiBath, BiMessageDetail } from "react-icons/bi";
 import { RiCloseLargeLine } from "react-icons/ri";
 import Spinner from "../../components/Spinner/Spinner";
+import { SlLocationPin } from "react-icons/sl";
 
 function SinglePage() {
   const post = useLoaderData();
@@ -81,11 +82,11 @@ function SinglePage() {
               <h1>{post.title}</h1>
               <div className="sizes">
                 <div className="size">
-                  <img src="/size.png" alt="" />
+                  <BiArea color="#888" size={20} />
                   <span>{post.area} m²</span>
                 </div>
                 <div className="size">
-                  <img src="/bed.png" alt="" />
+                  <IoBedOutline color="#888" size={20} />
                   <span>
                     {post.bedroom > 1
                       ? post.bedroom + " beds"
@@ -93,7 +94,7 @@ function SinglePage() {
                   </span>
                 </div>
                 <div className="size">
-                  <img src="/bath.png" alt="" />
+                  <BiBath color="#888" size={20} />
                   <span>
                     {post.bathroom > 1
                       ? post.bathroom + " bathrooms"
@@ -124,7 +125,7 @@ function SinglePage() {
             </button>
           </div>
           <div className="address">
-            <img src="/pin.png" alt="" />
+            <SlLocationPin color="#888" size={18} />
             <span>{post.address}</span>
           </div>
           <div className="mapContainer">
