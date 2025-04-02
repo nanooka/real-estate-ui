@@ -7,6 +7,7 @@ import apiRequest from "../../lib/apiRequest";
 import { IoIosLogOut, IoMdMenu } from "react-icons/io";
 import { CgProfile } from "react-icons/cg";
 import ThemeToggle from "../themeToggle/ThemeToggle";
+import { IoTriangle } from "react-icons/io5";
 
 export default function Navbar() {
   const [hamburgerOpen, setHamburgerOpen] = useState(false);
@@ -85,7 +86,11 @@ export default function Navbar() {
                 {number > 0 && <div className="notification">{number}</div>}
               </div>
               {profileDropdownOpen && (
-                <div className="dropdown-menu">
+                <div
+                  className="dropdown-menu"
+                  onClick={() => setProfileDropdownOpen(!profileDropdownOpen)}
+                >
+                  <IoTriangle className="triangle" />
                   <NavLink to="/profile" className="dropdown-item">
                     <CgProfile /> Profile
                   </NavLink>

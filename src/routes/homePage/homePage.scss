@@ -80,5 +80,16 @@
     @include sm {
       padding-right: 0;
     }
+
+    .skeletonWrapper {
+      width: 100%;
+      display: grid;
+      grid-template-columns: 100% 100%;
+      gap: 30px;
+
+      @include md {
+        grid-template-columns: 1fr;
+      }
+    }
   }
 }

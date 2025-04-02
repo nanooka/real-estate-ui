@@ -15,9 +15,10 @@
   position: absolute;
   cursor: pointer;
   inset: 0;
-  background-color: #e5e5e5;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset,
-    rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+  background: linear-gradient(to right, #a2bfde, #fff);
+  // background-color: #e5e5e5;
+  // box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset,
+  //   rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
   border-radius: 34px;
   transition: background-color 0.3s;
 }
@@ -44,7 +45,8 @@
 }
 
 .toggle-container input:checked + .toggle-slider {
-  background-color: #111;
+  background: #111;
+  // background: linear-gradient(to right, rgb(17, 17, 79), black);
 }
 
 .toggle-container input:checked + .toggle-slider::before {

@@ -128,9 +128,9 @@ nav {
           border-radius: 6px;
           transition: background 0.3s;
 
-          &:hover {
-            background: #f5f5f5;
-          }
+          // &:hover {
+          //   background: #f5f5f5;
+          // }
 
           .notification {
             position: absolute;
@@ -156,13 +156,23 @@ nav {
 
         .dropdown-menu {
           position: absolute;
-          top: 100%;
+          top: 130%;
           right: 0;
-          background: white;
+          // background: white;
+          background: var(--bg-message);
           box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
           border-radius: 6px;
           min-width: 150px;
-          overflow: hidden;
+          // overflow: hidden;
+
+          .triangle {
+            position: absolute;
+            top: -13px;
+            right: 15px;
+            color: var(--bg-message);
+            // color: red;
+            font-size: 15px;
+          }
 
           .dropdown-item {
             display: flex;
@@ -171,10 +181,12 @@ nav {
             padding: 8px;
             cursor: pointer;
             text-decoration: none;
-            color: black;
+            // color: black;
+            color: var(--text-color);
 
             &:hover {
-              background: #f0f0f0;
+              // background: #f0f0f0;
+              background: var(--bg-color);
             }
           }
           .logout {
@@ -229,6 +241,17 @@ nav {
 
         &.active {
           right: 0;
+        }
+
+        a {
+          &:hover {
+            font-weight: bold;
+          }
+        }
+
+        a.active {
+          color: var(--primary-color);
+          font-weight: bold;
         }
 
         @include sm {

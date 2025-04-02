@@ -11,7 +11,8 @@
   .imageContainer {
     flex: 2;
     height: 200px;
-    background-color: #f0f0f0;
+    // background-color: #f0f0f0;
+    background: var(--bg-navbar);
     border-radius: 10px;
   }
 
@@ -31,7 +32,8 @@
     .price,
     .address,
     .bottom {
-      background-color: #f0f0f0;
+      // background-color: #f0f0f0;
+      background: var(--bg-navbar);
       border-radius: 5px;
     }
 
@@ -46,7 +48,8 @@
         font-size: 14px;
 
         .feature {
-          background-color: #f0f0f0;
+          // background-color: #f0f0f0;
+          background: var(--bg-navbar);
           border-radius: 5px;
         }
       }
