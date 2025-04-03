@@ -284,7 +284,7 @@ export default function NewPostPage() {
                       className="deleteImage"
                       onClick={() => handleDeleteImage(index)}
                     >
-                      <RiCloseLargeLine />
+                      <RiCloseLargeLine color="black" />
                     </div>
                   </div>
                 ))}

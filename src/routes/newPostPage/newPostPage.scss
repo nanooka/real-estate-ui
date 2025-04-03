@@ -6,10 +6,11 @@
   align-items: flex-start;
   padding: 20px;
   padding-bottom: 50px;
-  background-color: #f9f9f9;
+  // background-color: #f9f9f9;
 
   .formContainer {
-    background-color: #fff;
+    // background-color: #fff;
+    background-color: var(--bg-navbar);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     padding: 30px;
     border-radius: 8px;
@@ -19,7 +20,7 @@
     h1 {
       font-size: 24px;
       margin-bottom: 20px;
-      color: #333;
+      // color: #333;
       font-weight: 600;
       justify-self: center;
     }
@@ -64,7 +65,7 @@
           label,
           span {
             font-size: 16px;
-            color: #333;
+            // color: #333;
             margin-bottom: 8px;
           }
 
@@ -83,6 +84,8 @@
             border: 1px solid #ddd;
             border-radius: 5px;
             transition: border-color 0.3s;
+            background: transparent;
+            color: var(--text-color);
 
             &:focus {
               border-color: var(--primary-color);
@@ -90,14 +93,28 @@
             }
           }
 
+          .custom-select__control {
+            background-color: transparent !important;
+          }
+
+          .custom-select__menu {
+            background-color: var(--bg-message) !important;
+          }
+
           .custom-select__option--is-focused {
             background-color: rgba(44, 139, 139, 0.4);
             cursor: pointer;
           }
+          .custom-select__single-value {
+            color: var(
+              --text-color
+            ) !important; /* Selected option text color */
+          }
 
           .custom-select__option--is-selected {
             background-color: var(--primary-color);
-            color: white;
+            // color: white;
+            // color: var(--text-color) !important;
           }
 
           .custom-select__control--is-focused {

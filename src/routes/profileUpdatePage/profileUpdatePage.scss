@@ -48,6 +48,8 @@
             border: none;
             outline: none;
             padding: 4px;
+            background: var(--bg-navbar);
+            color: var(--text-color);
 
             &:focus {
               border-bottom: 1px solid black;
@@ -86,6 +88,7 @@
           font-weight: bold;
           cursor: pointer;
           transition: background-color 0.3s;
+          letter-spacing: 1px;
 
           &:hover {
             background-color: rgb(1, 112, 112);

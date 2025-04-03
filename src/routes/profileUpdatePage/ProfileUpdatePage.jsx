@@ -90,7 +90,7 @@ export default function ProfileUpdatePage() {
                   className="avatar"
                 />
                 <div className="deleteImage" onClick={() => setAvatar([])}>
-                  <RiCloseLargeLine />
+                  <RiCloseLargeLine color="black" />
                 </div>
               </div>
               <UploadWidget
