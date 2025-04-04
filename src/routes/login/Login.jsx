@@ -3,6 +3,7 @@ import "./login.scss";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import apiRequest from "../../lib/apiRequest";
 import { AuthContext } from "../../context/AuthContext";
+import GoogleAuthButton from "../../components/googleAuthButton/GoogleAuthButton";
 
 export default function Login() {
   const [error, setError] = useState("");
@@ -60,6 +61,7 @@ export default function Login() {
           <button disabled={isLoading}>Login</button>
           {error && <span>{error}</span>}
           <Link to="/register">{"Don't"} you have an account?</Link>
+          <GoogleAuthButton />
         </form>
       </div>
       <div className="imgContainer">
