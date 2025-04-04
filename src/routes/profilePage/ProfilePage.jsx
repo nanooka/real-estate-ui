@@ -11,7 +11,7 @@ export default function ProfilePage() {
   const data = useLoaderData();
 
   const { currentUser } = useContext(AuthContext);
-  // console.log("ProfilePage", updateUser, currentUser);
+  console.log("ProfilePage", currentUser);
 
   return (
     <div className="profilePage">
@@ -35,7 +35,7 @@ export default function ProfilePage() {
               Email: <b>{currentUser.email}</b>
             </span>
             <span>
-              Number: <b>{currentUser.phone}</b>
+              Phone Number: <b>{currentUser.phone}</b>
             </span>
           </div>
           <div className="title">

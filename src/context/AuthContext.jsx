@@ -26,6 +26,8 @@ export const AuthContextProvider = ({ children }) => {
     localStorage.setItem("user", JSON.stringify(userData));
     setCurrentUser(data);
 
+    console.log(data);
+
     scheduleAutoLogOut(expiry - new Date().getTime());
   };
 
