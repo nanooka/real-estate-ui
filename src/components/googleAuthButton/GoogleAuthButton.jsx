@@ -1,13 +1,13 @@
 import { useContext } from "react";
-import { GoogleLogin } from "@react-oauth/google"; // Google Auth Library
+import { GoogleLogin } from "@react-oauth/google";
 import { AuthContext } from "../../context/AuthContext";
 import apiRequest from "../../lib/apiRequest";
 import { useNavigate } from "react-router-dom";
 import "./googleAuthButton.scss";
 
 const GoogleAuthButton = () => {
-  const { updateUser } = useContext(AuthContext); // Get updateUser function
-  const navigate = useNavigate(); // Get navigation function
+  const { updateUser } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const handleGoogleSuccess = async (response) => {
     const { credential } = response;

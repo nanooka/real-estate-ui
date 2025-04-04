@@ -14,6 +14,9 @@ export default function Chat({ chats }) {
   const { currentUser } = useContext(AuthContext);
   const { socket } = useContext(SocketContext);
 
+  // console.log("chatsstate", chatsState);
+  // console.log(currentUser);
+
   const messageEndRef = useRef();
 
   const decrease = useNotificationStore((state) => state.decrease);
@@ -105,9 +108,18 @@ export default function Chat({ chats }) {
             }}
             onClick={() => handleOpenChat(c.id, c.receiver)}
           >
-            <img src={c.receiver.avatar || "/noavatar.jpg"} alt="" />
-            <span>{c.receiver.username}</span>
-            <p>{c.lastMessage}</p>
+            <div className="userInfo">
+              <img src={c.receiver.avatar || "/noavatar.jpg"} alt="" />
+              <span>{c.receiver.username}</span>
+            </div>
+            <div className="lastMessage">
+              <span>
+                {c.lastMessage[1] == c.receiver.id
+                  ? c.receiver.username + ":"
+                  : "you: "}
+              </span>
+              <p>{c.lastMessage[0]}</p>
+            </div>
           </div>
         ))}
       </div>

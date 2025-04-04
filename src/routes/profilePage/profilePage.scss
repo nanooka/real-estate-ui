@@ -112,6 +112,7 @@
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
     height: 100%;
+    max-width: 440px;
 
     @include md {
       flex: none;

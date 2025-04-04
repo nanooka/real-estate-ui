@@ -2,6 +2,9 @@ import { createContext, useContext, useEffect, useState } from "react";
 import { io } from "socket.io-client";
 import { AuthContext } from "./AuthContext";
 
+const URL = import.meta.env.VITE_SOCKET_URL_LOCAL;
+// const URL = import.meta.env.VITE_SOCKET_URL_DEPLOYMENT;
+
 export const SocketContext = createContext();
 
 export const SocketContextProvider = ({ children }) => {
@@ -12,8 +15,12 @@ export const SocketContextProvider = ({ children }) => {
   //   setSocket(io("http://localhost:4000"));
   // }, []);
 
+  // useEffect(() => {
+  //   setSocket(io("https://real-estate-socket-v13t.onrender.com"));
+  // }, []);
+
   useEffect(() => {
-    setSocket(io("https://real-estate-socket-v13t.onrender.com"));
+    setSocket(io(URL));
   }, []);
 
   useEffect(() => {
