@@ -20,6 +20,9 @@ export default function NewPostPage() {
   const [selectedCountry, setSelectedCountry] = useState("");
   const [selectedCity, setSelectedCity] = useState("");
 
+  // console.log(selectedCountry, selectedCity);
+  // console.log(countries);
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -47,12 +50,16 @@ export default function NewPostPage() {
 
     const loadCities = async () => {
       try {
-        const cityList = await fetchCities(selectedCountry.label);
+        const cityList = await fetchCities(selectedCountry.value);
         const cityOptions = Object.entries(cityList).map((name) => ({
           value: name[1],
           label: name[1],
         }));
         setCities(cityOptions);
+
+        // if (cityOptions.length > 0) {
+        //   setSelectedCity(cityOptions[0]);
+        // }
       } catch (error) {
         console.error(error);
         setCities([]);
@@ -115,7 +122,8 @@ export default function NewPostPage() {
                   classNamePrefix="custom-select"
                   options={countries}
                   value={selectedCountry}
-                  onChange={setSelectedCountry}
+                  // onChange={setSelectedCountry}
+                  onChange={(e) => setSelectedCountry(e)}
                   placeholder=""
                   isClearable
                   required
@@ -130,7 +138,8 @@ export default function NewPostPage() {
                   classNamePrefix="custom-select"
                   options={cities}
                   value={selectedCity}
-                  onChange={setSelectedCity}
+                  // onChange={setSelectedCity}
+                  onChange={(e) => setSelectedCity(e)}
                   placeholder=""
                   isClearable
                   isDisabled={!selectedCountry}
@@ -149,8 +158,8 @@ export default function NewPostPage() {
                 type="text"
                 required
                 autoComplete="address"
-                value={address && address}
-                onChange={(e) => e.target.value}
+                value={address}
+                onChange={(e) => setAddress(e.target.value)}
               />
             </div>
 
@@ -274,6 +283,8 @@ export default function NewPostPage() {
               setCoordinates={setCoordinates}
               city={selectedCity?.label}
               setAddress={setAddress}
+              setCity={setSelectedCity}
+              setCountry={setSelectedCountry}
             />
             <div className="imgContainer">
               <div className="uploadedImages">

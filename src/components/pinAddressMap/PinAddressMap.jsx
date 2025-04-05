@@ -9,7 +9,13 @@ import {
 import "leaflet/dist/leaflet.css";
 import "./pinAddressMap.scss";
 
-export default function PinAddressMap({ setCoordinates, city, setAddress }) {
+export default function PinAddressMap({
+  setCoordinates,
+  city,
+  setAddress,
+  setCity,
+  setCountry,
+}) {
   const [position, setPosition] = useState(null);
   const [center, setCenter] = useState([40.713, -74.0132]);
 
@@ -53,7 +59,8 @@ export default function PinAddressMap({ setCoordinates, city, setAddress }) {
           const data = await response.json();
 
           if (data && data.address) {
-            const { house_number, road, city, state, postcode } = data.address;
+            const { house_number, road, city, state, postcode, country } =
+              data.address;
 
             const addressParts = [
               house_number ? house_number + " " + road : road,
@@ -62,9 +69,18 @@ export default function PinAddressMap({ setCoordinates, city, setAddress }) {
               postcode,
             ].filter(Boolean);
 
+            console.log(data);
             const fullAddress = addressParts.join(", ");
             console.log("Pinned Address:", fullAddress);
             setAddress(fullAddress);
+            setCountry({
+              value: country,
+              label: country,
+            });
+            setCity({
+              value: city,
+              label: city,
+            });
           }
         } catch (err) {
           console.error("Error fetching address:", err);
