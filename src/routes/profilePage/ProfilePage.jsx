@@ -9,9 +9,10 @@ import Spinner from "../../components/Spinner/Spinner";
 
 export default function ProfilePage() {
   const data = useLoaderData();
+  // console.log("data.postResponse.data", data.postResponse._data);
 
   const { currentUser } = useContext(AuthContext);
-  console.log("ProfilePage", currentUser);
+  // console.log("ProfilePage", currentUser);
 
   return (
     <div className="profilePage">
@@ -50,7 +51,13 @@ export default function ProfilePage() {
               resolve={data.postResponse}
               errorElement={<p>Error loading posts</p>}
             >
-              {(postResponse) => <List posts={postResponse.data.userPosts} />}
+              {(postResponse) =>
+                postResponse.data.userPosts.length > 0 ? (
+                  <List posts={postResponse.data.userPosts} />
+                ) : (
+                  <p>You haven’t added any listings. Let’s get started!</p>
+                )
+              }
             </Await>
           </Suspense>
 
@@ -62,7 +69,13 @@ export default function ProfilePage() {
               resolve={data.postResponse}
               errorElement={<p>Error loading posts</p>}
             >
-              {(postResponse) => <List posts={postResponse.data.savedPosts} />}
+              {(postResponse) =>
+                postResponse.data.savedPosts.length > 0 ? (
+                  <List posts={postResponse.data.savedPosts} />
+                ) : (
+                  <p>Saved posts will appear here. Go explore!</p>
+                )
+              }
             </Await>
           </Suspense>
         </div>

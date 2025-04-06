@@ -17,9 +17,7 @@ export default function Card({ item }) {
           <p className="price">$ {formatWithSpaces(item.price)}</p>
           <p className="address">
             <SlLocationPin color="#888" size={18} />
-            <span>
-              {item.address}, {item.city}
-            </span>
+            <span>{item.address}</span>
           </p>
 
           <div className="bottom">

@@ -14,14 +14,13 @@ export default function NewPostPage() {
   const [error, setError] = useState("");
   const [images, setImages] = useState([]);
   const [coordinates, setCoordinates] = useState({ lat: null, lng: null });
-  const [address, setAddress] = useState("");
   const [countries, setCountries] = useState([]);
   const [cities, setCities] = useState([]);
+  const [address, setAddress] = useState("");
   const [selectedCountry, setSelectedCountry] = useState("");
   const [selectedCity, setSelectedCity] = useState("");
-
-  // console.log(selectedCountry, selectedCity);
-  // console.log(countries);
+  const [state, setState] = useState("");
+  const [postalCode, setPostalCode] = useState("");
 
   const navigate = useNavigate();
 
@@ -80,17 +79,19 @@ export default function NewPostPage() {
 
     const formData = new FormData(e.target);
     const inputs = Object.fromEntries(formData);
+    console.log(formData);
 
     try {
       const res = await apiRequest.post("/posts", {
         postData: {
           title: inputs.title,
           desc: inputs.desc,
-          // desc: descValue,
           price: parseInt(inputs.price),
           address: inputs.address,
           country: inputs.country,
           city: inputs.city,
+          state: inputs.state,
+          postalCode: inputs.postalCode,
           bedroom: parseInt(inputs.bedroom),
           bathroom: parseInt(inputs.bathroom),
           status: inputs.status,
@@ -114,55 +115,6 @@ export default function NewPostPage() {
         <h1>Add New Post</h1>
         <div className="wrapper">
           <form onSubmit={handleSubmit}>
-            <div className="item-section">
-              <div className="item">
-                <span>Country</span>
-
-                <Select
-                  classNamePrefix="custom-select"
-                  options={countries}
-                  value={selectedCountry}
-                  // onChange={setSelectedCountry}
-                  onChange={(e) => setSelectedCountry(e)}
-                  placeholder=""
-                  isClearable
-                  required
-                  name="country"
-                  autoComplete="country"
-                />
-              </div>
-
-              <div className="item">
-                <span>City</span>
-                <Select
-                  classNamePrefix="custom-select"
-                  options={cities}
-                  value={selectedCity}
-                  // onChange={setSelectedCity}
-                  onChange={(e) => setSelectedCity(e)}
-                  placeholder=""
-                  isClearable
-                  isDisabled={!selectedCountry}
-                  required
-                  name="city"
-                  autoComplete="city"
-                />
-              </div>
-            </div>
-
-            <div className="item">
-              <label htmlFor="address">Address</label>
-              <input
-                id="address"
-                name="address"
-                type="text"
-                required
-                autoComplete="address"
-                value={address}
-                onChange={(e) => setAddress(e.target.value)}
-              />
-            </div>
-
             <div className="big-item-section">
               <div className="item">
                 <label htmlFor="area">Area (m²)</label>
@@ -194,6 +146,13 @@ export default function NewPostPage() {
                       e.preventDefault();
                     }
                   }}
+                  onInput={(e) => {
+                    // Limit to 5 digits
+                    if (e.target.value.length > 2) {
+                      e.target.value = e.target.value.slice(0, 2);
+                    }
+                  }}
+                  max={99}
                 />
               </div>
               <div className="item">
@@ -210,6 +169,13 @@ export default function NewPostPage() {
                       e.preventDefault();
                     }
                   }}
+                  onInput={(e) => {
+                    // Limit to 5 digits
+                    if (e.target.value.length > 2) {
+                      e.target.value = e.target.value.slice(0, 2);
+                    }
+                  }}
+                  max={20}
                 />
               </div>
               <div className="item">
@@ -258,6 +224,13 @@ export default function NewPostPage() {
                       e.preventDefault();
                     }
                   }}
+                  onInput={(e) => {
+                    // Limit to 5 digits
+                    if (e.target.value.length > 8) {
+                      e.target.value = e.target.value.slice(0, 8);
+                    }
+                  }}
+                  max={19000000}
                 />
                 <span className="price-sign">$</span>
               </div>
@@ -279,13 +252,108 @@ export default function NewPostPage() {
               <textarea name="desc" id="desc"></textarea>
             </div>
 
-            <PinAddressMap
-              setCoordinates={setCoordinates}
-              city={selectedCity?.label}
-              setAddress={setAddress}
-              setCity={setSelectedCity}
-              setCountry={setSelectedCountry}
-            />
+            <div className="item-section">
+              <div className="item">
+                <span>Country</span>
+
+                <Select
+                  classNamePrefix="custom-select"
+                  options={countries}
+                  value={selectedCountry}
+                  // onChange={setSelectedCountry}
+                  onChange={(e) => setSelectedCountry(e)}
+                  placeholder=""
+                  isClearable
+                  required
+                  name="country"
+                  autoComplete="country"
+                />
+              </div>
+
+              <div className="item">
+                <span>City</span>
+                <Select
+                  classNamePrefix="custom-select"
+                  options={cities}
+                  value={selectedCity}
+                  // onChange={setSelectedCity}
+                  onChange={(e) => setSelectedCity(e)}
+                  placeholder=""
+                  isClearable
+                  isDisabled={!selectedCountry}
+                  required
+                  name="city"
+                  autoComplete="city"
+                />
+              </div>
+            </div>
+
+            <div className="item-section">
+              <div className="item">
+                <label htmlFor="state">State</label>
+                <input
+                  id="state"
+                  name="state"
+                  type="text"
+                  // required
+                  autoComplete="state"
+                  value={state}
+                  onChange={(e) => setState(e.target.value)}
+                />
+              </div>
+              <div className="item">
+                <label htmlFor="postalCode">Postal Code</label>
+                <input
+                  id="postalCode"
+                  name="postalCode"
+                  type="number"
+                  required
+                  autoComplete="postalCode"
+                  onKeyDown={(e) => {
+                    if (e.key === "-" || e.key === "e") {
+                      e.preventDefault();
+                    }
+                  }}
+                  onInput={(e) => {
+                    // Limit to 5 digits
+                    if (e.target.value.length > 5) {
+                      e.target.value = e.target.value.slice(0, 5);
+                    }
+                  }}
+                  max={99950}
+                  value={postalCode}
+                  onChange={(e) => setPostalCode(e.target.value)}
+                />
+              </div>
+            </div>
+
+            <div className="item">
+              <label htmlFor="address">Address</label>
+              <input
+                id="address"
+                name="address"
+                type="text"
+                required
+                autoComplete="address"
+                value={address}
+                onChange={(e) => setAddress(e.target.value)}
+              />
+            </div>
+
+            <span>
+              You can pin location on map and fill location inputs automatically
+            </span>
+            <div className="mapContainer">
+              <PinAddressMap
+                setCoordinates={setCoordinates}
+                city={selectedCity?.label}
+                setAddress={setAddress}
+                setCity={setSelectedCity}
+                setCountry={setSelectedCountry}
+                setState={setState}
+                setPostalCode={setPostalCode}
+              />
+            </div>
             <div className="imgContainer">
               <div className="uploadedImages">
                 {images?.map((image, index) => (

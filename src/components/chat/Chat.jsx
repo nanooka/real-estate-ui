@@ -13,6 +13,7 @@ export default function Chat({ chats }) {
   const [chatsState, setChatsState] = useState(chats);
   const { currentUser } = useContext(AuthContext);
   const { socket } = useContext(SocketContext);
+  const [isLoading, setIsLoading] = useState(false);
 
   // console.log("chatsstate", chatsState);
   // console.log(currentUser);
@@ -46,6 +47,7 @@ export default function Chat({ chats }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
 
     const formData = new FormData(e.target);
     const text = formData.get("text");
@@ -68,6 +70,8 @@ export default function Chat({ chats }) {
       );
     } catch (err) {
       console.log(err);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -118,7 +122,7 @@ export default function Chat({ chats }) {
                   ? c.receiver.username + ":"
                   : "you: "}
               </span>
-              <p>{c.lastMessage[0]}</p>
+              <p>{c.lastMessage}</p>
             </div>
           </div>
         ))}
@@ -184,7 +188,7 @@ export default function Chat({ chats }) {
                 }
               }}
             ></textarea>
-            <button type="submit">
+            <button type="submit" disabled={isLoading}>
               <IoIosSend size={24} />
             </button>
           </form>

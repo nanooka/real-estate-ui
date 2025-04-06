@@ -15,6 +15,8 @@ export default function PinAddressMap({
   setAddress,
   setCity,
   setCountry,
+  setState,
+  setPostalCode,
 }) {
   const [position, setPosition] = useState(null);
   const [center, setCenter] = useState([40.713, -74.0132]);
@@ -81,6 +83,8 @@ export default function PinAddressMap({
               value: city,
               label: city,
             });
+            setState(state);
+            setPostalCode(postcode);
           }
         } catch (err) {
           console.error("Error fetching address:", err);
