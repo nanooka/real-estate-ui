@@ -2,8 +2,8 @@ import { createContext, useContext, useEffect, useState } from "react";
 import { io } from "socket.io-client";
 import { AuthContext } from "./AuthContext";
 
-const URL = import.meta.env.VITE_SOCKET_URL_LOCAL;
-// const URL = import.meta.env.VITE_SOCKET_URL_DEPLOYMENT;
+// const URL = import.meta.env.VITE_SOCKET_URL_LOCAL;
+const URL = import.meta.env.VITE_SOCKET_URL_DEPLOYMENT;
 
 export const SocketContext = createContext();
 
