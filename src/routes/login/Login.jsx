@@ -31,7 +31,13 @@ export default function Login() {
         password,
       });
 
-      updateUser(res.data);
+      // const { token } = res.data;
+      const { token, ...userData } = res.data;
+
+      // updateUser({ token });
+      updateUser({ ...userData, token });
+
+      // updateUser(res.data);
 
       // navigate("/");
       const fallback =

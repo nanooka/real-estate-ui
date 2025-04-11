@@ -11,11 +11,11 @@ import { RiCloseLargeLine } from "react-icons/ri";
 export default function Chat({ chats }) {
   const [chat, setChat] = useState(null);
   const [chatsState, setChatsState] = useState(chats);
-  const { currentUser } = useContext(AuthContext);
+  const { currentUser, token } = useContext(AuthContext);
   const { socket } = useContext(SocketContext);
   const [isLoading, setIsLoading] = useState(false);
 
-  // console.log("chatsstate", chatsState);
+  console.log("chatsstate", chatsState);
   // console.log(currentUser);
 
   const messageEndRef = useRef();
@@ -28,7 +28,11 @@ export default function Chat({ chats }) {
 
   const handleOpenChat = async (id, receiver) => {
     try {
-      const res = await apiRequest(`/chats/${id}`);
+      const res = await apiRequest(`/chats/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       if (!res.data.seenBy.includes(currentUser.id)) {
         decrease();
         res.data.seenBy.push(currentUser.id);
@@ -54,7 +58,15 @@ export default function Chat({ chats }) {
 
     if (!text) return;
     try {
-      const res = await apiRequest.post(`/messages/${chat.id}`, { text });
+      const res = await apiRequest.post(
+        `/messages/${chat.id}`,
+        { text },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
       setChat((prev) => ({ ...prev, messages: [...prev.messages, res.data] }));
       e.target.reset();
 
@@ -63,10 +75,13 @@ export default function Chat({ chats }) {
         data: res.data,
       });
 
+      // setChatsState((prevChats) =>
+      //   prevChats.map((c) =>
+      //     c.id === chat.id ? { ...c, lastMessage: res.data.text } : c
+      //   )
+      // );
       setChatsState((prevChats) =>
-        prevChats.map((c) =>
-          c.id === chat.id ? { ...c, lastMessage: res.data.text } : c
-        )
+        prevChats.map((c) => (c.id === chat.id ? c : c))
       );
     } catch (err) {
       console.log(err);
@@ -116,14 +131,14 @@ export default function Chat({ chats }) {
               <img src={c.receiver.avatar || "/noavatar.jpg"} alt="" />
               <span>{c.receiver.username}</span>
             </div>
-            <div className="lastMessage">
+            {/* <div className="lastMessage">
               <span>
                 {c.lastMessage[1] == c.receiver.id
                   ? c.receiver.username + ":"
                   : "you: "}
               </span>
-              <p>{c.lastMessage}</p>
-            </div>
+              <p>{c.lastMessage[0]}</p>
+            </div> */}
           </div>
         ))}
       </div>

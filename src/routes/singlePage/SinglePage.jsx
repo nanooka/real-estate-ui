@@ -17,11 +17,13 @@ import { SlLocationPin } from "react-icons/sl";
 
 function SinglePage() {
   const post = useLoaderData();
-  const { currentUser } = useContext(AuthContext);
+  const { currentUser, token } = useContext(AuthContext);
   const [saved, setSaved] = useState(post?.isSaved || false);
   const [showChat, setShowChat] = useState(false);
   const [message, setMessage] = useState("");
   const navigate = useNavigate();
+
+  console.log(post);
 
   const handleSave = async () => {
     if (!currentUser) {
@@ -30,9 +32,17 @@ function SinglePage() {
     }
 
     setSaved((prev) => !prev);
-    console.log(typeof post.id, typeof currentUser?.id);
     try {
-      await apiRequest.post("/users/save", { postId: post.id });
+      // await apiRequest.post("/users/save", { postId: post.id });
+      await apiRequest.post(
+        "/users/save",
+        { postId: post.id },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
     } catch (err) {
       console.log(err);
       setSaved((prev) => !prev);
@@ -55,15 +65,29 @@ function SinglePage() {
     try {
       setMessage("");
       setShowChat(false);
-      const chatResponse = await apiRequest.post("/chats", {
-        receiverId: post.userId,
-      });
+      const chatResponse = await apiRequest.post(
+        "/chats",
+        {
+          receiverId: post.userId,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
       const chatId = chatResponse.data.id;
 
-      await apiRequest.post(`/messages/${chatId}`, {
-        text: message,
-      });
+      await apiRequest.post(
+        `/messages/${chatId}`,
+        { text: message },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
     } catch (err) {
       console.error(err);
       toast.error("Failed to send message.");

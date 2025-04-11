@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import "./newPostPage.scss";
 import "react-quill/dist/quill.snow.css";
@@ -9,8 +9,10 @@ import PinAddressMap from "../../components/pinAddressMap/PinAddressMap";
 import { fetchCities, fetchCountries } from "../../lib/location";
 import Select from "react-select";
 import { RiCloseLargeLine } from "react-icons/ri";
+import { AuthContext } from "../../context/AuthContext";
 
 export default function NewPostPage() {
+  const { token } = useContext(AuthContext);
   const [error, setError] = useState("");
   const [images, setImages] = useState([]);
   const [coordinates, setCoordinates] = useState({ lat: null, lng: null });
@@ -82,26 +84,34 @@ export default function NewPostPage() {
     console.log(formData);
 
     try {
-      const res = await apiRequest.post("/posts", {
-        postData: {
-          title: inputs.title,
-          desc: inputs.desc,
-          price: parseInt(inputs.price),
-          address: inputs.address,
-          country: inputs.country,
-          city: inputs.city,
-          state: inputs.state,
-          postalCode: inputs.postalCode,
-          bedroom: parseInt(inputs.bedroom),
-          bathroom: parseInt(inputs.bathroom),
-          status: inputs.status,
-          propertyType: inputs.propertyType,
-          latitude: coordinates.lat.toString(),
-          longitude: coordinates.lng.toString(),
-          images: images,
-          area: parseInt(inputs.area),
+      const res = await apiRequest.post(
+        "/posts",
+        {
+          postData: {
+            title: inputs.title,
+            desc: inputs.desc,
+            price: parseInt(inputs.price),
+            address: inputs.address,
+            country: inputs.country,
+            city: inputs.city,
+            state: inputs.state,
+            postalCode: inputs.postalCode,
+            bedroom: parseInt(inputs.bedroom),
+            bathroom: parseInt(inputs.bathroom),
+            status: inputs.status,
+            propertyType: inputs.propertyType,
+            latitude: coordinates.lat.toString(),
+            longitude: coordinates.lng.toString(),
+            images: images,
+            area: parseInt(inputs.area),
+          },
         },
-      });
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
       navigate(`/${res.data.id}`);
     } catch (err) {
       console.log(err);
