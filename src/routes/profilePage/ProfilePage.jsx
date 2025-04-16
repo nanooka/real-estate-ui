@@ -5,7 +5,7 @@ import { Await, Link, useLoaderData } from "react-router-dom";
 import { Suspense, useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import CardSkeleton from "../../components/cardSkeleton/CardSkeleton";
-import Spinner from "../../components/Spinner/Spinner";
+import Spinner from "../../components/spinner/Spinner";
 
 export default function ProfilePage() {
   const data = useLoaderData();

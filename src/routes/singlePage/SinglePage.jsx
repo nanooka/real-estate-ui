@@ -12,7 +12,7 @@ import { IoBedOutline, IoCallOutline } from "react-icons/io5";
 import { FaBookmark, FaRegBookmark } from "react-icons/fa";
 import { BiArea, BiBath, BiMessageDetail } from "react-icons/bi";
 import { RiCloseLargeLine } from "react-icons/ri";
-import Spinner from "../../components/Spinner/Spinner";
+import Spinner from "../../components/spinner/Spinner";
 import { SlLocationPin } from "react-icons/sl";
 
 function SinglePage() {

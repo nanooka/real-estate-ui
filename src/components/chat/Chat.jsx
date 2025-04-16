@@ -80,8 +80,25 @@ export default function Chat({ chats }) {
       //     c.id === chat.id ? { ...c, lastMessage: res.data.text } : c
       //   )
       // );
+      // setChatsState((prevChats) =>
+      //   prevChats.map((c) => (c.id === chat.id ? c : c))
+      // );
+      // setChatsState((prevChats) =>
+      //   prevChats.map((c) =>
+      //     c.id === chat.id ? { ...c, lastMessage: [text, currentUser.id] } : c
+      //   )
+      // );
+
       setChatsState((prevChats) =>
-        prevChats.map((c) => (c.id === chat.id ? c : c))
+        prevChats.map((c) =>
+          c.id === chat.id
+            ? {
+                ...c,
+                lastMessage: res.data.text, // Store text of last message
+                lastMessageSender: currentUser.id, // Store sender ID
+              }
+            : c
+        )
       );
     } catch (err) {
       console.log(err);
@@ -139,6 +156,16 @@ export default function Chat({ chats }) {
               </span>
               <p>{c.lastMessage[0]}</p>
             </div> */}
+            {c.lastMessage && (
+              <div className="lastMessage">
+                <span>
+                  {c.lastMessageSender === c.receiver.id
+                    ? `${c.receiver.username}: `
+                    : "you: "}
+                </span>
+                <p>{c.lastMessage}</p>
+              </div>
+            )}
           </div>
         ))}
       </div>

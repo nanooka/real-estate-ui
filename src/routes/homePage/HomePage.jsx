@@ -5,11 +5,21 @@ import Card from "../../components/card/Card";
 import Filter from "../../components/filter/Filter";
 import CardSkeleton from "../../components/cardSkeleton/CardSkeleton";
 import Spinner from "../../components/spinner/Spinner";
+import { useState, useEffect } from "react";
 
 export default function HomePage() {
   const data = useLoaderData();
+  const [showLoadingMessage, setShowLoadingMessage] = useState(true);
 
   const skeletonCount = 4;
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowLoadingMessage(false);
+    }, 7000); // Show message after 3 seconds
+
+    return () => clearTimeout(timer); // Cleanup if component unmounts
+  }, []);
 
   return (
     <div className="homePage">
@@ -22,6 +32,15 @@ export default function HomePage() {
           </Suspense>
         </div>
       </div>
+
+      {showLoadingMessage && (
+        <div className="loadingMessage">
+          <p>
+            ⏳ First load may take a few extra seconds — thanks for waiting!
+          </p>
+        </div>
+      )}
+
       <div className="wrapper">
         <Suspense
           fallback={

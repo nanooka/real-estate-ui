@@ -9,6 +9,7 @@
   @include md {
     flex-direction: column;
     overflow-y: visible;
+    align-items: center;
   }
 
   .details {
@@ -118,6 +119,7 @@
       flex: none;
       height: max-content;
       padding-bottom: 50px;
+      width: 100%;
     }
 
     .wrapper {

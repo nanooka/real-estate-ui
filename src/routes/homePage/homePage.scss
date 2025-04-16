@@ -3,6 +3,14 @@
 .homePage {
   padding-bottom: 50px;
 
+  .loadingMessage {
+    padding: 10px;
+    text-align: center;
+    font-size: 18px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+  }
+
   .coverContainer {
     height: 400px;
     overflow: hidden;

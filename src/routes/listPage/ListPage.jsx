@@ -5,7 +5,7 @@ import Map from "../../components/map/Map";
 import { Await, useLoaderData } from "react-router-dom";
 import { Suspense } from "react";
 import CardSkeleton from "../../components/cardSkeleton/CardSkeleton";
-import Spinner from "../../components/Spinner/Spinner";
+import Spinner from "../../components/spinner/Spinner";
 
 export default function ListPage() {
   const data = useLoaderData();
