@@ -36,7 +36,8 @@ export default function ProfilePage() {
               Email: <b>{currentUser.email}</b>
             </span>
             <span>
-              Phone Number: <b>{currentUser.phone}</b>
+              <span>Phone Number:</span>
+              <b>{currentUser.phone}</b>
             </span>
           </div>
           <div className="title">

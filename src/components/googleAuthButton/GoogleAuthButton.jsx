@@ -15,7 +15,9 @@ const GoogleAuthButton = () => {
     try {
       const res = await apiRequest.post("/auth/google", { credential });
 
-      updateUser(res.data.user);
+      const userWithToken = { ...res.data.user, token: res.data.token };
+
+      updateUser(userWithToken);
       const fallback =
         location.state?.from && location.state.from.startsWith("/")
           ? location.state.from

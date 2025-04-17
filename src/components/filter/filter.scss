@@ -51,6 +51,11 @@
     width: 200px;
     color: black;
 
+    @include tiny {
+      // width: 300px;
+      // max-width: 100%;
+    }
+
     &:first-of-type .dropdownHeader {
       border-top-left-radius: 50px;
       border-bottom-left-radius: 50px;
