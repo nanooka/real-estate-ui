@@ -65,7 +65,6 @@
 
           label,
           span {
-            font-size: 16px;
             // color: #333;
             margin-bottom: 8px;
           }
@@ -81,7 +80,6 @@
           .custom-select,
           textarea {
             padding: 10px;
-            font-size: 16px;
             border: 1px solid #ddd;
             border-radius: 5px;
             transition: border-color 0.3s;
@@ -138,6 +136,10 @@
           }
         }
 
+        .mapDescription {
+          margin-bottom: 20px;
+        }
+
         .mapContainer {
           height: 400px;
         }
@@ -146,7 +148,6 @@
           padding: 12px 20px;
           background-color: var(--primary-color);
           color: #fff;
-          font-size: 16px;
           border: none;
           border-radius: 5px;
           cursor: pointer;

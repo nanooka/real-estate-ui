@@ -9,7 +9,7 @@ import { BiSolidEditAlt } from "react-icons/bi";
 import { IoEyeOutline, IoEyeOffOutline } from "react-icons/io5";
 
 export default function ProfileUpdatePage() {
-  const { currentUser, updateUser } = useContext(AuthContext);
+  const { currentUser, updateUser, token } = useContext(AuthContext);
   const [error, setError] = useState("");
   const [avatar, setAvatar] = useState([]);
   const [isPasswordInputsShown, setIsPasswordInputsShown] = useState(false);
@@ -50,16 +50,24 @@ export default function ProfileUpdatePage() {
     }
 
     try {
-      const res = await apiRequest.put(`/users/${currentUser.id}`, {
-        username,
-        email,
-        oldPassword,
-        newPassword,
-        phone,
-        avatar: avatar[0] || null,
-      });
+      const res = await apiRequest.put(
+        `/users/${currentUser.id}`,
+        {
+          username,
+          email,
+          oldPassword,
+          newPassword,
+          phone,
+          avatar: avatar[0] || null,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
-      console.log("avatar in try", avatar);
+      // console.log("avatar in try", avatar);
 
       updateUser(res.data);
       navigate("/profile");

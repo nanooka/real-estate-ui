@@ -94,7 +94,6 @@
       border: none;
       border: 1px solid #ccc;
       padding: 10px;
-      font-size: 16px;
       box-shadow: inset 0px -2px 6px rgba(0, 0, 0, 0.1);
 
       &:focus {
@@ -160,7 +159,6 @@
           border: none;
           background-color: transparent;
           cursor: pointer;
-          font-size: 16px;
           color: #757575;
 
           &:hover {
@@ -185,7 +183,6 @@
     border: 1px solid #ccc;
     padding: 10px;
     cursor: pointer;
-    font-size: 16px;
     height: 41px;
     display: flex;
     justify-content: space-between;

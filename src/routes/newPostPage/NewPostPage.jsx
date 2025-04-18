@@ -350,7 +350,7 @@ export default function NewPostPage() {
               />
             </div>
 
-            <span>
+            <span className="mapDescription">
               You can pin location on map and fill location inputs automatically
             </span>
             <div className="mapContainer">

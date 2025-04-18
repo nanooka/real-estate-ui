@@ -35,3 +35,10 @@ body {
   background-color: var(--bg-color);
   color: var(--text-color);
 }
+input,
+textarea,
+span,
+button,
+p {
+  font-size: 16px;
+}

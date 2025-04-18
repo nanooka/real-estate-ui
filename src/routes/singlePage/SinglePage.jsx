@@ -23,7 +23,7 @@ function SinglePage() {
   const [message, setMessage] = useState("");
   const navigate = useNavigate();
 
-  console.log(post);
+  // console.log(post);
 
   const handleSave = async () => {
     if (!currentUser) {
@@ -76,6 +76,7 @@ function SinglePage() {
           },
         }
       );
+      console.log("chatResponse", chatResponse.data);
 
       const chatId = chatResponse.data.id;
 
@@ -94,7 +95,7 @@ function SinglePage() {
     }
   };
 
-  console.log(post.price, post.area);
+  // console.log(post.price, post.area);
 
   return (
     <div className="singlePage">

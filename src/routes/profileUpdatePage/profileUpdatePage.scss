@@ -47,12 +47,11 @@
           input {
             border: none;
             outline: none;
-            padding: 4px;
+            padding: 6px;
             background: var(--bg-navbar);
             color: var(--text-color);
-
             &:focus {
-              border-bottom: 1px solid black;
+              border-bottom: 1px solid var(--text-color);
             }
           }
 
@@ -81,7 +80,7 @@
 
         .updateButton {
           padding: 20px;
-          border-radius: 5px;
+          border-radius: 50px;
           border: none;
           background-color: var(--primary-color);
           color: white;

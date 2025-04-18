@@ -16,7 +16,7 @@ export default function HomePage() {
   useEffect(() => {
     const timer = setTimeout(() => {
       setShowLoadingMessage(false);
-    }, 7000); // Show message after 3 seconds
+    }, 5000); // Show message after 3 seconds
 
     return () => clearTimeout(timer); // Cleanup if component unmounts
   }, []);
@@ -33,7 +33,7 @@ export default function HomePage() {
         </div>
       </div>
 
-      {showLoadingMessage && (
+      {!data && (
         <div className="loadingMessage">
           <p>
             ⏳ First load may take a few extra seconds — thanks for waiting!

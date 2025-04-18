@@ -11,7 +11,7 @@ export default function Slider({ images }) {
   const [imageIndex, setImageIndex] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  console.log(imageIndex);
+  // console.log(imageIndex);
 
   const changeSlide = (direction) => {
     if (direction === "left") {
