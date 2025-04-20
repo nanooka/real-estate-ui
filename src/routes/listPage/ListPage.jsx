@@ -1,5 +1,4 @@
 import "./listPage.scss";
-// import Filter from "../../components/filter/Filter";
 import Card from "../../components/card/Card";
 import Map from "../../components/map/Map";
 import { Await, useLoaderData } from "react-router-dom";
@@ -9,15 +8,12 @@ import Spinner from "../../components/spinner/Spinner";
 
 export default function ListPage() {
   const data = useLoaderData();
-  // const [searchParams] = useSearchParams();
-
   const skeletonCount = 4;
 
   return (
     <div className="listPage">
       <div className="listContainer">
         <div className="wrapper">
-          {/* <Filter /> */}
           <Suspense
             fallback={
               <div className="skeletonWrapper">
@@ -32,9 +28,16 @@ export default function ListPage() {
               errorElement={<p>Error loading posts</p>}
             >
               {(postResponse) =>
-                postResponse.data.map((post) => (
-                  <Card key={post.id} item={post} />
-                ))
+                postResponse.data.length === 0 ? (
+                  <p className="noResults">
+                    We couldn&apos;t find any properties based on your current
+                    criteria.
+                  </p>
+                ) : (
+                  postResponse.data.map((post) => (
+                    <Card key={post.id} item={post} />
+                  ))
+                )
               }
             </Await>
           </Suspense>

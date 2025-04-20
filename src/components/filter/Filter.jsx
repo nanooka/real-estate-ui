@@ -100,7 +100,7 @@ export default function Filter() {
       Object.entries(query).filter(([_, value]) => value)
     );
     const queryString = new URLSearchParams(filteredQuery).toString();
-    navigate(`/listing?${queryString}`);
+    navigate(`/?${queryString}`);
   };
 
   const handleInputChange = (type, value) => {
@@ -367,7 +367,7 @@ export default function Filter() {
             : query.minPrice && !query.maxPrice
             ? query.minPrice + "+"
             : !query.minPrice && query.maxPrice
-            ? "-" + query.maxPrice
+            ? "<" + query.maxPrice
             : "Price"}
           <span>$</span>
         </div>
@@ -419,7 +419,7 @@ export default function Filter() {
             : query.minArea && !query.maxArea
             ? query.minArea + "+"
             : !query.minArea && query.maxArea
-            ? "-" + query.maxArea
+            ? "<" + query.maxArea
             : "Area (m²)"}
           <div>
             {query.bedroom && (
