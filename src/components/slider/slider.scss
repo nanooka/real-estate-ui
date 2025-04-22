@@ -27,6 +27,10 @@
       justify-content: center;
       width: 64px;
 
+      @include sm {
+        display: none;
+      }
+
       .arrowIcon {
         color: white;
         font-size: 80px;
