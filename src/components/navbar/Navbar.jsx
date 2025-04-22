@@ -14,7 +14,7 @@ export default function Navbar() {
   const [profileDropdownOpen, setProfileDropdownOpen] = useState(false);
   const navigate = useNavigate();
 
-  const { currentUser, updateUser } = useContext(AuthContext);
+  const { currentUser, logout } = useContext(AuthContext);
 
   const fetch = useNotificationStore((state) => state.fetch);
   const number = useNotificationStore((state) => state.number);
@@ -28,7 +28,8 @@ export default function Navbar() {
   const handleLogout = async () => {
     try {
       await apiRequest.post("/auth/logout");
-      updateUser(null);
+      // updateUser(null);
+      logout();
       navigate("/");
     } catch (err) {
       console.log(err);

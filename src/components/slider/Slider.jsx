@@ -10,10 +10,13 @@ import Skeleton from "react-loading-skeleton";
 export default function Slider({ images }) {
   const [imageIndex, setImageIndex] = useState(null);
   const [loading, setLoading] = useState(true);
-
-  // console.log(imageIndex);
+  const [touchStartX, setTouchStartX] = useState(null);
+  const [touchEndX, setTouchEndX] = useState(null);
+  const [direction, setDirection] = useState(null);
 
   const changeSlide = (direction) => {
+    setDirection(direction);
+
     if (direction === "left") {
       if (imageIndex === 0) {
         setImageIndex(images.length - 1);
@@ -54,14 +57,52 @@ export default function Slider({ images }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [imageIndex]);
 
+  useEffect(() => {
+    // Reset direction after animation duration (400ms)
+    const timer = setTimeout(() => {
+      setDirection(null);
+    }, 400);
+
+    return () => clearTimeout(timer); // Clean up timeout
+  }, [direction]);
+
+  const handleTouchStart = (e) => {
+    setTouchStartX(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchMove = (e) => {
+    setTouchEndX(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchEnd = () => {
+    if (!touchStartX || !touchEndX) return;
+
+    const distance = touchStartX - touchEndX;
+    const threshold = 50;
+
+    if (distance > threshold) {
+      changeSlide("right");
+    } else if (distance < -threshold) {
+      changeSlide("left");
+    }
+
+    setTouchStartX(null);
+    setTouchEndX(null);
+  };
+
   return (
     <div className="slider">
       {imageIndex !== null && (
-        <div className="fullSlider">
+        <div
+          className="fullSlider"
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+          onTouchEnd={handleTouchEnd}
+        >
           <div className="arrow" onClick={() => changeSlide("left")}>
             <MdOutlineKeyboardArrowLeft className="arrowIcon" />
           </div>
-          <div className="imgContainer">
+          <div className={`imgContainer ${direction}`}>
             <img src={images[imageIndex]} alt="" />
           </div>
           <div className="arrow" onClick={() => changeSlide("right")}>

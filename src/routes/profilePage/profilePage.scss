@@ -10,6 +10,7 @@
     flex-direction: column;
     overflow-y: visible;
     align-items: center;
+    // justify-content: center;
   }
 
   .details {
@@ -48,6 +49,10 @@
       flex-direction: column;
       gap: 50px;
 
+      @include sm {
+        padding-right: 10px;
+      }
+
       .title {
         display: flex;
         align-items: center;
@@ -66,6 +71,7 @@
           border-radius: 20px;
           cursor: pointer;
           border: none;
+          width: max-content;
 
           &:hover {
             background-color: rgb(1, 112, 112);
@@ -78,6 +84,11 @@
         flex-direction: column;
         gap: 20px;
         width: max-content;
+        // width: 100%;
+
+        @include md {
+          width: 100%;
+        }
 
         span {
           display: flex;

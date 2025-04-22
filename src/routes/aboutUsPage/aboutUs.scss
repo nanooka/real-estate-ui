@@ -61,7 +61,7 @@
         margin-bottom: 10px;
         &::before {
           content: "✔";
-          color: var(--primary-color);
+          color: var(--primary-color) !important;
           margin-right: 8px;
         }
 
