@@ -1,5 +1,5 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import ListPage from "./routes/listPage/ListPage";
+// import ListPage from "./routes/listPage/ListPage";
 import HomePage from "./routes/homePage/HomePage";
 import { Layout, RequireAuth } from "./routes/layout/Layout";
 import SinglePage from "./routes/singlePage/SinglePage";
@@ -11,12 +11,13 @@ import NewPostPage from "./routes/newPostPage/NewPostPage";
 import FaqsPage from "./routes/faqsPage/FaqsPage";
 import {
   homePageLoader,
-  listPageLoader,
+  // listPageLoader,
   profilePageLoader,
   singlePageLoader,
 } from "./lib/loaders";
 import ContactPage from "./routes/contactPage/ContactPage";
 import AboutUs from "./routes/aboutUsPage/AboutUs";
+import User from "./routes/user/User";
 
 function App() {
   const router = createBrowserRouter([
@@ -29,10 +30,14 @@ function App() {
           element: <HomePage />,
           loader: homePageLoader,
         },
+        // {
+        //   path: "/listing",
+        //   element: <ListPage />,
+        //   loader: listPageLoader,
+        // },
         {
-          path: "/listing",
-          element: <ListPage />,
-          loader: listPageLoader,
+          path: "/user/:userId",
+          element: <User />,
         },
         {
           path: "/:id",

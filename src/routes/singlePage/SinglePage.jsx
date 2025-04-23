@@ -23,7 +23,13 @@ function SinglePage() {
   const [message, setMessage] = useState("");
   const navigate = useNavigate();
 
-  // console.log(post);
+  console.log(post);
+
+  const handleGoToUser = () => {
+    navigate(`/user/${post.userId}`, {
+      state: { user: post.user },
+    });
+  };
 
   const handleSave = async () => {
     if (!currentUser) {
@@ -33,7 +39,6 @@ function SinglePage() {
 
     setSaved((prev) => !prev);
     try {
-      // await apiRequest.post("/users/save", { postId: post.id });
       await apiRequest.post(
         "/users/save",
         { postId: post.id },
@@ -94,8 +99,6 @@ function SinglePage() {
       toast.error("Failed to send message.");
     }
   };
-
-  // console.log(post.price, post.area);
 
   return (
     <div className="singlePage">
@@ -159,7 +162,7 @@ function SinglePage() {
             </Suspense>
           </div>
 
-          <div className="user">
+          <div className="user" onClick={handleGoToUser}>
             <img src={post.user.avatar || "/noavatar.jpg"} alt="" />
             <div>
               <span>{post.user.username}</span>

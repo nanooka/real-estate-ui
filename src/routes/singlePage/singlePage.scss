@@ -165,6 +165,8 @@
         display: flex;
         align-items: center;
         gap: 10px;
+        cursor: pointer;
+        max-width: max-content;
 
         div {
           display: flex;

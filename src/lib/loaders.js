@@ -15,16 +15,16 @@ export const singlePageLoader = async ({ params }) => {
   return res.data;
 };
 
-export const listPageLoader = async ({ request }) => {
-  const query = request.url.split("?")[1];
+// export const listPageLoader = async ({ request }) => {
+//   const query = request.url.split("?")[1];
 
-  const postPromise = apiRequest(`/posts?${query}`, {
-    headers: getAuthHeaders(),
-  });
-  return defer({
-    postResponse: postPromise,
-  });
-};
+//   const postPromise = apiRequest(`/posts?${query}`, {
+//     headers: getAuthHeaders(),
+//   });
+//   return defer({
+//     postResponse: postPromise,
+//   });
+// };
 
 // export const homePageLoader = async () => {
 //   const postPromise = apiRequest(`/posts`, {

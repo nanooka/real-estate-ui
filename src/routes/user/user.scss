@@ -1,0 +1,88 @@
+@use "../../responsive.scss" as *;
+
+.userPage {
+  .userPageHeader {
+    display: flex;
+    align-items: center;
+    gap: 50px;
+
+    @include md {
+      flex-direction: column;
+      align-items: start;
+      gap: 20px;
+    }
+
+    .userInfo {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+
+      div {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+
+        p {
+          font-size: 18px;
+        }
+
+        span {
+          &:last-child {
+            color: #888;
+            font-size: 16px;
+          }
+        }
+      }
+
+      img {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        object-fit: cover;
+      }
+    }
+
+    .phoneNumber {
+      color: var(--primary-color);
+      width: max-content;
+
+      a {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+    }
+
+    .messageDiv {
+      button {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        background: transparent;
+        border: none;
+        color: var(--primary-color);
+        cursor: pointer;
+      }
+    }
+  }
+
+  h2 {
+    font-size: 24px;
+    margin-top: 50px;
+    .username {
+      font-size: 24px;
+      color: var(--primary-color);
+    }
+  }
+
+  .user-posts {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+    margin-top: 40px;
+
+    @include md {
+      grid-template-columns: 1fr;
+    }
+  }
+}
