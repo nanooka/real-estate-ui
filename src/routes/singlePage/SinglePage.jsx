@@ -23,12 +23,14 @@ function SinglePage() {
   const [message, setMessage] = useState("");
   const navigate = useNavigate();
 
-  console.log(post);
-
   const handleGoToUser = () => {
-    navigate(`/user/${post.userId}`, {
-      state: { user: post.user },
-    });
+    if (currentUser.id === post.userId) {
+      navigate("/profile");
+    } else {
+      navigate(`/user/${post.userId}`, {
+        state: { user: post.user },
+      });
+    }
   };
 
   const handleSave = async () => {
