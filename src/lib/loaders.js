@@ -16,9 +16,16 @@ export const singlePageLoader = async ({ params }) => {
 
 export const homePageLoader = async ({ request }) => {
   const query = request.url.split("?")[1];
-  const postPromise = apiRequest(`/posts${query ? `?${query}` : ""}`, {
-    headers: getAuthHeaders(),
-  });
+  // const postPromise = apiRequest(`/posts${query ? `?${query}` : ""}`, {
+  //   headers: getAuthHeaders(),
+  // });
+
+  const postPromise = apiRequest(
+    `/posts${query ? `?${query}&page=1&limit=10` : "?page=1&limit=10"}`,
+    {
+      headers: getAuthHeaders(),
+    }
+  );
 
   return defer({
     postResponse: postPromise,

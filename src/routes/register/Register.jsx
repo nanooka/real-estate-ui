@@ -21,6 +21,13 @@ export default function Register() {
     const email = formData.get("email");
     const phone = formData.get("phone");
     const password = formData.get("password");
+    const confirmPassword = formData.get("confirmPassword");
+
+    if (password !== confirmPassword) {
+      setError("Passwords do not match");
+      setIsLoading(false);
+      return;
+    }
 
     try {
       const res = await apiRequest.post("/auth/register", {
@@ -58,6 +65,12 @@ export default function Register() {
             name="password"
             type="password"
             placeholder="Password"
+            required
+          />
+          <input
+            name="confirmPassword"
+            type="password"
+            placeholder="Confirm Password"
             required
           />
           <button disabled={isLoading}>Register</button>
