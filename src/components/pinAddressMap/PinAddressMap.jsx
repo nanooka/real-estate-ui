@@ -10,6 +10,7 @@ import "leaflet/dist/leaflet.css";
 import "./pinAddressMap.scss";
 
 export default function PinAddressMap({
+  coordinates,
   setCoordinates,
   city,
   setAddress,
@@ -22,7 +23,14 @@ export default function PinAddressMap({
   const [center, setCenter] = useState([40.713, -74.0132]);
 
   useEffect(() => {
-    if (!city) return;
+    if (coordinates?.lat != null && coordinates?.lng != null) {
+      setPosition({ lat: coordinates.lat, lng: coordinates.lng });
+      setCenter([coordinates.lat, coordinates.lng]);
+    }
+  }, [coordinates]);
+
+  useEffect(() => {
+    if (!city || (coordinates?.lat && coordinates?.lng)) return;
 
     const fetchCityCoordinates = async () => {
       try {
@@ -45,7 +53,7 @@ export default function PinAddressMap({
     };
 
     fetchCityCoordinates();
-  }, [city]);
+  }, [city, coordinates?.lat, coordinates?.lng]);
 
   const LocationSelector = () => {
     useMapEvents({

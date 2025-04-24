@@ -2,4 +2,24 @@
   display: flex;
   flex-direction: column;
   gap: 50px;
+
+  .cardWrapper {
+    position: relative;
+
+    .editButton {
+      background: transparent;
+      color: var(--primary-color);
+      border: none;
+      cursor: pointer;
+      position: absolute;
+      right: 0;
+      top: 0;
+      font-size: 24px;
+      transition: font-size 0.3s ease-in-out;
+
+      &:hover {
+        font-size: 30px;
+      }
+    }
+  }
 }

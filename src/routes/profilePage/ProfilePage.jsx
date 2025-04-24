@@ -54,7 +54,7 @@ export default function ProfilePage() {
             >
               {(postResponse) =>
                 postResponse.data.userPosts.length > 0 ? (
-                  <List posts={postResponse.data.userPosts} />
+                  <List posts={postResponse.data.userPosts} editable={true} />
                 ) : (
                   <p>You haven’t added any listings. Let’s get started!</p>
                 )

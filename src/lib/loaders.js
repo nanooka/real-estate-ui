@@ -4,7 +4,6 @@ import apiRequest from "./apiRequest";
 const getAuthHeaders = () => {
   const user = JSON.parse(localStorage.getItem("user"));
   const token = user?.user?.token;
-  // console.log(token);
   return token ? { Authorization: `Bearer ${token}` } : {};
 };
 
@@ -15,29 +14,8 @@ export const singlePageLoader = async ({ params }) => {
   return res.data;
 };
 
-// export const listPageLoader = async ({ request }) => {
-//   const query = request.url.split("?")[1];
-
-//   const postPromise = apiRequest(`/posts?${query}`, {
-//     headers: getAuthHeaders(),
-//   });
-//   return defer({
-//     postResponse: postPromise,
-//   });
-// };
-
-// export const homePageLoader = async () => {
-//   const postPromise = apiRequest(`/posts`, {
-//     headers: getAuthHeaders(),
-//   });
-//   return defer({
-//     postResponse: postPromise,
-//   });
-// };
-
 export const homePageLoader = async ({ request }) => {
-  const query = request.url.split("?")[1]; // extract query params like ?city=...&type=...
-
+  const query = request.url.split("?")[1];
   const postPromise = apiRequest(`/posts${query ? `?${query}` : ""}`, {
     headers: getAuthHeaders(),
   });
