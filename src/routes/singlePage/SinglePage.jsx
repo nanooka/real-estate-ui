@@ -154,10 +154,25 @@ function SinglePage() {
               )}
             </button>
           </div>
+
           <div className="address">
             <SlLocationPin color="#888" size={18} />
-            <span>{post.address}</span>
+            <a
+              href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+                post.address
+              )}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                color: "#888",
+                textDecoration: "none",
+                marginLeft: "5px",
+              }}
+            >
+              {post.address}
+            </a>
           </div>
+
           <div className="mapContainer">
             <Suspense fallback={<Spinner />}>
               <Map items={[post]} />

@@ -103,12 +103,12 @@ export default function HomePage() {
               criteria.
             </p>
           ) : (
-            posts.map((post) => <Card key={post.id} item={post} />)
+            posts?.map((post) => <Card key={post.id} item={post} />)
           )}
 
           {loading && (
             <div className="skeletonWrapper">
-              {Array.from({ length: skeletonCount }).map((_, index) => (
+              {Array.from({ length: skeletonCount })?.map((_, index) => (
                 <CardSkeleton key={index} />
               ))}
             </div>
