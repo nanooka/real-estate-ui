@@ -27,6 +27,8 @@ export default function Filter() {
     bedroom: "",
   });
 
+  console.log(query);
+
   const navigate = useNavigate();
   const dropdownRef = useRef(null);
   const countryInputRef = useRef(null);

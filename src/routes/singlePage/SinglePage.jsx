@@ -24,7 +24,7 @@ function SinglePage() {
   const navigate = useNavigate();
 
   const handleGoToUser = () => {
-    if (currentUser.id === post.userId) {
+    if (currentUser && currentUser.id === post.userId) {
       navigate("/profile");
     } else {
       navigate(`/user/${post.userId}`, {

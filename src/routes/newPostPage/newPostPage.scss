@@ -160,6 +160,11 @@
           &:hover {
             background-color: rgb(1, 112, 112);
           }
+
+          &:disabled {
+            background-color: #bed9d8;
+            cursor: not-allowed;
+          }
         }
       }
 

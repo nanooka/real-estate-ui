@@ -33,6 +33,7 @@ export default function PostUpdatePage() {
   const [bathroom, setBathroom] = useState("");
   const [status, setStatus] = useState(null);
   const [propertyType, setPropertyType] = useState(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const navigate = useNavigate();
   console.log("postId", id);
@@ -117,6 +118,10 @@ export default function PostUpdatePage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (isSubmitting) return;
+
+    setIsSubmitting(true);
+    setError("");
 
     const formData = new FormData(e.target);
     const inputs = Object.fromEntries(formData);
@@ -155,6 +160,7 @@ export default function PostUpdatePage() {
     } catch (err) {
       console.log(err);
       setError(err.response?.data?.message || "An unexpected error occurred.");
+      setIsSubmitting(false);
     }
   };
 
@@ -447,7 +453,7 @@ export default function PostUpdatePage() {
                 setState={setImages}
               />
             </div>
-            <button className="addButton" type="submit">
+            <button className="addButton" type="submit" disabled={isSubmitting}>
               Update Post
             </button>
             {error && <span>{error}</span>}

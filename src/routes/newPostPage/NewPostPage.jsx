@@ -23,6 +23,7 @@ export default function NewPostPage() {
   const [selectedCity, setSelectedCity] = useState("");
   const [state, setState] = useState("");
   const [postalCode, setPostalCode] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const navigate = useNavigate();
 
@@ -78,6 +79,10 @@ export default function NewPostPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (isSubmitting) return;
+
+    setIsSubmitting(true);
+    setError("");
 
     const formData = new FormData(e.target);
     const inputs = Object.fromEntries(formData);
@@ -116,6 +121,7 @@ export default function NewPostPage() {
     } catch (err) {
       console.log(err);
       setError(err.response?.data?.message || "An unexpected error occurred.");
+      setIsSubmitting(false);
     }
   };
 
@@ -388,7 +394,7 @@ export default function NewPostPage() {
                 setState={setImages}
               />
             </div>
-            <button className="addButton" type="submit">
+            <button className="addButton" type="submit" disabled={isSubmitting}>
               Add Post
             </button>
             {error && <span>{error}</span>}

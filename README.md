@@ -1,8 +1,9 @@
-# React + Vite
+# PrimeEstate 🏠
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**PrimeEstate** is a full-featured real estate web application where users can explore properties, add listings, chat with other users, and filter results with advanced search options. The platform includes real-time communication, Google OAuth, and interactive map views — all in a modern, responsive UI.
 
-Currently, two official plugins are available:
+## 📸 Demo
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+![PrimeEstate Demo](./demo.gif)
+
+See all information on [This Repository](https://github.com/nanooka/real-estate)

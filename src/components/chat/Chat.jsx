@@ -15,9 +15,6 @@ export default function Chat({ chats }) {
   const { socket } = useContext(SocketContext);
   const [isLoading, setIsLoading] = useState(false);
 
-  console.log("chatsstate", chatsState);
-  // console.log(currentUser);
-
   const messageEndRef = useRef();
 
   const decrease = useNotificationStore((state) => state.decrease);
@@ -75,27 +72,13 @@ export default function Chat({ chats }) {
         data: res.data,
       });
 
-      // setChatsState((prevChats) =>
-      //   prevChats.map((c) =>
-      //     c.id === chat.id ? { ...c, lastMessage: res.data.text } : c
-      //   )
-      // );
-      // setChatsState((prevChats) =>
-      //   prevChats.map((c) => (c.id === chat.id ? c : c))
-      // );
-      // setChatsState((prevChats) =>
-      //   prevChats.map((c) =>
-      //     c.id === chat.id ? { ...c, lastMessage: [text, currentUser.id] } : c
-      //   )
-      // );
-
       setChatsState((prevChats) =>
         prevChats.map((c) =>
           c.id === chat.id
             ? {
                 ...c,
-                lastMessage: res.data.text, // Store text of last message
-                lastMessageSender: currentUser.id, // Store sender ID
+                lastMessage: res.data.text,
+                lastMessageSender: currentUser.id,
               }
             : c
         )
@@ -132,6 +115,7 @@ export default function Chat({ chats }) {
     <div className="chat">
       <div className="messages">
         <h1>Messages</h1>
+        {chatsState?.length === 0 && <p>Your messages will appear here.</p>}
         {chatsState?.map((c) => (
           <div
             className="message"
@@ -148,14 +132,6 @@ export default function Chat({ chats }) {
               <img src={c.receiver.avatar || "/noavatar.jpg"} alt="" />
               <span>{c.receiver.username}</span>
             </div>
-            {/* <div className="lastMessage">
-              <span>
-                {c.lastMessage[1] == c.receiver.id
-                  ? c.receiver.username + ":"
-                  : "you: "}
-              </span>
-              <p>{c.lastMessage[0]}</p>
-            </div> */}
             {c.lastMessage && (
               <div className="lastMessage">
                 <span>
